@@ -1,0 +1,11 @@
+.form-control{
+    margin-top: 15px;
+}
+[type=submit]:not(:disabled) {
+
+    margin-top: 10px;
+}
+
+.table-responsive{
+    min-height: 300px;
+}
