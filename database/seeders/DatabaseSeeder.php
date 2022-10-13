@@ -48,66 +48,7 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
         ]);
 
-
-        Gallery::create([
-            'title' => "Title",
-            'featured_image' => "/uploads/gallery.jpg",
-        ]);
-
-        Gallery::create([
-            'title' => "Title",
-            'featured_image' => "/uploads/gallery.jpg",
-        ]);
-
-        Gallery::create([
-            'title' => "Title",
-            'featured_image' => "/uploads/gallery.jpg",
-        ]);
-        Gallery::create([
-            'title' => "Title",
-            'featured_image' => "/uploads/gallery.jpg",
-        ]);
-        Gallery::create([
-            'title' => "Title",
-            'featured_image' => "/uploads/gallery.jpg",
-        ]);
-        Gallery::create([
-            'title' => "Title",
-            'featured_image' => "/uploads/gallery.jpg",
-        ]);
-        Gallery::create([
-            'title' => "Title",
-            'featured_image' => "/uploads/gallery.jpg",
-        ]);
-        Gallery::create([
-            'title' => "Title",
-            'featured_image' => "/uploads/gallery.jpg",
-        ]);
-
-        BlogCategory::create([
-            'category_title' => "Category 1",
-            'featured_image' => "/uploads/news.png",
-        ]);
-        BlogCategory::create([
-            'category_title' => "Category 2",
-            'featured_image' => "/uploads/news.png",
-        ]);
-
-        News::create([
-            'title' => "Etiam laoreet sem eget eros rhoncus",
-            'featured_image' => "/uploads/news.png",
-            'details' => getDummyNews(),
-        ]);
-        News::create([
-            'title' => "Etiam laoreet sem eget eros rhoncus",
-            'featured_image' => "/uploads/news.png",
-            'details' => getDummyNews(),
-        ]);
-        News::create([
-            'title' => "Etiam laoreet sem eget eros rhoncus",
-            'featured_image' => "/uploads/news.png",
-            'details' => getDummyNews(),
-        ]);
+        $this->call(FrameSeeder::class);
 
 
     }

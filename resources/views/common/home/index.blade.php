@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <h4>Welcome To Home</h4>
+    <h4>Frame</h4>
 
 
 @endsection

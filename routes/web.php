@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 /*Public Section start*/
 
 Route::get('/', [Controller::class, 'home']);
+Route::get('/start-journey', [Controller::class, 'startJourney']);
+Route::get('/create-poster', [Controller::class, 'createPoster']);
 
 /*Student Area Start*/
 Route::group(['middleware' => 'user'], function () {

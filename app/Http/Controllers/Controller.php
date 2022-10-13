@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\Gallery;
-use App\Models\News;
+use App\Models\AluminiumPrint;
+use App\Models\FoamCoreBoard;
+use App\Models\PosterPrint;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\Auth;
 use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 
@@ -20,19 +20,31 @@ class Controller extends BaseController
     public function home()
     {
 
-        $gallery = Gallery::where('is_active', true)->get();
-        $news = News::where('is_active', true)->get();
-        return view('common.home.index')
-            ->with('gallery', $gallery)
-            ->with('news', $news);
+        return view('common.home.index');
     }
 
+
+    function startJourney()
+    {
+        return view('common.create-poster.start');
+
+    }
+
+    function createPoster()
+    {
+        $poster_print = PosterPrint::get();
+        $aluminium_print = AluminiumPrint::get();
+        $foam_board = FoamCoreBoard::get();
+        return view('common.create-poster.poster')
+            ->with("poster_print", $poster_print)
+            ->with("aluminium_print", $aluminium_print)
+            ->with("foam_board", $foam_board);
+    }
 
     function profile()
     {
         return view('common.membership.profile');
     }
-
 
 
 }
