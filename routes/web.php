@@ -25,6 +25,12 @@ Route::get('/', [Controller::class, 'home']);
 Route::get('/start-journey', [Controller::class, 'startJourney']);
 Route::get('/create-poster', [Controller::class, 'createPoster']);
 
+
+
+
+Route::any('/dropzone/store', [Controller::class, 'dropZoneStore']);
+Route::any('/upload/crop', [Controller::class, 'uploadCropImage']);
+
 /*Student Area Start*/
 Route::group(['middleware' => 'user'], function () {
 
