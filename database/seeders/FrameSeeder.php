@@ -18,24 +18,24 @@ class FrameSeeder extends Seeder
     {
 
         FoamCoreBoard::create([
-            "title" => '12"X18"',
+            "title" => '12 X 18',
             "price" => '25.16',
         ]);
         FoamCoreBoard::create([
-            "title" => '16"X20"',
+            "title" => '16 X 20',
             "price" => '32.64',
         ]);
         FoamCoreBoard::create([
-            "title" => '16"X24"',
+            "title" => '16" X 24',
             "price" => '35.44',
         ]);
         FoamCoreBoard::create([
-            "title" => '18"X24"',
+            "title" => '18 X 24',
             "price" => '38.53',
         ]);
 
         PosterPrint::create([
-            "title" => '12"X18"',
+            "title" => '12 X 18',
             "photo_premium_glossy" => '10.48',
             "canvas" => '32.38',
             "banner" => '26.98',
@@ -51,11 +51,11 @@ class FrameSeeder extends Seeder
         ]);
 
         AluminiumPrint::create([
-            "title" => '12"X18"',
+            "title" => '12 X 18',
             "price" => '25.16',
         ]);
         AluminiumPrint::create([
-            "title" => '16"X20"',
+            "title" => '16 X 20',
             "price" => '32.64',
         ]);
     }

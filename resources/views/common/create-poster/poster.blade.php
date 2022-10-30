@@ -11,16 +11,14 @@
     <div class="holder">
         <div class="container mb-4">
             <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6">
                     <!-- Poster print options selection -->
                     <div class="card product_selection" id="pp_size_selection">
                         <div class="card-header">Choose Your Print Options</div>
                         <div class="card-body poster_customize">
-
-
                             <div class="form-group row">
-                                <label for="cart_item_media" class="col-sm-7 col-form-label">Product:</label>
-                                <div class="col-sm-11">
+                                <label for="cart_item_media" class="col-sm-5 col-form-label">Product:</label>
+                                <div class="col-sm-13">
                                     <select name="select_product_id" id="select_product_id" class="form-control" onchange="select_product();">
                                         <option selected="selected" value="photo">Poster Prints</option>
                                         <option value="framed">Framed Poster Prints</option>
@@ -30,8 +28,8 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="cart_item_media" class="col-sm-4 col-form-label">Paper:</label>
-                                <div class="col-sm-8">
+                                <label for="cart_item_media" class="col-sm-5 col-form-label">Paper:</label>
+                                <div class="col-sm-13">
                                     <select class="form-control" onchange="calculate_poster();" name="cart_item[media]" id="cart_item_media">
                                         <option selected="selected" value="satin">Photo Premium Satin</option>
                                         <option value="gloss">Photo Premium Glossy</option>
@@ -42,8 +40,8 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="size_options" class="col-sm-4 col-form-label">Size:</label>
-                                <div class="col-sm-8">
+                                <label for="size_options" class="col-sm-5 col-form-label">Size:</label>
+                                <div class="col-sm-13">
                                     <select class="form-control" id="size_options">
                                         <option value="0">Select Size</option>
                                         <option value="18x12">18 x 12</option>
@@ -63,24 +61,23 @@
                             <div class="form-group form-group-sm">
                                 <label for="CustomLength">Or choose your custom size:</label>
                                 <div class="row align-items-center">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <input value="36" class="form-control" data-product="photo" min="8" max="60" type="text" name="cart_item[print_width]" id="cart_item_print_width">
                                     </div>
                                     <div class="col-md-1"> x </div>
                                     <div class="col-md-4">
                                         <input value="24" class="form-control" data-product="photo" min="8" max="60" type="text" name="cart_item[print_height]" id="cart_item_print_height">
                                     </div>
-                                    <div class="col-md-2"> </div>
                                 </div>
                             </div>
                             <!-- FRAME -->
                             <div id="sp_step_frame" class="form-group row frame_selection">
-                                <div class="col-md-12">
+                                <div class="col">
                                     <p>Framing Options:</p>
                                     <select class="form-control" onchange="calculate_poster();" name="cart_item[frame]" id="cart_item_frame">
                                         <option value="none">No Frame</option>
-                                        <option value="24x36">24x36 Frame</option>
-                                        <option value="27x40">27x40 Frame</option>
+                                        {{--<option value="24x36">24x36 Frame</option>
+                                        <option value="27x40">27x40 Frame</option>--}}
                                     </select>
                                 </div>
                             </div>
@@ -93,11 +90,11 @@
                     </div>
                     <!-- Poster print options selection -->
                 </div>
-                <div class="col-12">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">Preview Your Print</div>
                         <div class="card-body">
-                            <div class="col-md-10 offset-md-1 text-center" id="crop_box">
+                            <div class="col-lg-18 p-0 " id="crop_box">
                                 <img id="image" src="/uploads/{{$temporary_image}}" alt="Picture">
 
                             </div>
@@ -109,7 +106,7 @@
         <div class="container-fluid bottom_buttons">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-lg-18">
                         <a href="/create-custom-posters" class="btn btn-sm btn-secondary float-left"><span class="fas fa-undo-alt"></span> Change Uploaded Image</a>
                         <button type="button" class="btn btn-lg btn-success float-right" id="cropper_preview_print">
                             PREVIEW YOUR PRINT

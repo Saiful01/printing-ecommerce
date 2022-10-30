@@ -48,7 +48,7 @@
                     <!-- /Menu Toggle -->
                 </div>
                 <div class="col-auto hdr-logo">
-                    <a href="index.html" class="logo"><img
+                    <a href="/" class="logo"><img
                             srcset="/common/images/logo/logo.png 1x, images/logo/logo2x.png 2x"
                             alt="Logo"></a>
                 </div>
@@ -148,7 +148,7 @@
                         <!-- /Menu Toggle -->
                     </div>
                     <div class="col-auto hdr-logo">
-                        <a href="index.html" class="logo"><img
+                        <a href="/" class="logo"><img
                                 srcset="/common/images/logo/logo.png 1x, images/logo/logo2x.png 2x"
                                 alt="Logo"></a>
                     </div>
@@ -156,7 +156,7 @@
                     <div class="hdr-nav hide-mobile nav-holder justify-content-center px-4">
                         <!--mmenu-->
                         <ul class="mmenu mmenu-js">
-                            <li class="mmenu-item--simple"><a href="index.html" class="active">Home</a></li>
+                            <li class="mmenu-item--simple"><a href="/" class="active">Home</a></li>
                             <li class="mmenu-item--mega"><a href="#">Custom Poster Prints</a>
                                 <div class="mmenu-submenu mmenu-submenu--has-bottom">
                                     <div class="mmenu-submenu-inside">
@@ -254,7 +254,7 @@
             <div class="mobilemenu-scroll">
                 <div class="nav-wrapper show-menu">
                     <ul class="nav nav-level-1">
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li><a href="poster-print.html">Poster Prints</a></li>
                         <li><a href="foam-board.html">Foam Board Prints</a></li>
                         <li><a href="alu-print.html">Aluminum Prints</a></li>
@@ -343,7 +343,7 @@
                 <div class="col-lg col-xl last-mobile">
                     <div class="footer-block">
                         <div class="footer-logo">
-                            <a href="index.html"><img class="lazyload fade-up"
+                            <a href="/"><img class="lazyload fade-up"
                                                       src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                                                       data-srcset="/common/images/logo-footer.png 1x, images/logo-footer2x.png 2x"
                                                       alt="Logo"></a>

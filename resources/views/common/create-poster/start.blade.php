@@ -3,14 +3,16 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center">Drag and Drop File Upload Using Dropzone js in Laravel 8 -
-                    websolutionstuff.com</h1><br>
+            <div class="col-md-16">
                 <form action="/dropzone/store" method="post" name="file" files="true" enctype="multipart/form-data"
                       class="dropzone" id="image-upload">
                     @csrf
-                    <div>
-                        <h3 class="text-center">Upload Multiple Images</h3>
+                    <div class="dz-message custom_uploader">
+                        <h4 class="alert-heading">Drag &amp; Drop Your File Here</h4>
+                        <p>or use the button below to choose a file.</p>
+                        <p class="uploader_large_icon"><i class="icon-qr-code"></i></p>
+                        <p><a href="javascript:void(0);" class="btn btn-success"><i class="icon-shield"></i> Choose An Image File</a></p>
+                        <p><small>We recommend uploading JPG, PNG, TIF or PDF files for faster uploads and better results.</small></p>
                     </div>
                 </form>
             </div>
@@ -28,7 +30,7 @@
             <script type="text/javascript">
                 Dropzone.options.imageUpload = {
                     maxFilesize: 1,
-                    acceptedFiles: ".jpeg,.jpg,.png,.gif",
+                    acceptedFiles: ".jpeg,.jpg,.png,.tif,.pdf",
 
                     init: function () {
                         this.on("success", function (file, responseText) {
