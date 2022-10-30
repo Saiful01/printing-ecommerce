@@ -9,6 +9,7 @@ use App\Models\Department;
 use App\Models\Event;
 use App\Models\Gallery;
 use App\Models\News;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -51,6 +52,24 @@ class DatabaseSeeder extends Seeder
         $this->call(FrameSeeder::class);
 
 
+        Product::create([
+            'title' => "Wall Art Poster",
+            'details' => "Wall Art Poster",
+            'price' => 100,
+            'featured_image'=>"/uploads/1.jpg"
+        ]);
+        Product::create([
+            'title' => "Wall Art Poster",
+            'details' => "Wall Art Poster",
+            'price' => 100,
+            'featured_image'=>"/uploads/1.jpg"
+        ]);
+        Product::create([
+            'title' => "Wall Art Poster",
+            'details' => "Wall Art Poster",
+            'price' => 100,
+            'featured_image'=>"/uploads/1.jpg"
+        ]);
     }
 
 

@@ -8,7 +8,7 @@
         }*/
     </style>
 
-    <div ng-controller="myCtrl">
+    <div class="holder">
         <div class="container mb-4">
             <div class="row">
                 <div class="col-lg-6">
@@ -82,6 +82,80 @@
                     </form>
 
 
+
+
+
+                    <!-- Poster print options selection -->
+                    <div class="card product_selection" id="pp_size_selection">
+                        <div class="card-header">Choose Your Print Options</div>
+                        <div class="card-body poster_customize">
+                            <div class="form-group row">
+                                <label for="cart_item_media" class="col-sm-5 col-form-label">Product:</label>
+                                <div class="col-sm-13">
+                                    <select class="form-control" name="product_type" id="product_type"
+                                            ng-model="product_type" ng-change="productChange()">
+                                        <option value="1">Poster Print</option>
+                                        <option value="2">Foam Core Board</option>
+                                        <option value="3">Aluminium Print</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="cart_item_media" class="col-sm-5 col-form-label">Paper:</label>
+                                <div class="col-sm-13">
+                                    <select class="form-control" name="paper_type" id="paper_type"
+                                            ng-model="paper_type" ng-change="changePosterSize()">
+                                        <option value="1">Photo Premium Glossy</option>
+                                        <option value="2">Canvas</option>
+                                        <option value="3">Banner Vinyl</option>
+                                        <option value="4">Self Adhesive Synthetic</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="size_options" class="col-sm-5 col-form-label">Size:</label>
+                                <div class="col-sm-13">
+                                    <select class="form-control" name="poster_size" id="poster_size"
+                                            ng-model="poster_size"
+                                            ng-change="changePosterSize()">
+                                        @foreach($poster_print as $item)
+                                            <option value="{{$item->id}}">{{$item->title}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm">
+                                <label for="CustomLength">Or choose your custom size:</label>
+                                <div class="row align-items-center">
+                                    <div class="col-md-3">
+                                        <input value="36" class="form-control" >
+                                    </div>
+                                    <div class="col-md-1"> x </div>
+                                    <div class="col-md-4">
+                                        <input value="24" class="form-control" >
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- FRAME -->
+                            <div id="sp_step_frame" class="form-group row frame_selection">
+                                <div class="col">
+                                    <p>Framing Options:</p>
+                                    <select class="form-control" onchange="calculate_poster();" name="cart_item[frame]" id="cart_item_frame">
+                                        <option value="none">No Frame</option>
+                                        {{--<option value="24x36">24x36 Frame</option>
+                                        <option value="27x40">27x40 Frame</option>--}}
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- FRAME -->
+                            <div class="col-md-12 subtotal_row">
+                                SUBTOTAL: <span class="float-right" id="sp_subtotal_price">$18.99</span> <span class="float-right mr-2"><small><em id="sp_print_price_inc">$26.59</em></small></span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- Poster print options selection -->
                 </div>
                 <div class="col-lg-12">
                     <div class="card">
@@ -213,7 +287,6 @@
 
         app.controller('myCtrl', function ($scope, $http) {
 
-            console.log("hello")
             document.getElementById("poster-print").style.display = "block";
             document.getElementById("foam-board").style.display = "none";
             document.getElementById("aluminium-print").style.display = "none";

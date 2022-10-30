@@ -32,13 +32,15 @@
     <script>
         var app = angular.module('myApp', []);
     </script>
+    <script src="js/cart.js"></script>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
 
 </head>
-<body class="has-smround-btns has-loader-bg equal-height">
+<body class="has-smround-btns has-loader-bg equal-height" ng-app="myApp">
 <!--header-->
 <header class="hdr-wrap">
-    <div class="hdr-content hdr-content-sticky">
+    <div class="hdr-content hdr-content-sticky" ng-controller="printingCartController">
         <div class="container">
             <div class="row">
                 <div class="col-auto show-mobile">
@@ -69,7 +71,7 @@
                             <a href="#" class="dropdn-link js-dropdn-link minicart-link only-icon"
                                data-panel="#dropdnMinicart">
                                 <i class="icon-basket"></i>
-                                <span class="minicart-qty">3</span>
+                                <span class="minicart-qty" >777</span>
                                 <span class="minicart-total hide-mobile">$34.99</span>
                             </a>
                         </div>
@@ -78,7 +80,7 @@
             </div>
         </div>
     </div>
-    <div class="hdr">
+    <div class="hdr" ng-controller="printingCartController">
         <div class="hdr-topline hdr-topline--light js-hdr-top">
             <div class="container">
                 <div class="row flex-nowrap">
@@ -209,11 +211,11 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="poster-print.html">Banner</a>
-                            <li><a href="wall-art-poster.html">Wall Arts & Posters</a>
+                            <li><a href="/poster-print">Banner</a>
+                            <li><a href="/wall-art-poster">Wall Arts & Posters</a>
                             </li>
-                            <li><a href="pricing.html">Pricing</a></li>
-                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="/pricing">Pricing</a></li>
+                            <li><a href="/contact">Contact</a></li>
                         </ul>
                         <!--/mmenu-->
                     </div>
@@ -222,11 +224,12 @@
                         <div class="hdr-inline-link">
                             <!-- Header Wishlist -->
                             <div class="dropdn dropdn_wishlist">
-                                <a href="cart.html" class="dropdn-link only-icon wishlist-link ">
+                                <a href="/cart" class="dropdn-link only-icon wishlist-link ">
                                     <i class="icon-basket"></i><span
                                         class="dropdn-link-txt">Wishlist</span><span
-                                        class="minicart-qty">3</span>
+                                        class="minicart-qty" ng-bind="total_item"></span>
                                 </a>
+
                             </div>
                             <!-- /Header Wishlist -->
                             <div class="hdr_container_mobile show-mobile">
@@ -246,7 +249,7 @@
         </div>
     </div>
 </header>
-<div class="header-side-panel">
+<div class="header-side-panel" >
     <!-- Mobile Menu -->
     <div class="mobilemenu js-push-mbmenu">
         <div class="mobilemenu-content">
@@ -344,9 +347,9 @@
                     <div class="footer-block">
                         <div class="footer-logo">
                             <a href="/"><img class="lazyload fade-up"
-                                                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                                      data-srcset="/common/images/logo-footer.png 1x, images/logo-footer2x.png 2x"
-                                                      alt="Logo"></a>
+                                             src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                             data-srcset="/common/images/logo-footer.png 1x, images/logo-footer2x.png 2x"
+                                             alt="Logo"></a>
                         </div>
                         <div class="collapsed-content">
                             <ul>
@@ -443,7 +446,7 @@
 <script src="/common/js/vendor-special/instafeed.min.js"></script>
 <script src="/common/js/vendor/vendor.min.js"></script>
 <script src="/common/js/app-html.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 @stack('footer-scripts')
 
 </body>

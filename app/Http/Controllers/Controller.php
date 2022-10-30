@@ -6,13 +6,13 @@ namespace App\Http\Controllers;
 use App\Models\AluminiumPrint;
 use App\Models\FoamCoreBoard;
 use App\Models\PosterPrint;
+use App\Models\Product;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Session;
-use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 
 class Controller extends BaseController
@@ -44,6 +44,15 @@ class Controller extends BaseController
             ->with("aluminium_print", $aluminium_print)
             ->with("foam_board", $foam_board)
             ->with("temporary_image", $temporary_image);
+    }
+    public function wallArtPoster()
+    {
+        $products= Product::get();
+        return view('common.create-poster.wall-art-poster')->with("products",$products);
+    }
+    public function cart()
+    {
+        return view('common.create-poster.cart');
     }
 
     function profile()
@@ -77,6 +86,7 @@ class Controller extends BaseController
 
     public function uploadCropImage(Request $request)
     {
+
 
         if ($request->hasFile('avatar')) {
             $image = $request->file('avatar');

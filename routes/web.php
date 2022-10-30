@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [Controller::class, 'home']);
 Route::get('/start-journey', [Controller::class, 'startJourney']);
 Route::get('/create-poster', [Controller::class, 'createPoster']);
+Route::get('/wall-art-poster', [Controller::class, 'wallArtPoster']);
+Route::get('/cart', [Controller::class, 'cart']);
 
 
 
