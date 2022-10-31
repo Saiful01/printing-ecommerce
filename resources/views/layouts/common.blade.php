@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-auto hdr-logo">
                     <a href="/" class="logo"><img
-                            srcset="/common/images/logo/logo.png 1x, images/logo/logo2x.png 2x"
+                            srcset="/common/images/logo/logo.png 1x, /common/images/logo/logo2x.png 2x"
                             alt="Logo"></a>
                 </div>
                 <!--navigation-->
@@ -68,11 +68,10 @@
                         </div>
                         <!-- /Header Account -->
                         <div class="dropdn dropdn_fullheight minicart">
-                            <a href="#" class="dropdn-link js-dropdn-link minicart-link only-icon"
-                               data-panel="#dropdnMinicart">
-                                <i class="icon-basket"></i>
-                                <span class="minicart-qty" >777</span>
-                                <span class="minicart-total hide-mobile">$34.99</span>
+                            <a href="/cart" class="dropdn-link only-icon wishlist-link ">
+                                <i class="icon-basket"></i><span
+                                    class="dropdn-link-txt">Wishlist</span><span
+                                    class="minicart-qty" ng-bind="total_item"></span>
                             </a>
                         </div>
                     </div>
@@ -151,7 +150,7 @@
                     </div>
                     <div class="col-auto hdr-logo">
                         <a href="/" class="logo"><img
-                                srcset="/common/images/logo/logo.png 1x, images/logo/logo2x.png 2x"
+                                srcset="/common/images/logo/logo.png 1x, /common/images/logo/logo2x.png 2x"
                                 alt="Logo"></a>
                     </div>
                     <!--navigation-->
@@ -175,10 +174,10 @@
                                                 <div class="mmenu-col">
                                                     <h3 class="submenu-title"><a href="#">Poster Prints</a></h3>
                                                     <ul class="submenu-list">
-                                                        <li><a href="poster-print.html">Extremely affordable<span
+                                                        <li><a href="/poster-print">Extremely affordable<span
                                                                     class="submenu-link-txt">custom size posters</span></a>
                                                         </li>
-                                                        <li><a href="customize-poster-print.html">Customize
+                                                        <li><a href="/start-journey">Customize
                                                                 everything<span class="submenu-link-txt">from the size to the paper stock to fit your needs</span></a>
                                                         </li>
                                                     </ul>
@@ -186,10 +185,10 @@
                                                 <div class="mmenu-col">
                                                     <h3 class="submenu-title"><a href="#">Foam Board Prints</a></h3>
                                                     <ul class="submenu-list">
-                                                        <li><a href="foam-board.html">Turn your into a sign,<span
+                                                        <li><a href="/foam-board-print">Turn your into a sign,<span
                                                                     class="submenu-link-txt">display or presentation board for exhibitions</span></a>
                                                         </li>
-                                                        <li><a href="mounted-foam-board.html">Mounted print on foam<span
+                                                        <li><a href="/mounted-foam-board-print">Mounted print on foam<span
                                                                     class="submenu-link-txt">Core board for easy hanging, framing or display</span></a>
                                                         </li>
                                                     </ul>
@@ -197,7 +196,7 @@
                                                 <div class="mmenu-col">
                                                     <h3 class="submenu-title"><a href="#">Aluminum Prints</a></h3>
                                                     <ul class="submenu-list">
-                                                        <li><a href="alu-print.html">Infuse your artwork onto<span
+                                                        <li><a href="/aluminum-print">Infuse your artwork onto<span
                                                                     class="submenu-link-txt">aluminum for a compelling and impactful show</span></a>
                                                         </li>
                                                     </ul>
@@ -258,12 +257,13 @@
                 <div class="nav-wrapper show-menu">
                     <ul class="nav nav-level-1">
                         <li><a href="/">Home</a></li>
-                        <li><a href="poster-print.html">Poster Prints</a></li>
-                        <li><a href="foam-board.html">Foam Board Prints</a></li>
-                        <li><a href="alu-print.html">Aluminum Prints</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="/poster-print">Banner</a></li>
+                        <li><a href="/wall-art-poster">Wall Arts & Posters</a></li>
+                        <li><a href="/foam-board-print">Foam Board Prints</a></li>
+                        <li><a href="/aluminum-print">Aluminum Prints</a></li>
+                        <li><a href="/pricing">Pricing</a></li>
+                        <li><a href="/faql">FAQ</a></li>
+                        <li><a href="/contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -388,11 +388,11 @@
                         </div>
                         <div class="collapsed-content">
                             <ul>
-                                <li><a href="poster-print.html">Poster Prints</a></li>
-                                <li><a href="foam-board.html">Foam Board Prints</a></li>
-                                <li><a href="alu-print.html">Aluminum Prints</a></li>
-                                <li><a href="pricing.html"></a></li>
-                                <!--<li><a href="typography.html">Shipping & Delivery</a></li>-->
+                                <li><a href="/poster-print">Banner</a></li>
+                                <li><a href="/wall-art-poster">Wall Arts & Posters</a></li>
+                                <li><a href="/foam-board-print">Foam Board Prints</a></li>
+                                <li><a href="/aluminum-print">Aluminum Prints</a></li>
+                                <li><a href="/pricing">Pricing</a></li>
                             </ul>
                         </div>
                     </div>
@@ -405,9 +405,9 @@
                         </div>
                         <div class="collapsed-content">
                             <ul>
-                                <li><a href="terms&contitions.html">Terms & Conditions</a></li>
-                                <li><a href="faq.html">FAQ</a></li>
-                                <li><a href="return-policy.html">Return Policy</a></li>
+                                <li><a href="/terms-and-conditions">Terms & Conditions</a></li>
+                                <li><a href="/faq">FAQ</a></li>
+                                <li><a href="/return-policy">Return Policy</a></li>
                             </ul>
                         </div>
                     </div>

@@ -43485,7 +43485,8 @@ button.close {
 input[type="text"] {
     border: none;
     width: 100%;
-    padding-right: 65px;
+    padding-right: 59px;
+    height: 38px;
 }
 .input-group {
     position: relative;

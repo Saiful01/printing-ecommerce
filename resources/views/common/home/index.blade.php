@@ -54,7 +54,7 @@
                         <p>Premium Quality Foam Boards</p>
                         <hr>
                         <p>
-                            <a href="#" class="btn btn-default"
+                            <a href="/start-journey" class="btn btn-default"
                                title="Create custom poster prints">
                                 CREATE YOUR POSTER NOW !
                                 <br>
@@ -80,7 +80,7 @@
                                 <li>Adhesive</li>
                                 <li>Canvas</li>
                             </ul>
-                            <a href="poster-print.html" class="btn btn-sm btn-default"
+                            <a href="/poster-print" class="btn btn-sm btn-default"
                                title="Poster print materials">See
                                 Details</a>
                         </div>
@@ -89,7 +89,7 @@
                     <div class="col-lg col-xl">
                         <div class="hpb hp_framed_posters">
                             <h2><i class="fa fa-square"></i> FOAM BOARD</h2>
-                            <a href="foam-board.html" class="btn btn-sm btn-default"
+                            <a href="/foam-board-print" class="btn btn-sm btn-default"
                                title="Framed poster prints">See
                                 Details</a>
                         </div>
@@ -98,7 +98,7 @@
                     <div class="col-lg col-xl">
                         <div class="hpb hp_mounted_posters">
                             <h2><i class="fa fa-square"></i> ALUMINUM PRINT</h2>
-                            <a href="alu-print.html" class="btn btn-sm btn-default"
+                            <a href="/aluminum-print" class="btn btn-sm btn-default"
                                title="Mounted poster prints">See
                                 Details</a>
                         </div>

@@ -50,6 +50,47 @@ class Controller extends BaseController
         $products= Product::get();
         return view('common.create-poster.wall-art-poster')->with("products",$products);
     }
+    public function showBanner()
+    {
+        return view('common.pages.banner');
+    }
+    public function foamBoard()
+    {
+        return view('common.pages.foam-board-print');
+    }
+    public function aluminiumPrint()
+    {
+        return view('common.pages.aluminum-prints');
+    }
+    public function mountedFoamBoard()
+    {
+        return view('common.pages.mounted-foam-board');
+    }
+    public function customizePosterPrint()
+    {
+        return view('common.pages.customize-poster-print');
+    }
+    public function showContactUs()
+    {
+        return view('common.pages.contact');
+    }
+    public function showPricing()
+    {
+        return view('common.pages.pricing');
+    }
+    public function showTermsAndConditions()
+    {
+        return view('common.pages.terms-and-conditions');
+    }
+    public function showReturnPolicy()
+    {
+        return view('common.pages.return');
+    }
+    public function showFAQ()
+    {
+        return view('common.pages.faq');
+    }
+
     public function cart()
     {
         return view('common.create-poster.cart');

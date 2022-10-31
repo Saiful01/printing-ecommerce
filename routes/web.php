@@ -24,7 +24,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [Controller::class, 'home']);
 Route::get('/start-journey', [Controller::class, 'startJourney']);
 Route::get('/create-poster', [Controller::class, 'createPoster']);
+Route::get('/poster-print', [Controller::class, 'showBanner']);
 Route::get('/wall-art-poster', [Controller::class, 'wallArtPoster']);
+Route::get('/foam-board-print', [Controller::class, 'foamBoard']);
+Route::get('/mounted-foam-board-print', [Controller::class, 'mountedFoamBoard']);
+Route::get('/customize-poster-print', [Controller::class, 'customizePosterPrint']);
+Route::get('/aluminum-print', [Controller::class, 'aluminiumPrint']);
+Route::get('/pricing', [Controller::class, 'showPricing']);
+Route::get('/terms-and-conditions', [Controller::class, 'showTermsAndConditions']);
+Route::get('/faq', [Controller::class, 'showFAQ']);
+Route::get('/return-policy', [Controller::class, 'showReturnPolicy']);
+Route::get('/contact', [Controller::class, 'showContactUs']);
 Route::get('/cart', [Controller::class, 'cart']);
 
 
@@ -33,12 +43,12 @@ Route::get('/cart', [Controller::class, 'cart']);
 Route::any('/dropzone/store', [Controller::class, 'dropZoneStore']);
 Route::any('/upload/crop', [Controller::class, 'uploadCropImage']);
 
-/*Student Area Start*/
+/*Customer Area Start*/
 Route::group(['middleware' => 'user'], function () {
 
     Route::any('/profile', [Controller::class, 'profile']);
 });
-/*Student Area End*/
+/*Customer Area End*/
 
 
 /*Admin Section start*/
