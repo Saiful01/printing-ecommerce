@@ -130,7 +130,7 @@
 
                     <li class="nav-item ">
                         <a class="nav-link menu-link {{ Request::is('/admin/orders') ? 'active' : null }}"
-                           href="/admin/orders"
+                           href="/admin/order/show"
                            aria-expanded="false" aria-controls="sidebarDashboards">
                             <i class="mdi-basket-check"></i> <span data-key="t-dashboards">Orders</span>
                         </a>
