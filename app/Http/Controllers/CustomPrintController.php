@@ -14,28 +14,27 @@ class CustomPrintController extends Controller
      */
     public function index()
     {
-        //
+        return view("admin.customPrint.create");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        // return $request->all();
+        $request->validate([
+            'min' => 'required',
+            'max' => 'required',
+            'photo_premium_glossy' => 'required',
+            'canvas' => 'required',
+            'banner' => 'required',
+            'self_adhesive' => 'required',
+        ]);
+        try {
+            CustomPrint::create($request->all());
+            return redirect('/admin/custom/price/show')->with('success', "Successfully Created");
+        } catch (Exception $exception) {
+
+            return back()->with('success', $exception->getMessage());
+        }
     }
 
     /**
@@ -46,7 +45,9 @@ class CustomPrintController extends Controller
      */
     public function show(CustomPrint $customPrint)
     {
-        //
+        $results = CustomPrint::orderBy('created_at', 'DESC')->get();
+        //return $results;
+        return view("admin.customPrint.show")->with('results', $results);
     }
 
     /**
@@ -78,8 +79,14 @@ class CustomPrintController extends Controller
      * @param  \App\Models\CustomPrint  $customPrint
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CustomPrint $customPrint)
+    public function destroy($id)
     {
-        //
+        try {
+            CustomPrint::where('id', $id)->delete();
+            return back()->with('success', "Successfully Deleted");
+        } catch (Exception $exception) {
+
+            return back()->with('success', $exception->getMessage());
+        }
     }
 }

@@ -7,77 +7,57 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function Show()
     {
-        //
+
+        $query = Order:: leftJoin('customers', 'customers.customer_id', '=', 'orders.customer_id')->orderBy('orders.created_at', 'DESC');
+        if ($request->customer_phone != null) {
+            $query = $query->where('customers.customer_phone', $request['customer_phone']);
+        }
+        if ($request->order_invoice != null) {
+            $query = $query->where('orders.order_invoice', $request['order_invoice']);
+        }
+        if ($request->is_whole_sale != null) {
+
+            $query = $query->where('orders.is_whole_sale', $request['is_whole_sale']);
+        }
+        $results = $query->paginate(50);
+        /*foreach ($results as $product) {
+            $status = OrderStatus::where('order_item_id', $product->order_item_id)
+                ->orderBy('id', 'DESC')->first();
+            if (is_null($status)) {
+                $product->status = "Pending";
+            } else {
+                $product->status = getDeliveryStatus($status->delivery_status);
+            }
+            $product->commission = ($product->total_price * $product->commission_rate) / 100;
+        }*/
+
+
+        return view('admin.order.show')
+            ->with('results', $results);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Order $order)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Order $order)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Order $order)
     {
         //

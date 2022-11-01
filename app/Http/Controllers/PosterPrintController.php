@@ -14,28 +14,26 @@ class PosterPrintController extends Controller
      */
     public function index()
     {
-        //
+        return view("admin.posterPrint.create");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+       // return $request->all();
+        $request->validate([
+            'title' => 'required',
+            'photo_premium_glossy' => 'required',
+            'canvas' => 'required',
+            'banner' => 'required',
+            'self_adhesive' => 'required',
+        ]);
+        try {
+            PosterPrint::create($request->all());
+            return redirect('/admin/poster/price/show')->with('success', "Successfully Created");
+        } catch (Exception $exception) {
+
+            return back()->with('success', $exception->getMessage());
+        }
     }
 
     /**
@@ -46,7 +44,9 @@ class PosterPrintController extends Controller
      */
     public function show(PosterPrint $posterPrint)
     {
-        //
+        $results = PosterPrint::orderBy('created_at', 'DESC')->get();
+        //return $results;
+        return view("admin.posterPrint.show")->with('results', $results);
     }
 
     /**
@@ -78,8 +78,14 @@ class PosterPrintController extends Controller
      * @param  \App\Models\PosterPrint  $posterPrint
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PosterPrint $posterPrint)
+    public function destroy($id)
     {
-        //
+        try {
+            PosterPrint::where('id', $id)->delete();
+            return back()->with('success', "Successfully Deleted");
+        } catch (Exception $exception) {
+
+            return back()->with('success', $exception->getMessage());
+        }
     }
 }

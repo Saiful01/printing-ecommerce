@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class FoamCoreBoard extends Model
 {
     use HasFactory;
+    public $timestamps = true;
+    protected $guarded = [];
 }
