@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CustomerController extends Controller
 {
@@ -12,6 +15,30 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function loginCheck(Request $request)
+    {
+        //return $request->all();
+
+
+
+        if (Auth::guard('customer')->attempt(['email' => $request['email'], 'password' => $request['password']], /*$remember*/)) {
+         return \redirect('customer/profile');
+        } else {
+            return "not Ok";
+            Alert::error('Sorry! ', "Phone or password does not match or Your are not active");
+            return back()->withInput();
+
+        }
+    }
+    public function login()
+    {
+        return view('common.customer.login');
+    }
+    public function logout()
+    {
+        Auth::guard('customer')->logout();
+        return \redirect('/');
+    }
     public function index()
     {
         //

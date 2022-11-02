@@ -12,6 +12,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 
@@ -93,6 +94,15 @@ class Controller extends BaseController
 
     public function cart()
     {
+        return view('common.create-poster.cart');
+    }
+    public function orderNew()
+
+    {
+        if (!Auth::guard('customer')->check()) {
+            return redirect('/customer/login');
+        }
+        return "ok";
         return view('common.create-poster.cart');
     }
 

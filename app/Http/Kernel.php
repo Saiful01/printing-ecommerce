@@ -4,9 +4,11 @@ namespace App\Http;
 
 use App\Http\Middleware\AlumniAuth;
 use App\Http\Middleware\ApplicantMiddleware;
+use App\Http\Middleware\CustomerMiddleware;
 use App\Http\Middleware\OperatorMiddleware;
 use App\Http\Middleware\UniversityAdminMiddleware;
 use App\Http\Middleware\UserAuth;
+use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -72,5 +74,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'user' => UserAuth::class,
+        'customer' => CustomerMiddleware::class,
     ];
 }

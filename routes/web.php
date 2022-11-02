@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminRoleController;
 use App\Http\Controllers\AluminiumPrintController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomPrintController;
 use App\Http\Controllers\FoamCoreBoardController;
 use App\Http\Controllers\GalleryController;
@@ -42,6 +43,7 @@ Route::get('/faq', [Controller::class, 'showFAQ']);
 Route::get('/return-policy', [Controller::class, 'showReturnPolicy']);
 Route::get('/contact', [Controller::class, 'showContactUs']);
 Route::get('/cart', [Controller::class, 'cart']);
+Route::get('/orders/new', [Controller::class, 'orderNew']);
 
 
 
@@ -50,9 +52,11 @@ Route::any('/dropzone/store', [Controller::class, 'dropZoneStore']);
 Route::any('/upload/crop', [Controller::class, 'uploadCropImage']);
 
 /*Customer Area Start*/
-Route::group(['middleware' => 'user'], function () {
-
-    Route::any('/profile', [Controller::class, 'profile']);
+Route::any('/customer/login', [CustomerController::class, 'login']);
+Route::any('/customer/login-check', [CustomerController::class, 'loginCheck']);
+Route::group(['prefix' => 'customer','middleware' => 'customer'], function () {
+    Route::any('/profile', [CustomerController::class, 'customerProfile']);
+    Route::any('/logout', [CustomerController::class, 'logout']);
 });
 /*Customer Area End*/
 

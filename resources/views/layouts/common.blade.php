@@ -279,15 +279,16 @@
             </ul>
             <div class="dropdn-form-wrapper">
                 <h5>Quick Login</h5>
-                <form action="#">
+                <form action="/customer/login-check" method="post">
+                    @csrf
                     <div class="form-group">
                         <input type="text" class="form-control form-control--sm is-invalid"
-                               placeholder="Enter your e-mail">
+                               placeholder="Enter your e-mail" name="email" required>
                         <div class="invalid-feedback">Can't be blank</div>
                     </div>
                     <div class="form-group">
                         <input type="password" class="form-control form-control--sm"
-                               placeholder="Enter your password">
+                               placeholder="Enter your password" name="password" required>
                     </div>
                     <button type="submit" class="btn">Enter</button>
                 </form>
