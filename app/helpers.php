@@ -61,6 +61,9 @@ function getTimeOnly($date)
 }
 function isAddress()
 {
+    if (!Auth::guard('customer')->check()){
+        return false;
+    }
     $exist= CustomerAddress::where('customer_id', Auth::guard('customer')->user()->id)->first();
     if ($exist != null){
         return true;

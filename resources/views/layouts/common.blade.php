@@ -298,6 +298,9 @@
                 <ul>
                     <li><a href="/customer/profile"><span>{{Auth::guard('customer')->user()->firstName}} {{Auth::guard('customer')->user()->lastName}}</span><i class="icon-user2"></i></a></li>
                 </ul>
+                <ul>
+                    <li><a href="/customer/logout"><span>Logout</span><i class="icon-locker"></i></a></li>
+                </ul>
             @endif
 
         </div>
