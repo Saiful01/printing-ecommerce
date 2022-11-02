@@ -142,6 +142,10 @@
 
     {{--<button type="button" class="btn btn-primary" id="crop">Crop</button>--}}
 
+    <link rel="stylesheet" href="https://fengyuanchen.github.io/cropperjs/css/cropper.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://fengyuanchen.github.io/cropperjs/js/cropper.js"></script>
+
     <script>
 
         let poster_array = <?php echo json_encode($poster_print) ?>;
@@ -218,110 +222,112 @@
 
             $scope.changePosterSize();
 
+            window.addEventListener('DOMContentLoaded', function () {
+
+
+
+
+                var image = document.querySelector('#image');
+                var minAspectRatio = 1;
+                var maxAspectRatio = 1
+                var cropper = new Cropper(image, {
+                   /* aspectRatio: 18 / 12,*/
+                    ready: function () {
+                        var cropper = this.cropper;
+                        var containerData = cropper.getContainerData();
+                        var cropBoxData = cropper.getCropBoxData();
+                        var aspectRatio = cropBoxData.width / cropBoxData.height;
+                        var newCropBoxWidth;
+
+                        if (aspectRatio < minAspectRatio || aspectRatio > maxAspectRatio) {
+                            newCropBoxWidth = cropBoxData.height * ((minAspectRatio + maxAspectRatio) / 2);
+
+                            cropper.setCropBoxData({
+                                left: (containerData.width - newCropBoxWidth) / 2,
+                                width: newCropBoxWidth
+                            });
+                        }
+                    },
+
+                    cropmove: function () {
+                        var cropper = this.cropper;
+                        var cropBoxData = cropper.getCropBoxData();
+                        var aspectRatio = cropBoxData.width / cropBoxData.height;
+
+                        if (aspectRatio < minAspectRatio) {
+                            cropper.setCropBoxData({
+                                width: cropBoxData.height * minAspectRatio
+                            });
+                        } else if (aspectRatio > maxAspectRatio) {
+                            cropper.setCropBoxData({
+                                width: cropBoxData.height * maxAspectRatio
+                            });
+                        }
+                    },
+
+                });
+
+                document.getElementById('crop').addEventListener('click', function () {
+                    var initialAvatarURL;
+                    var canvas;
+
+
+                    if (cropper) {
+                        /* canvas = cropper.getCroppedCanvas({
+                             width: 100%,
+                             height: 160,
+                         });*/
+
+
+                        canvas.toBlob(function (blob) {
+                            var formData = new FormData();
+                            formData.append('avatar', blob, 'avatar.jpg');
+
+                            $.ajax('/upload/crop', {
+                                method: 'POST',
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+
+                                xhr: function () {
+                                    var xhr = new XMLHttpRequest();
+
+                                    xhr.upload.onprogress = function (e) {
+                                        var percent = '0';
+                                        var percentage = '0%';
+
+                                        if (e.lengthComputable) {
+                                            percent = Math.round((e.loaded / e.total) * 100);
+                                            percentage = percent + '%';
+
+                                        }
+                                    };
+                                    return xhr;
+                                },
+
+                                success: function () {
+                                    console.log("ok");
+                                },
+
+                                error: function () {
+                                    console.log("errr");
+                                },
+
+                                complete: function () {
+                                    console.log("done");
+                                },
+                            });
+                        });
+                    }
+                });
+            });
+
+
         });
 
 
     </script>
 
 
-    <link rel="stylesheet" href="https://fengyuanchen.github.io/cropperjs/css/cropper.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://fengyuanchen.github.io/cropperjs/js/cropper.js"></script>
 
-    <script>
-        window.addEventListener('DOMContentLoaded', function () {
-            var image = document.querySelector('#image');
-            var minAspectRatio = 1;
-            var maxAspectRatio = 1;
-            var cropper = new Cropper(image, {
-                ready: function () {
-                    var cropper = this.cropper;
-                    var containerData = cropper.getContainerData();
-                    var cropBoxData = cropper.getCropBoxData();
-                    var aspectRatio = cropBoxData.width / cropBoxData.height;
-                    var newCropBoxWidth;
-
-                    if (aspectRatio < minAspectRatio || aspectRatio > maxAspectRatio) {
-                        newCropBoxWidth = cropBoxData.height * ((minAspectRatio + maxAspectRatio) / 2);
-
-                        cropper.setCropBoxData({
-                            left: (containerData.width - newCropBoxWidth) / 2,
-                            width: newCropBoxWidth
-                        });
-                    }
-                },
-
-                cropmove: function () {
-                    var cropper = this.cropper;
-                    var cropBoxData = cropper.getCropBoxData();
-                    var aspectRatio = cropBoxData.width / cropBoxData.height;
-
-                    if (aspectRatio < minAspectRatio) {
-                        cropper.setCropBoxData({
-                            width: cropBoxData.height * minAspectRatio
-                        });
-                    } else if (aspectRatio > maxAspectRatio) {
-                        cropper.setCropBoxData({
-                            width: cropBoxData.height * maxAspectRatio
-                        });
-                    }
-                },
-
-            });
-
-            document.getElementById('crop').addEventListener('click', function () {
-                var initialAvatarURL;
-                var canvas;
-
-
-                if (cropper) {
-                    /* canvas = cropper.getCroppedCanvas({
-                         width: 100%,
-                         height: 160,
-                     });*/
-
-
-                    canvas.toBlob(function (blob) {
-                        var formData = new FormData();
-                        formData.append('avatar', blob, 'avatar.jpg');
-
-                        $.ajax('/upload/crop', {
-                            method: 'POST',
-                            data: formData,
-                            processData: false,
-                            contentType: false,
-
-                            xhr: function () {
-                                var xhr = new XMLHttpRequest();
-
-                                xhr.upload.onprogress = function (e) {
-                                    var percent = '0';
-                                    var percentage = '0%';
-
-                                    if (e.lengthComputable) {
-                                        percent = Math.round((e.loaded / e.total) * 100);
-                                        percentage = percent + '%';
-
-                                    }
-                                };
-                                return xhr;
-                            },
-
-                            success: function () {
-                                console.log("ok");
-                            },
-
-                            error: function () {
-                                console.log("errr");
-                            },
-
-                            complete: function () {
-                                console.log("done");
-                            },
-                        });
-                    });
-                }
-            });
-        });
-    </script>
 @endsection

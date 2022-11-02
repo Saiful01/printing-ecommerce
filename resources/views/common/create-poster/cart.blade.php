@@ -24,7 +24,7 @@
                                 </div>
                                 <div class="col item_desc p-0">
                                     <strong>Dimensions:</strong> 36.0 (w) x 24.0 (h)<br>
-                                    <strong>Media:</strong> Photo Premium Satin<br>
+                                    <strong>Media:</strong> @{{ item.title }}<br>
                                     <strong>Framing:</strong> No Frame<br>
                                 </div>
                                 <div class="col ">
@@ -39,7 +39,7 @@
                                             </div>
                                         </div>
                                         <div class="col-6 text-center align-items-center">
-                                            <h6><strong>@{{ item.price }}</strong></h6>
+                                            <h6><strong>$@{{ item.price }}</strong></h6>
                                         </div>
                                         <div class="col-6 text-right">
                                             <button class="btn btn-outline-danger btn-sm" ng-click="deleteItem(item)"><i
@@ -80,7 +80,7 @@
                                     Prints: <span class="float-right">1</span>
                                 </li>
                                 <li class="list-group-item">
-                                    Subtotal: <span class="float-right"><strong>$18.99</strong></span>
+                                    Subtotal: <span class="float-right"><strong>$@{{ totalPriceCountAll }}</strong></span>
                                 </li>
                                 <li class="list-group-item">
                                     <form action="/carts/add_coupon" method="get">
@@ -96,7 +96,7 @@
                                     </form>
                                 </li>
                                 <li class="list-group-item">
-                                    <strong>Subtotal: <span class="float-right">$18.99</span></strong>
+                                    <strong>Subtotal: <span class="float-right">$@{{ totalPriceCountAll }}</span></strong>
                                 </li>
 
                                 <li class="list-group-item text-center">

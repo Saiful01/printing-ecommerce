@@ -5,19 +5,19 @@
         <!-- Dark Logo-->
         <a href="/admin/dashboard" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="/images/logo.png" alt="" height="60">
+                        <img src="/common/images/logo.png" alt="" height="60">
                     </span>
             <span class="logo-lg">
-                        <img src="/images/logo.png" alt="" height="60">
+                        <img src="/common/images/logo.png" alt="" height="60">
                     </span>
         </a>
         <!-- Light Logo-->
         <a href="/admin/dashboard" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="/images/logo.png" alt="" height="60">
+                        <img src="/common/images/logo.png" alt="" height="60">
                     </span>
             <span class="logo-lg">
-                        <img src="/images/logo.png" alt="" height="60">
+                        <img src="/common/images/logo.png" alt="" height="60">
                     </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -112,7 +112,7 @@
                            href="#sidebarCustomPrice"
                            data-bs-toggle="collapse" role="button" aria-expanded="false"
                            aria-controls="sidebarCustomPrice">
-                            <i class="mdi mdi-puzzle-outline"></i> <span data-key="t-layouts">Custom Price</span>
+                            <i class="mdi mdi-grid-large"></i> <span data-key="t-layouts">Custom Price</span>
                         </a>
                         <div class="menu-dropdown collapse" id="sidebarCustomPrice" style="">
                             <ul class="nav nav-sm flex-column">
@@ -128,11 +128,32 @@
                         </div>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link menu-link {{ Request::is('/admin/product/add') ? 'active' : null }}"
+                           href="#sidebarProduct"
+                           data-bs-toggle="collapse" role="button" aria-expanded="false"
+                           aria-controls="sidebarCustomPrice">
+                            <i class="mdi mdi-cube-outline"></i> <span data-key="t-layouts">Product</span>
+                        </a>
+                        <div class="menu-dropdown collapse" id="sidebarProduct" style="">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="/admin/product/add" class="nav-link"
+                                       data-key="t-horizontal">Add Product</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/product/show" class="nav-link"
+                                       data-key="t-detached">Show Product</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
                     <li class="nav-item ">
                         <a class="nav-link menu-link {{ Request::is('/admin/orders') ? 'active' : null }}"
                            href="/admin/order/show"
                            aria-expanded="false" aria-controls="sidebarDashboards">
-                            <i class="mdi-basket-check"></i> <span data-key="t-dashboards">Orders</span>
+                            <i class="mdi mdi-basket-check"></i> <span data-key="t-dashboards">Orders</span>
                         </a>
 
                     </li>
@@ -141,7 +162,7 @@
                         <a class="nav-link menu-link {{ Request::is('/admin/customers') ? 'active' : null }}"
                            href="/admin/customers"
                            aria-expanded="false" aria-controls="sidebarDashboards">
-                            <i class="mdi-account-group"></i> <span data-key="t-dashboards">Customers</span>
+                            <i class="mdi mdi-account-group"></i> <span data-key="t-dashboards">Customers</span>
                         </a>
 
                     </li>

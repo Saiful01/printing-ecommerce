@@ -15,10 +15,12 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger("customer_id");
             $table->string("invoice");
             $table->double("total_price");
             $table->string("coupon_code")->nullable();
             $table->double("coupon_value")->default(0);
+            $table->boolean("is_paid")->default(0);
             $table->timestamps();
         });
     }

@@ -11,6 +11,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PosterPrintController;
 use App\Http\Controllers\WebApiController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -138,3 +139,13 @@ Route::group(['prefix' => 'web-api', 'middleware' => 'admin'], function () {
 /*Admin Section End*/
 
 
+Route::get('/migrate', function () {
+
+    //return "Not allowed!";
+    Artisan::call('migrate:fresh');
+    Artisan::call('db:seed');
+    Artisan::call('config:clear');
+
+    return "Migrate!";
+
+});
