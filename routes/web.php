@@ -54,6 +54,7 @@ Route::any('/upload/crop', [Controller::class, 'uploadCropImage']);
 /*Customer Area Start*/
 Route::any('/customer/login', [CustomerController::class, 'login']);
 Route::any('/customer/login-check', [CustomerController::class, 'loginCheck']);
+
 Route::group(['prefix' => 'customer','middleware' => 'customer'], function () {
     Route::any('/profile', [CustomerController::class, 'customerProfile']);
     Route::any('/logout', [CustomerController::class, 'logout']);

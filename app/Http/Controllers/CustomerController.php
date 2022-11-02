@@ -19,8 +19,6 @@ class CustomerController extends Controller
     {
         //return $request->all();
 
-
-
         if (Auth::guard('customer')->attempt(['email' => $request['email'], 'password' => $request['password']], /*$remember*/)) {
          return \redirect('customer/profile');
         } else {
@@ -34,11 +32,18 @@ class CustomerController extends Controller
     {
         return view('common.customer.login');
     }
+
     public function logout()
     {
         Auth::guard('customer')->logout();
         return \redirect('/');
     }
+
+    public function customerProfile()
+    {
+        return view('common.membership.profile');
+    }
+
     public function index()
     {
         //

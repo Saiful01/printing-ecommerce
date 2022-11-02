@@ -106,11 +106,6 @@ class Controller extends BaseController
         return view('common.create-poster.cart');
     }
 
-    function profile()
-    {
-        return view('common.membership.profile');
-    }
-
     function dropZoneStore(Request $request)
     {
         //return $request->all();
