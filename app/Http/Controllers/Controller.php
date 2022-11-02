@@ -102,7 +102,6 @@ class Controller extends BaseController
         if (!Auth::guard('customer')->check()) {
             return redirect('/customer/login');
         }
-        return "ok";
         return view('common.create-poster.cart');
     }
 

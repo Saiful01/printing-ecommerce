@@ -273,9 +273,10 @@
     <div class="dropdn-content account-drop" id="dropdnAccount">
         <div class="dropdn-content-block">
             <div class="dropdn-close"><span class="js-dropdn-close">Close</span></div>
+            @if (!Auth::guard('customer')->check())
+
             <ul>
-                <li><a href="#"><span>Log In</span><i class="icon-login"></i></a></li>
-                <li><a href="#"><span>Register</span><i class="icon-user2"></i></a></li>
+                <li><a href="/customer/register"><span>Register</span><i class="icon-user2"></i></a></li>
             </ul>
             <div class="dropdn-form-wrapper">
                 <h5>Quick Login</h5>
@@ -290,9 +291,15 @@
                         <input type="password" class="form-control form-control--sm"
                                placeholder="Enter your password" name="password" required>
                     </div>
-                    <button type="submit" class="btn">Enter</button>
+                    <button type="submit" class="btn">Login</button>
                 </form>
             </div>
+            @else
+                <ul>
+                    <li><a href="/customer/profile"><span>{{Auth::guard('customer')->user()->firstName}} {{Auth::guard('customer')->user()->lastName}}</span><i class="icon-user2"></i></a></li>
+                </ul>
+            @endif
+
         </div>
         <div class="drop-overlay js-dropdn-close"></div>
     </div>
@@ -349,7 +356,7 @@
                         <div class="footer-logo">
                             <a href="/"><img class="lazyload fade-up"
                                              src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                             data-srcset="/common/images/logo-footer.png 1x, images/logo-footer2x.png 2x"
+                                             data-srcset="/common/images/logo-footer.png 1x, /common/images/logo-footer2x.png 2x"
                                              alt="Logo"></a>
                         </div>
                         <div class="collapsed-content">

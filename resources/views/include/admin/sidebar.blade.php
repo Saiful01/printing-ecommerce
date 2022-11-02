@@ -158,13 +158,25 @@
 
                     </li>
 
-                    <li class="nav-item ">
-                        <a class="nav-link menu-link {{ Request::is('/admin/customers') ? 'active' : null }}"
-                           href="/admin/customers"
-                           aria-expanded="false" aria-controls="sidebarDashboards">
-                            <i class="mdi mdi-account-group"></i> <span data-key="t-dashboards">Customers</span>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link {{ Request::is('/admin/product/add') ? 'active' : null }}"
+                           href="#sidebarCustomers"
+                           data-bs-toggle="collapse" role="button" aria-expanded="false"
+                           aria-controls="sidebarDashboards">
+                            <i class="mdi mdi-account-group"></i> <span data-key="t-layouts">Customers</span>
                         </a>
-
+                        <div class="menu-dropdown collapse" id="sidebarCustomers" style="">
+                            <ul class="nav nav-sm flex-column">
+                                {{--<li class="nav-item">
+                                    <a href="/admin/product/add" class="nav-link"
+                                       data-key="t-horizontal">Add Customers</a>
+                                </li>--}}
+                                <li class="nav-item">
+                                    <a href="/admin/customers/list" class="nav-link"
+                                       data-key="t-detached">Customers List</a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
 
                 @endif

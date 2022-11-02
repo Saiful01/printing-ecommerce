@@ -53,10 +53,21 @@ Route::any('/upload/crop', [Controller::class, 'uploadCropImage']);
 
 /*Customer Area Start*/
 Route::any('/customer/login', [CustomerController::class, 'login']);
+Route::any('/customer/register', [CustomerController::class, 'register']);
+Route::any('/customer/register/store', [CustomerController::class, 'registerSave']);
 Route::any('/customer/login-check', [CustomerController::class, 'loginCheck']);
 
 Route::group(['prefix' => 'customer','middleware' => 'customer'], function () {
     Route::any('/profile', [CustomerController::class, 'customerProfile']);
+    Route::any('/order/history', [CustomerController::class, 'customerOrderHistory']);
+    Route::any('/address', [CustomerController::class, 'customerAddress']);
+    Route::any('/address/store', [CustomerController::class, 'customerAddressStore']);
+    Route::any('/address/show', [CustomerController::class, 'customerAddressShow']);
+    Route::any('/address/edit/{id}', [CustomerController::class, 'customerAddressEdit']);
+    Route::any('/address/update}', [CustomerController::class, 'customerAddressUpdate']);
+    Route::any('/billing/address', [CustomerController::class, 'customerBillingAddress']);
+    Route::any('/billing/address/store', [CustomerController::class, 'customerBillingAddressStore']);
+    Route::any('/bill/pay', [CustomerController::class, 'customerBillPay']);
     Route::any('/logout', [CustomerController::class, 'logout']);
 });
 /*Customer Area End*/
@@ -115,10 +126,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/order/store', [OrderController::class, 'store']);
     Route::get('/admin/order/edit/{id}', [OrderController::class, 'edit']);
     Route::post('/admin/order/update', [OrderController::class, 'update']);
-
-    Route::resource('/news', NewsController::class);
-    Route::resource('/galleries', GalleryController::class);
-    Route::resource('/events', EventController::class);
 
     Route::get('/admin/admins', [AdminRoleController::class, 'show']);
     Route::get('/admin/edit/{id}', [AdminRoleController::class, 'edit']);

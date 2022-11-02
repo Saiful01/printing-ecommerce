@@ -2,12 +2,14 @@
 
 
 use App\Models\BlogCategory;
+use App\Models\CustomerAddress;
 use App\Models\Department;
 use App\Models\InOutMonitor;
 use App\Models\Leave;
 use App\Models\LoginHistory;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 function getErrorMessage($param)
 {
@@ -56,6 +58,15 @@ function getDateFormat($date)
 function getTimeOnly($date)
 {
     return Carbon::createFromFormat('H:i:s', $date)->format('h:i:s');
+}
+function isAddress()
+{
+    $exist= CustomerAddress::where('customer_id', Auth::guard('customer')->user()->id)->first();
+    if ($exist != null){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 function getLoginHistory()

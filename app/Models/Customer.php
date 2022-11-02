@@ -11,4 +11,8 @@ class Customer extends Authenticatable
     use HasFactory;
     public $timestamps= true;
     protected $guarded=[];
+
+    public function customerAddress(){
+        return $this->hasOne(CustomerAddress::class);
+    }
 }

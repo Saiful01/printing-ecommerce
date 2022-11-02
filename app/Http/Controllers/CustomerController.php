@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\CustomerAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\URL;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CustomerController extends Controller
@@ -20,7 +23,10 @@ class CustomerController extends Controller
         //return $request->all();
 
         if (Auth::guard('customer')->attempt(['email' => $request['email'], 'password' => $request['password']], /*$remember*/)) {
-         return \redirect('customer/profile');
+            if($request->previous_url != null){
+                return \redirect($request['previous_url']);
+            }
+         return \redirect('/customer/profile');
         } else {
             return "not Ok";
             Alert::error('Sorry! ', "Phone or password does not match or Your are not active");
@@ -30,7 +36,31 @@ class CustomerController extends Controller
     }
     public function login()
     {
-        return view('common.customer.login');
+        $previous=URL::previous();
+        return view('common.customer.login')->with('previous',$previous);
+    }
+
+    public function register()
+    {
+        return view('common.customer.register');
+    }
+    public function registerSave(Request $request)
+    {
+         //return $request->all();
+        $request->validate([
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'email' => 'required|email|unique:customers',
+            'password' => 'required',
+        ]);
+        try {
+            $request['password'] = Hash::make($request['password']);
+            Customer::create($request->except('checkbox1','_token'));
+            return redirect('/customer/login')->with('success', "Successfully Created");
+        } catch (Exception $exception) {
+
+            return back()->with('success', $exception->getMessage());
+        }
     }
 
     public function logout()
@@ -41,41 +71,54 @@ class CustomerController extends Controller
 
     public function customerProfile()
     {
-        return view('common.membership.profile');
+        $result = Customer::with('customerAddress')->where('id',Auth::guard('customer')->user()->id)->first();
+        //return $result;
+        return view('common.customer.customerProfile')->with('result',$result);
     }
 
-    public function index()
+    public function customerAddress()
     {
-        //
+        return view('common.customer.customerAddress');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function customerAddressStore(Request $request)
     {
-        //
+        //return $request->all();
+        $request->validate([
+          /*  'company' => 'required',*/
+            'address' => 'required',
+            'phone' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zipCode' => 'required',
+        ]);
+        $request['customer_id']= Auth::guard('customer')->user()->id;
+        try {
+            CustomerAddress::create($request->except('_token'));
+            return redirect('/customer/billing/address')->with('success', "Successfully Created");
+        } catch (Exception $exception) {
+
+            return back()->with('success', $exception->getMessage());
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function customerAddressShow()
     {
-        //
+        $result = CustomerAddress::where('id',Auth::guard('customer')->user()->id)->first();
+        return $result;
+        return view('common.customer.customerBillingAddress')->with('result',$result);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
+    public function customerBillingAddress()
+    {
+        return view('common.customer.customerBillingAddress');
+    }
+
+    public function customerBillPay()
+    {
+        return view('common.customer.customerBillPay');
+    }
+
     public function show(Customer $customer)
     {
         //

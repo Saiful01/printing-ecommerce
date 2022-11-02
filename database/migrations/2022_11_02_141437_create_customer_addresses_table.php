@@ -15,7 +15,7 @@ class CreateCustomerAddressesTable extends Migration
     {
         Schema::create('customer_addresses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("customers_id");
+            $table->unsignedBigInteger("customer_id");
             $table->string('company')->nullable();
             $table->longText('address');
             $table->longText('address2')->nullable();
@@ -24,6 +24,7 @@ class CreateCustomerAddressesTable extends Migration
             $table->string('state');
             $table->string('zipCode');
             $table->timestamps();
+            $table->foreign('customer_id')->references('id')->on('customers');
         });
     }
 
