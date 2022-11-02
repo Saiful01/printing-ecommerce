@@ -14,7 +14,7 @@ class AluminiumPrintController extends Controller
      */
     public function index()
     {
-        //
+        return view("admin.aluminumPrint.create");
     }
 
     /**
@@ -35,7 +35,18 @@ class AluminiumPrintController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request->all();
+        $request->validate([
+            'title' => 'required',
+            'price' => 'required',
+        ]);
+        try {
+            AluminiumPrint::create($request->all());
+            return redirect('/admin/aluminum/price/show')->with('success', "Successfully Created");
+        } catch (Exception $exception) {
+
+            return back()->with('success', $exception->getMessage());
+        }
     }
 
     /**
@@ -46,7 +57,9 @@ class AluminiumPrintController extends Controller
      */
     public function show(AluminiumPrint $aluminiumPrint)
     {
-        //
+        $results = AluminiumPrint::orderBy('created_at', 'DESC')->get();
+        //return $results;
+        return view("admin.aluminumPrint.show")->with('results', $results);
     }
 
     /**
@@ -78,8 +91,14 @@ class AluminiumPrintController extends Controller
      * @param  \App\Models\AluminiumPrint  $aluminiumPrint
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AluminiumPrint $aluminiumPrint)
+    public function destroy($id)
     {
-        //
+        try {
+            AluminiumPrint::where('id', $id)->delete();
+            return back()->with('success', "Successfully Deleted");
+        } catch (Exception $exception) {
+
+            return back()->with('success', $exception->getMessage());
+        }
     }
 }

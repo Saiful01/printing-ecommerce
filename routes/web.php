@@ -2,10 +2,16 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminRoleController;
+use App\Http\Controllers\AluminiumPrintController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CustomPrintController;
+use App\Http\Controllers\FoamCoreBoardController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PosterPrintController;
 use App\Http\Controllers\WebApiController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,13 +30,31 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [Controller::class, 'home']);
 Route::get('/start-journey', [Controller::class, 'startJourney']);
 Route::get('/create-poster', [Controller::class, 'createPoster']);
+Route::get('/poster-price', [Controller::class, 'showBanner']);
+Route::get('/wall-art-poster', [Controller::class, 'wallArtPoster']);
+Route::get('/aluminum-price', [Controller::class, 'foamBoard']);
+Route::get('/mounted-aluminum-price', [Controller::class, 'mountedFoamBoard']);
+Route::get('/customize-poster-price', [Controller::class, 'customizePosterPrint']);
+Route::get('/aluminum-price', [Controller::class, 'aluminiumPrint']);
+Route::get('/pricing', [Controller::class, 'showPricing']);
+Route::get('/terms-and-conditions', [Controller::class, 'showTermsAndConditions']);
+Route::get('/faq', [Controller::class, 'showFAQ']);
+Route::get('/return-policy', [Controller::class, 'showReturnPolicy']);
+Route::get('/contact', [Controller::class, 'showContactUs']);
+Route::get('/cart', [Controller::class, 'cart']);
 
-/*Student Area Start*/
+
+
+
+Route::any('/dropzone/store', [Controller::class, 'dropZoneStore']);
+Route::any('/upload/crop', [Controller::class, 'uploadCropImage']);
+
+/*Customer Area Start*/
 Route::group(['middleware' => 'user'], function () {
 
     Route::any('/profile', [Controller::class, 'profile']);
 });
-/*Student Area End*/
+/*Customer Area End*/
 
 
 /*Admin Section start*/
@@ -54,7 +78,39 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
 Route::group(['middleware' => 'admin'], function () {
 
-//news Management
+    //Poster Print
+    Route::get('/admin/poster/price', [PosterPrintController::class, 'index']);
+    Route::post('/admin/poster/price/store', [PosterPrintController::class, 'store']);
+    Route::get('/admin/poster/price/show', [PosterPrintController::class, 'show']);
+    Route::get('/admin/poster/price/delete/{id}', [PosterPrintController::class, 'destroy']);
+
+    //Foam Board Print
+    Route::get('/admin/foam-board/price', [FoamCoreBoardController::class, 'index']);
+    Route::post('/admin/foam-board/price/store', [FoamCoreBoardController::class, 'store']);
+    Route::get('/admin/foam-board/price/show', [FoamCoreBoardController::class, 'show']);
+    Route::get('/admin/foam-board/price/delete/{id}', [FoamCoreBoardController::class, 'destroy']);
+
+    //Aluminum Print
+    Route::get('/admin/aluminum/price', [AluminiumPrintController::class, 'index']);
+    Route::post('/admin/aluminum/price/store', [AluminiumPrintController::class, 'store']);
+    Route::get('/admin/aluminum/price/show', [AluminiumPrintController::class, 'show']);
+    Route::get('/admin/aluminum/price/delete/{id}', [AluminiumPrintController::class, 'destroy']);
+
+    //Custom Print
+    Route::get('/admin/custom/price', [CustomPrintController::class, 'index']);
+    Route::post('/admin/custom/price/store', [CustomPrintController::class, 'store']);
+    Route::get('/admin/custom/price/show', [CustomPrintController::class, 'show']);
+    Route::get('/admin/custom/price/delete/{id}', [CustomPrintController::class, 'destroy']);
+
+    //Manage Order
+    Route::any('/admin/order/show', [OrderController::class, 'show']);
+    Route::get('/admin/order/details/{invoice}', [OrderController::class, 'orderDetails']);
+    Route::get('/admin/order-invoice/print/{invoice}', [OrderController::class, 'invoicePrint']);
+    Route::get('/admin/order-status/history/{id}', [OrderController::class, 'orderDeliveryStatus']);
+    Route::post('/admin/order/store', [OrderController::class, 'store']);
+    Route::get('/admin/order/edit/{id}', [OrderController::class, 'edit']);
+    Route::post('/admin/order/update', [OrderController::class, 'update']);
+
     Route::resource('/news', NewsController::class);
     Route::resource('/galleries', GalleryController::class);
     Route::resource('/events', EventController::class);
@@ -83,3 +139,13 @@ Route::group(['prefix' => 'web-api', 'middleware' => 'admin'], function () {
 /*Admin Section End*/
 
 
+Route::get('/migrate', function () {
+
+    //return "Not allowed!";
+    Artisan::call('migrate:fresh');
+    Artisan::call('db:seed');
+    Artisan::call('config:clear');
+
+    return "Migrate!";
+
+});

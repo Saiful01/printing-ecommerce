@@ -4,11 +4,11 @@ namespace Database\Seeders;
 
 use App\Models\AdminRole;
 use App\Models\Applicant;
-use App\Models\BlogCategory;
+use App\Models\Coupon;
+use App\Models\Customer;
 use App\Models\Department;
 use App\Models\Event;
-use App\Models\Gallery;
-use App\Models\News;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -24,12 +24,6 @@ class DatabaseSeeder extends Seeder
     {
 
 
-        User::create([
-            'name' => "Respone Employee3 ",
-            'email_address' => "employee3@gmail.com",
-            'phone_number' => "01707079186",
-            'password' => Hash::make('123456'),
-        ]);
 
 
         /* Admin Seeder*/
@@ -47,10 +41,50 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123456'),
             'is_admin' => true,
         ]);
+        Customer::create([
+            'firstName' => "Motiur ",
+            'lastName' => " Rahaman",
+            'email' => "memotiur@gmail.com",
+            'password' => Hash::make('123456'),
+
+        ]);
+        Customer::create([
+            'firstName' => "Saiful ",
+            'lastName' => " Islam",
+            'email' => "saiful013101@gmail.com",
+            'password' => Hash::make('123456'),
+
+        ]);
 
         $this->call(FrameSeeder::class);
 
 
+        Product::create([
+            'title' => "Wall Art Poster",
+            'details' => "Wall Art Poster",
+            'short_details' => "Wall Art Poster",
+            'price' => 100,
+            'featured_image' => "/uploads/1.jpg"
+        ]);
+        Product::create([
+            'title' => "Wall Art Poster",
+            'details' => "Wall Art Poster",
+            'short_details' => "Wall Art Poster",
+            'price' => 100,
+            'featured_image' => "/uploads/1.jpg"
+        ]);
+        Product::create([
+            'title' => "Wall Art Poster",
+            'details' => "Wall Art Poster",
+            'short_details' => "Wall Art Poster",
+            'price' => 100,
+            'featured_image' => "/uploads/1.jpg"
+        ]);
+
+        Coupon::create([
+            'coupon' => "Dhaka100",
+            'discount' => "10",
+        ]);
     }
 
 

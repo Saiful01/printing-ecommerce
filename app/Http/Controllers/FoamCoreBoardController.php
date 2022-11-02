@@ -14,7 +14,7 @@ class FoamCoreBoardController extends Controller
      */
     public function index()
     {
-        //
+        return view("admin.foamPrint.create");
     }
 
     /**
@@ -35,7 +35,18 @@ class FoamCoreBoardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request->all();
+        $request->validate([
+            'title' => 'required',
+            'price' => 'required',
+        ]);
+        try {
+            FoamCoreBoard::create($request->all());
+            return redirect('/admin/foam-board/price/show')->with('success', "Successfully Created");
+        } catch (Exception $exception) {
+
+            return back()->with('success', $exception->getMessage());
+        }
     }
 
     /**
@@ -46,7 +57,9 @@ class FoamCoreBoardController extends Controller
      */
     public function show(FoamCoreBoard $foamCoreBoard)
     {
-        //
+        $results = FoamCoreBoard::orderBy('created_at', 'DESC')->get();
+        //return $results;
+        return view("admin.foamPrint.show")->with('results', $results);
     }
 
     /**
@@ -78,8 +91,14 @@ class FoamCoreBoardController extends Controller
      * @param  \App\Models\FoamCoreBoard  $foamCoreBoard
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FoamCoreBoard $foamCoreBoard)
+    public function destroy($id)
     {
-        //
+        try {
+            FoamCoreBoard::where('id', $id)->delete();
+            return back()->with('success', "Successfully Deleted");
+        } catch (Exception $exception) {
+
+            return back()->with('success', $exception->getMessage());
+        }
     }
 }
