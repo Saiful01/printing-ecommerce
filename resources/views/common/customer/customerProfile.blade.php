@@ -49,7 +49,11 @@
                                         </div>
                                         @if($result->customerAddress != null)
                                         <div class="row mt-2">
-                                            <div class="col-sm-18">
+                                            <div class="col-sm-9">
+                                                <label class="text-uppercase">Company:</label>
+                                                <h3>{{$result->customerAddress->company}}</h3>
+                                            </div>
+                                            <div class="col-sm-9">
                                                 <label class="text-uppercase">Address 1:</label>
                                                 <h3>{{$result->customerAddress->address}}</h3>
                                             </div>

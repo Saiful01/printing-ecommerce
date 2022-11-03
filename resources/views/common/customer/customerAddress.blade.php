@@ -13,52 +13,102 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            Billing Address
-                        </div>
-                        <div class="card-body">
-                            <form class="new_address"  action="/customer/address/store" accept-charset="UTF-8" method="post">
-                               @csrf
-                                <div class="form-group">
-                                    <label for="address_company">Company (Optional)</label>
-                                    <input class="form-control" placeholder="Company" type="text" name="company" id="company">
-                                </div>
-                                <div class="form-group">
-                                    <label for="address_address">Address 1</label>
-                                    <input class="form-control" placeholder="Address 1" required="required" type="text" name="address">
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label for="address_address">Address 2 (Optional)</label>
-                                        <input class="form-control" placeholder="Address 2" type="text" name="address2">
+                @if(isAddress() == true)
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Billing Address
+                            </div>
+                            <div class="card-body">
+                                <form class="new_address"  action="/customer/address/update" accept-charset="UTF-8" method="post">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="address_company">Company (Optional)</label>
+                                        <input class="form-control" type="text" name="company" id="company" value="{{$result->customerAddress->company}}">
+                                        <input type="hidden" name="customer_id" value="{{$result->id}}">
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="address_phone">Phone</label>
-                                        <input class="form-control" placeholder="Phone" required="required" type="text" name="phone">
+                                    <div class="form-group">
+                                        <label for="address_address">Address 1</label>
+                                        <input class="form-control" value="{{$result->customerAddress->address}}" required="required" type="text" name="address">
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-4">
-                                        <label for="address_city">City</label>
-                                        <input class="form-control" placeholder="City" required="required" type="text" name="city">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="address_address">Address 2 (Optional)</label>
+                                            <input class="form-control" value="{{$result->customerAddress->address2}}" type="text" name="address2">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="address_phone">Phone</label>
+                                            <input class="form-control" value="{{$result->customerAddress->phone}}" required="required" type="text" name="phone">
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="address_state">State</label>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="address_city">City</label>
+                                            <input class="form-control" value="{{$result->customerAddress->city}}" required="required" type="text" name="city">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="address_state">State</label>
 
-                                        <input class="form-control" placeholder="City" required="required" type="text" name="state">
+                                            <input class="form-control" value="{{$result->customerAddress->state}}" required="required" type="text" name="state">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="address_zipcode">Zip Code</label>
+                                            <input class="form-control" value="{{$result->customerAddress->zipCode}}" required="required" type="text" name="zipCode">
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-4">
-                                        <label for="address_zipcode">Zip Code</label>
-                                        <input class="form-control" placeholder="Zip Code" required="required" type="text" name="zipCode">
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Save And Continue</button>
-                            </form>
+                                    <button type="submit" class="btn btn-primary">Update And Continue</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @else
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                Billing Address
+                            </div>
+                            <div class="card-body">
+                                <form class="new_address"  action="/customer/address/store" accept-charset="UTF-8" method="post">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="address_company">Company (Optional)</label>
+                                        <input class="form-control" placeholder="Company" type="text" name="company" id="company">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address_address">Address 1</label>
+                                        <input class="form-control" placeholder="Address 1" required="required" type="text" name="address">
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="address_address">Address 2 (Optional)</label>
+                                            <input class="form-control" placeholder="Address 2" type="text" name="address2">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="address_phone">Phone</label>
+                                            <input class="form-control" placeholder="Phone" required="required" type="text" name="phone">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="address_city">City</label>
+                                            <input class="form-control" placeholder="City" required="required" type="text" name="city">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="address_state">State</label>
+
+                                            <input class="form-control" placeholder="State" required="required" type="text" name="state">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="address_zipcode">Zip Code</label>
+                                            <input class="form-control" placeholder="Zip Code" required="required" type="text" name="zipCode">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Save And Continue</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                @endif
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">Cart Summary</div>

@@ -26,27 +26,32 @@ class CustomerController extends Controller
             if($request->previous_url != null){
                 return \redirect($request['previous_url']);
             }
-         return \redirect('/customer/profile');
+         return \redirect('/customer/address');
         } else {
-            return "not Ok";
-            Alert::error('Sorry! ', "Phone or password does not match or Your are not active");
+            Alert::error('Sorry! ', "Email or password does not match or Your are not active");
             return back()->withInput();
 
         }
     }
     public function login()
     {
+        if (Auth::guard('customer')->check()){
+            return \redirect('/customer/profile');
+        }
         $previous=URL::previous();
         return view('common.customer.login')->with('previous',$previous);
     }
 
     public function register()
     {
+        if (Auth::guard('customer')->check()){
+            return \redirect('/customer/profile');
+        }
         return view('common.customer.register');
     }
     public function registerSave(Request $request)
     {
-         //return $request->all();
+        // return $request->all();
         $request->validate([
             'firstName' => 'required',
             'lastName' => 'required',
@@ -56,7 +61,7 @@ class CustomerController extends Controller
         try {
             $request['password'] = Hash::make($request['password']);
             Customer::create($request->except('checkbox1','_token'));
-            return redirect('/customer/login')->with('success', "Successfully Created");
+            return redirect('/customer/profile')->with('success', "Successfully Created");
         } catch (Exception $exception) {
 
             return back()->with('success', $exception->getMessage());
@@ -76,16 +81,22 @@ class CustomerController extends Controller
         return view('common.customer.customerProfile')->with('result',$result);
     }
 
+    public function customerOrderHistory()
+    {
+        return view('common.customer.customerOrderDetails');
+    }
+
     public function customerAddress()
     {
-        return view('common.customer.customerAddress');
+        $result = Customer::with('customerAddress')->where('id',Auth::guard('customer')->user()->id)->first();
+        //return $result;
+        return view('common.customer.customerAddress')->with('result',$result);
     }
 
     public function customerAddressStore(Request $request)
     {
         //return $request->all();
         $request->validate([
-          /*  'company' => 'required',*/
             'address' => 'required',
             'phone' => 'required',
             'city' => 'required',
@@ -102,59 +113,32 @@ class CustomerController extends Controller
         }
     }
 
-    public function customerAddressShow()
+    public function customerAddressUpdate(Request $request)
     {
-        $result = CustomerAddress::where('id',Auth::guard('customer')->user()->id)->first();
-        return $result;
-        return view('common.customer.customerBillingAddress')->with('result',$result);
-    }
+        //return $request->all();
+        $request->validate([
+            'address' => 'required',
+            'phone' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zipCode' => 'required',
+        ]);
+        //$request['customer_id'];
+        try {
+            CustomerAddress::where('customer_id', $request['customer_id'])->update($request->except('_token'));
+            return redirect('/customer/bill/pay')->with('success', "Successfully Created");
+        } catch (Exception $exception) {
 
-    public function customerBillingAddress()
-    {
-        return view('common.customer.customerBillingAddress');
+            return back()->with('success', $exception->getMessage());
+        }
     }
 
     public function customerBillPay()
     {
-        return view('common.customer.customerBillPay');
+        $result = Customer::with('customerAddress')->where('id',Auth::guard('customer')->user()->id)->first();
+        // return $result;
+        return view('common.customer.customerBillPay')->with('result',$result);
     }
 
-    public function show(Customer $customer)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Customer $customer)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Customer $customer)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Customer  $customer
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Customer $customer)
-    {
-        //
-    }
 }

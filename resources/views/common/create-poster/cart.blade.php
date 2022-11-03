@@ -118,10 +118,15 @@
                                         <a class="btn btn-lg btn-success" href="/customer/bill/pay"><i
                                                 class="fas fa-shopping-cart"></i> SECURE CHECKOUT</a>
                                     </li>
-                                @else
+                                @elseif(Auth::guard('customer')->check())
 
                                     <li class="list-group-item text-center">
                                         <a class="btn btn-lg btn-success" href="/customer/address"><i
+                                                class="fas fa-shopping-cart"></i> SECURE CHECKOUT</a>
+                                    </li>
+                                @else
+                                    <li class="list-group-item text-center">
+                                        <a class="btn btn-lg btn-success" href="/customer/login"><i
                                                 class="fas fa-shopping-cart"></i> SECURE CHECKOUT</a>
                                     </li>
                                 @endif

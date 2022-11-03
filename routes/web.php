@@ -64,9 +64,7 @@ Route::group(['prefix' => 'customer','middleware' => 'customer'], function () {
     Route::any('/address/store', [CustomerController::class, 'customerAddressStore']);
     Route::any('/address/show', [CustomerController::class, 'customerAddressShow']);
     Route::any('/address/edit/{id}', [CustomerController::class, 'customerAddressEdit']);
-    Route::any('/address/update}', [CustomerController::class, 'customerAddressUpdate']);
-    Route::any('/billing/address', [CustomerController::class, 'customerBillingAddress']);
-    Route::any('/billing/address/store', [CustomerController::class, 'customerBillingAddressStore']);
+    Route::any('/address/update', [CustomerController::class, 'customerAddressUpdate']);
     Route::any('/bill/pay', [CustomerController::class, 'customerBillPay']);
     Route::any('/logout', [CustomerController::class, 'logout']);
 });

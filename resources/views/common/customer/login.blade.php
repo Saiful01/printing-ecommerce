@@ -8,6 +8,7 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-9 col-lg-9">
+                        @if (!Auth::guard('customer')->check())
                         <h2 class="text-center">Login to Account</h2>
                         <div class="form-wrapper">
                             <form action="/customer/login-check">
@@ -28,6 +29,7 @@
                                 </div>
                             </form>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
