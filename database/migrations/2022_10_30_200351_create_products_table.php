@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->longText("details");
             $table->double("price");
             $table->string("featured_image");
+            $table->string("tag");
             $table->timestamps();
         });
     }

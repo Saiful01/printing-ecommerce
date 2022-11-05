@@ -4,7 +4,7 @@
         <div class="holder breadcrumbs-wrap mt-0">
             <div class="container">
                 <ul class="breadcrumbs">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><span>Pricing</span></li>
                 </ul>
             </div>
@@ -25,69 +25,15 @@
                                 <th>VINYL</th>
                                 <th>ADHESIVE</th>
                             </tr>
-                            <tr class="odd_row">
-                                <td>12" x 18"</td>
-                                <td>$10.48</td>
-                                <td>$25.16</td>
-                                <td>$26.98</td>
-                                <td>$15.17</td>
-                            </tr>
-                            <tr class="even_row">
-                                <td>16" x 20"</td>
-                                <td>$15.26</td>
-                                <td>$32.64</td>
-                                <td>$35.20</td>
-                                <td>$20.57</td>
-                            </tr>
-                            <tr class="odd_row">
-                                <td>16" x 24"</td>
-                                <td>$17.27</td>
-                                <td>$35.44</td>
-                                <td>$38.38</td>
-                                <td>$22.40</td>
-                            </tr>
-                            <tr class="even_row">
-                                <td>18" x 24"</td>
-                                <td>$19.42</td>
-                                <td>$38.53</td>
-                                <td>$43.17</td>
-                                <td>$25.20</td>
-                            </tr>
-                            <tr class="odd_row">
-                                <td>20" x 30"</td>
-                                <td>$21.60</td>
-                                <td>$40.14</td>
-                                <td>$47.52</td>
-                                <td>$28.05</td>
-                            </tr>
-                            <tr class="even_row">
-                                <td>24" x 32"</td>
-                                <td>$23.96</td>
-                                <td>$42.24</td>
-                                <td>$58.37</td>
-                                <td>$34.47</td>
-                            </tr>
-                            <tr class="odd_row">
-                                <td>24" x 36" <small>Best value!</small></td>
-                                <td>$18.99</td>
-                                <td>$45.62</td>
-                                <td>$63.94</td>
-                                <td>$37.32</td>
-                            </tr>
-                            <tr class="even_row">
-                                <td>30" x 40" <small>Best value!</small></td>
-                                <td>$41.99</td>
-                                <td>$82.80</td>
-                                <td>$104.83</td>
-                                <td>$60.59</td>
-                            </tr>
-                            <tr class="odd_row">
-                                <td>36" x 36" <small>Best value!</small></td>
-                                <td>$51.73</td>
-                                <td>$104.20</td>
-                                <td>$144.67</td>
-                                <td>$83.61</td>
-                            </tr>
+                            @foreach($result as $res)
+                                <tr class="odd_row">
+                                    <td>{{$res->title}}</td>
+                                    <td>${{$res->photo_premium_glossy}}</td>
+                                    <td>${{$res->canvas}}</td>
+                                    <td>${{$res->banner}}</td>
+                                    <td>${{$res->self_adhesive}}</td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
 
@@ -277,7 +223,7 @@
                                     <p class="text-center">Get Started</p>
 
                                     <p class="text-center">
-                                        <a href="#" class="btn btn-danger">CREATE YOUR POSTER</a>
+                                        <a href="/start-journey" class="btn btn-danger">CREATE YOUR POSTER</a>
                                     </p>
 
                                 </form>

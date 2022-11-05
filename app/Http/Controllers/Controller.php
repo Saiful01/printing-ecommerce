@@ -82,7 +82,9 @@ class Controller extends BaseController
     }
     public function showPricing()
     {
-        return view('common.pages.pricing');
+        $result = PosterPrint::get();
+        //return $result;
+        return view('common.pages.pricing')->with('result', $result);
     }
     public function showTermsAndConditions()
     {
