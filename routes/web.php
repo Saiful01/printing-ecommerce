@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminRoleController;
 use App\Http\Controllers\AluminiumPrintController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomPrintController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PosterPrintController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\WebApiController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -66,11 +68,17 @@ Route::group(['prefix' => 'customer','middleware' => 'customer'], function () {
     Route::any('/address/edit/{id}', [CustomerController::class, 'customerAddressEdit']);
     Route::any('/address/update', [CustomerController::class, 'customerAddressUpdate']);
     Route::any('/bill/pay', [CustomerController::class, 'customerBillPay']);
+    Route::post('/bill/payment', [StripeController::class, 'payStripe']);
+    /*Route::any('/checkout', [CheckoutController::class, 'checkout']);
+    Route::any('/checkout', [CheckoutController::class, 'afterPayment'])->name('checkout.credit-card');*/
     Route::any('/logout', [CustomerController::class, 'logout']);
 });
 /*Customer Area End*/
 
-
+Route::get('stripe', [StripeController::class, 'stripe']);
+Route::post('payment', [StripeController::class, 'payStripe']);
+Route::get('checkout', [CheckoutController::class, 'checkout']);
+Route::post('checkout', [CheckoutController::class, 'afterPayment'])->name('checkout.credit-card');
 /*Admin Section start*/
 
 

@@ -5,19 +5,19 @@
         <!-- Dark Logo-->
         <a href="/admin/dashboard" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="/common/images/logo.png" alt="" height="60">
+                        <img src="/common/images/logo/logo.png" alt="" height="60">
                     </span>
             <span class="logo-lg">
-                        <img src="/common/images/logo.png" alt="" height="60">
+                        <img src="/common/images/logo/logo.png" alt="" height="60">
                     </span>
         </a>
         <!-- Light Logo-->
         <a href="/admin/dashboard" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="/common/images/logo.png" alt="" height="60">
+                        <img src="/common/images/logo/logo.png" alt="" height="60">
                     </span>
             <span class="logo-lg">
-                        <img src="/common/images/logo.png" alt="" height="60">
+                        <img src="/common/images/logo/logo.png" alt="" height="60">
                     </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -133,7 +133,7 @@
                            href="#sidebarProduct"
                            data-bs-toggle="collapse" role="button" aria-expanded="false"
                            aria-controls="sidebarCustomPrice">
-                            <i class="mdi mdi-cube-outline"></i> <span data-key="t-layouts">Product</span>
+                            <i class="mdi mdi-cube-outline"></i> <span data-key="t-layouts">Wall Art & Posters</span>
                         </a>
                         <div class="menu-dropdown collapse" id="sidebarProduct" style="">
                             <ul class="nav nav-sm flex-column">
@@ -158,6 +158,66 @@
 
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link menu-link {{ Request::is('/admin/coupon/add') ? 'active' : null }}"
+                           href="#sidebarCoupon"
+                           data-bs-toggle="collapse" role="button" aria-expanded="false"
+                           aria-controls="sidebarDashboards">
+                            <i class="mdi mdi-atom"></i> <span data-key="t-layouts">Coupon</span>
+                        </a>
+                        <div class="menu-dropdown collapse" id="sidebarCoupon" style="">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="/admin/coupon/add" class="nav-link"
+                                       data-key="t-horizontal">Add Coupon</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/coupon/list" class="nav-link"
+                                       data-key="t-detached">Coupon List</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link {{ Request::is('/admin/shipping/add') ? 'active' : null }}"
+                           href="#sidebarShipping"
+                           data-bs-toggle="collapse" role="button" aria-expanded="false"
+                           aria-controls="sidebarDashboards">
+                            <i class="mdi mdi-airplane-takeoff"></i> <span data-key="t-layouts">Shipping</span>
+                        </a>
+                        <div class="menu-dropdown collapse" id="sidebarShipping" style="">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="/admin/shipping/add" class="nav-link"
+                                       data-key="t-horizontal">Add Shipping</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/shipping/list" class="nav-link"
+                                       data-key="t-detached">Shipping List</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link menu-link {{ Request::is('/admin/tax/add') ? 'active' : null }}"
+                           href="#sidebarTax"
+                           data-bs-toggle="collapse" role="button" aria-expanded="false"
+                           aria-controls="sidebarDashboards">
+                            <i class="mdi mdi-apps-box"></i> <span data-key="t-layouts">Tax</span>
+                        </a>
+                        <div class="menu-dropdown collapse" id="sidebarTax" style="">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="/admin/tax/add" class="nav-link"
+                                       data-key="t-horizontal">Add Tax</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/admin/tax/list" class="nav-link"
+                                       data-key="t-detached">Tax List</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link menu-link {{ Request::is('/admin/product/add') ? 'active' : null }}"
                            href="#sidebarCustomers"

@@ -106,7 +106,7 @@ class CustomerController extends Controller
         $request['customer_id']= Auth::guard('customer')->user()->id;
         try {
             CustomerAddress::create($request->except('_token'));
-            return redirect('/customer/billing/address')->with('success', "Successfully Created");
+            return redirect('/customer/bill/pay')->with('success', "Successfully Created");
         } catch (Exception $exception) {
 
             return back()->with('success', $exception->getMessage());
