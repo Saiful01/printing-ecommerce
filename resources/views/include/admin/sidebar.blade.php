@@ -138,11 +138,11 @@
                         <div class="menu-dropdown collapse" id="sidebarProduct" style="">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
-                                    <a href="/admin/product/add" class="nav-link"
+                                    <a href="/admin/wall-art-poster/add" class="nav-link"
                                        data-key="t-horizontal">Add Product</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/admin/product/show" class="nav-link"
+                                    <a href="/admin/wall-art-poster/show" class="nav-link"
                                        data-key="t-detached">Show Product</a>
                                 </li>
                             </ul>

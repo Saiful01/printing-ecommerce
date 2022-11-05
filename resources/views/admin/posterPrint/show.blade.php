@@ -6,10 +6,8 @@
 @section('content')
     <style>
         .modal-body {
-
             overflow: auto;
         }
-
     </style>
 
 

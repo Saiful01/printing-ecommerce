@@ -14,17 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view("admin.wallPoster.create");
     }
 
     /**
@@ -35,7 +25,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -46,7 +35,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        $results = Product::orderBy('created_at', 'DESC')->get();
+        //return $results;
+        return view("admin.wallPoster.show")->with('results', $results);
     }
 
     /**

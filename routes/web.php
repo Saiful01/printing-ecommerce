@@ -12,6 +12,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PosterPrintController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\WebApiController;
 use Illuminate\Support\Facades\Artisan;
@@ -124,6 +125,14 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/admin/custom/price/store', [CustomPrintController::class, 'store']);
     Route::get('/admin/custom/price/show', [CustomPrintController::class, 'show']);
     Route::get('/admin/custom/price/delete/{id}', [CustomPrintController::class, 'destroy']);
+
+    //Wall Art & Poster Print
+    Route::get('/admin/wall-art-poster/add', [ProductController::class, 'index']);
+    Route::post('/admin/wall-art-poster/store', [ProductController::class, 'store']);
+    Route::get('/admin/wall-art-poster/show', [ProductController::class, 'show']);
+    Route::get('/admin/wall-art-poster/edit/{id}', [ProductController::class, 'destroy']);
+    Route::get('/admin/wall-art-poster/update', [ProductController::class, 'destroy']);
+    Route::get('/admin/wall-art-poster/delete/{id}', [ProductController::class, 'destroy']);
 
     //Manage Order
     Route::any('/admin/order/show', [OrderController::class, 'show']);

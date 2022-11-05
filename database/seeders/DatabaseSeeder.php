@@ -64,21 +64,24 @@ class DatabaseSeeder extends Seeder
             'details' => "Wall Art Poster",
             'short_details' => "Wall Art Poster",
             'price' => 100,
-            'featured_image' => "/uploads/1.jpg"
+            'tag' => "wall art poster, poster, unique design, wall art",
+            'featured_image' => "/wallPoster/1.jpg"
         ]);
         Product::create([
             'title' => "Wall Art Poster",
             'details' => "Wall Art Poster",
             'short_details' => "Wall Art Poster",
             'price' => 100,
-            'featured_image' => "/uploads/1.jpg"
+            'tag' => "wall art poster, poster, unique design, wall art",
+            'featured_image' => "/wallPoster/1.jpg"
         ]);
         Product::create([
             'title' => "Wall Art Poster",
             'details' => "Wall Art Poster",
             'short_details' => "Wall Art Poster",
             'price' => 100,
-            'featured_image' => "/uploads/1.jpg"
+            'tag' => "wall art poster, poster, unique design, wall art",
+            'featured_image' => "/wallPoster/1.jpg"
         ]);
 
         Coupon::create([
