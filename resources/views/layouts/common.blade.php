@@ -174,7 +174,7 @@
                                                 <div class="mmenu-col">
                                                     <h3 class="submenu-title"><a href="#">Poster Prints</a></h3>
                                                     <ul class="submenu-list">
-                                                        <li><a href="/poster-print">Extremely affordable<span
+                                                        <li><a href="/customize-poster-print">Extremely affordable<span
                                                                     class="submenu-link-txt">custom size posters</span></a>
                                                         </li>
                                                         <li><a href="/start-journey">Customize
