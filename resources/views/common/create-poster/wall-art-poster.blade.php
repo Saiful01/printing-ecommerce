@@ -43,13 +43,13 @@
                                 class="prd-grid product-listing data-to-show-4 data-to-show-md-3 data-to-show-sm-2 js-category-grid"
                                 data-grid-tab-content="">
 
-                                @foreach($products as $product)
+                                @foreach($posters as $poster)
                                     <div class="prd prd--style2 prd-labels--max prd-labels-shadow prd-w-lg">
                                         <div class="prd-inside">
                                             <div class="prd-img-area">
-                                                <a href="/product-details/{{$product->id}}"
+                                                <a href="/poster-details/{{$poster->id}}"
                                                    class="prd-img image-hover-scale image-container">
-                                                    <img src="{{$product->featured_image}}"
+                                                    <img src="{{$poster->featured_image}}"
                                                          alt="Exclusive Wall Poster"
                                                          class="js-prd-img fade-up lazyloaded">
                                                 </a>
@@ -57,22 +57,22 @@
                                             <div class="prd-info">
                                                 <div class="prd-info-wrap">
                                                     <h2 class="prd-title"><a
-                                                            href="/product-details/{{$product->id}}">{{$product->title}}</a>
+                                                            href="/product-details/{{$poster->id}}">{{$poster->title}}</a>
                                                     </h2>
                                                     <div class="prd-description">
-                                                        >{{$product->details}}
+                                                        >{{$poster->details}}
                                                     </div>
                                                 </div>
                                                 <div class="prd-hovers">
                                                     <div class="prd-price">
 
-                                                        <div class="price-new">$ {{$product->price}}</div>
+                                                        <div class="price-new">$ {{$poster->price}}</div>
                                                     </div>
                                                     <div class="prd-action">
                                                         <div class="prd-action-left">
 
                                                             <button class="btn js-prd-addtocart"
-                                                                    ng-click="addToCart({{$product}})">Add To Cart
+                                                                    ng-click="addToCart({{$poster}})">Add To Cart
                                                             </button>
 
                                                         </div>

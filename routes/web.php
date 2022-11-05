@@ -35,6 +35,7 @@ Route::get('/start-journey', [Controller::class, 'startJourney']);
 Route::get('/create-poster', [Controller::class, 'createPoster']);
 Route::get('/poster-price', [Controller::class, 'showBanner']);
 Route::get('/wall-art-poster', [Controller::class, 'wallArtPoster']);
+Route::get('/poster-details/{id}', [Controller::class, 'wallArtPosterDetails']);
 Route::get('/aluminum-price', [Controller::class, 'foamBoard']);
 Route::get('/mounted-aluminum-price', [Controller::class, 'mountedFoamBoard']);
 Route::get('/customize-poster-price', [Controller::class, 'customizePosterPrint']);
