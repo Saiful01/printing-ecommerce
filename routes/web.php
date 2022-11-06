@@ -38,7 +38,7 @@ Route::get('/', [Controller::class, 'home']);
 Route::get('/start-journey', [Controller::class, 'startJourney']);
 Route::get('/create-poster', [Controller::class, 'createPoster']);
 Route::get('/poster-print', [Controller::class, 'showBanner']);
-Route::get('/tax', [Controller::class, 'wallArtPoster']);
+Route::get('/wall-art-poster', [Controller::class, 'wallArtPoster']);
 Route::get('/poster-details/{id}', [Controller::class, 'wallArtPosterDetails']);
 Route::get('/foam-board-print', [Controller::class, 'foamBoard']);
 Route::get('/mounted-foam-board-print', [Controller::class, 'mountedFoamBoard']);
@@ -154,12 +154,12 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/shipping/delete/{id}', [ShippingController::class, 'destroy']);
 
     //Tax Section
-    Route::get('/admin/tax/add', [TaxController::class, 'index']);
+    /*Route::get('/admin/tax/add', [TaxController::class, 'index']);
     Route::post('/admin/tax/store', [TaxController::class, 'store']);
-    Route::get('/admin/tax/show', [TaxController::class, 'show']);
-    Route::get('/admin/tax/edit/{id}', [TaxController::class, 'edit']);
+    Route::get('/admin/tax/show', [TaxController::class, 'show']);*/
+    Route::get('/admin/tax/edit', [TaxController::class, 'edit']);
     Route::post('/admin/tax/update', [TaxController::class, 'update']);
-    Route::get('/admin/tax/delete/{id}', [TaxController::class, 'destroy']);
+    /*Route::get('/admin/tax/delete/{id}', [TaxController::class, 'destroy']);*/
 
     //Customers Section
     Route::any('/admin/customers/show', [AdminController::class, 'customersList']);

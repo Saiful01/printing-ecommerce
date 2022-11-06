@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FoamCoreBoard;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class FoamCoreBoardController extends Controller
 {
@@ -42,10 +43,11 @@ class FoamCoreBoardController extends Controller
         ]);
         try {
             FoamCoreBoard::create($request->all());
+            Alert::success('Foam Core Board Print! ', " Price Successfully Added");
             return redirect('/admin/foam-board/price/show')->with('success', "Successfully Created");
         } catch (Exception $exception) {
-
-            return back()->with('success', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 
@@ -95,10 +97,11 @@ class FoamCoreBoardController extends Controller
     {
         try {
             FoamCoreBoard::where('id', $id)->delete();
-            return back()->with('success', "Successfully Deleted");
+            Alert::success('Foam Core Board Print! ', " Price Successfully Deleted");
+            return back();
         } catch (Exception $exception) {
-
-            return back()->with('success', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 }

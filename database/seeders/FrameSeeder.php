@@ -6,6 +6,7 @@ use App\Models\AluminiumPrint;
 use App\Models\FoamCoreBoard;
 use App\Models\PosterPrint;
 use App\Models\CustomPrint;
+use App\Models\Tax;
 use Illuminate\Database\Seeder;
 
 class FrameSeeder extends Seeder
@@ -235,6 +236,9 @@ class FrameSeeder extends Seeder
         AluminiumPrint::create([
             "title" => '36 X 36 Best Value!',
             "price" => '104.20',
+        ]);
+        Tax::create([
+            "amount" => '15',
         ]);
     }
 }

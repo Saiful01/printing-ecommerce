@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PosterPrint;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PosterPrintController extends Controller
 {
@@ -29,10 +30,11 @@ class PosterPrintController extends Controller
         ]);
         try {
             PosterPrint::create($request->all());
-            return redirect('/admin/poster/price/show')->with('success', "Successfully Created");
+            Alert::success('Poster Print! ', " Price Successfully Added");
+            return redirect('/admin/poster/price/show');
         } catch (Exception $exception) {
-
-            return back()->with('success', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 
@@ -82,10 +84,11 @@ class PosterPrintController extends Controller
     {
         try {
             PosterPrint::where('id', $id)->delete();
-            return back()->with('success', "Successfully Deleted");
+            Alert::success('Poster Print! ', " Price Successfully Deleted");
+            return back();
         } catch (Exception $exception) {
-
-            return back()->with('success', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 }

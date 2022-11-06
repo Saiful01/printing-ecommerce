@@ -198,8 +198,8 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link menu-link {{ Request::is('/admin/tax/add') ? 'active' : null }}"
+                    {{--<li class="nav-item">
+                        <a class="nav-link menu-link {{ Request::is('/admin/tax/edit') ? 'active' : null }}"
                            href="#sidebarTax"
                            data-bs-toggle="collapse" role="button" aria-expanded="false"
                            aria-controls="sidebarDashboards">
@@ -217,6 +217,14 @@
                                 </li>
                             </ul>
                         </div>
+                    </li>--}}
+
+                    <li class="nav-item ">
+                        <a class="nav-link menu-link {{ Request::is('/admin/tax/edit') ? 'active' : null }}"
+                           href="/admin/tax/edit"
+                           aria-expanded="false" aria-controls="sidebarDashboards">
+                            <i class="mdi mdi-apps-box"></i> <span data-key="t-dashboards">Tax</span>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link menu-link {{ Request::is('/admin/product/add') ? 'active' : null }}"

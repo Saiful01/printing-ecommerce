@@ -54,7 +54,11 @@ class Controller extends BaseController
     public function wallArtPosterDetails($id)
     {
         $poster= Product::where('id', $id)->first();
-        return view('common.create-poster.wall-art-poster-details')->with("poster",$poster);
+        $posterPrint = PosterPrint::get();
+        //return $posterPrint;
+        return view('common.create-poster.wall-art-poster-details')
+            ->with("poster", $poster)
+            ->with("posterPrint", $posterPrint);
     }
     public function showBanner()
     {

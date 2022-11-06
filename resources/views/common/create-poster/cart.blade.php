@@ -23,8 +23,9 @@
                                     <img width="110" src="@{{ item.featured_image }}" alt="">
                                 </div>
                                 <div class="col item_desc p-0">
-                                    <strong>Dimensions:</strong> 36.0 (w) x 24.0 (h)<br>
-                                    <strong>Media:</strong> @{{ item.title }}<br>
+                                   {{-- <strong>Dimensions:</strong> 36.0 (w) x 24.0 (h)<br>--}}
+                                    <strong>Title:</strong> @{{ item.title }}<br>
+                                    <strong>Size:</strong>@{{ item.size }}<br>
                                     <strong>Framing:</strong> No Frame<br>
                                 </div>
                                 <div class="col ">
@@ -40,7 +41,7 @@
                                             </div>
                                         </div>
                                         <div class="col-6 text-center align-items-center">
-                                            <h6><strong>$@{{ item.price }}</strong></h6>
+                                            <h6><strong>@{{ item.quantity }} x $@{{ item.price }}</strong></h6>
                                         </div>
                                         <div class="col-6 text-right">
                                             <button class="btn btn-outline-danger btn-sm" ng-click="deleteItem(item)"><i
@@ -57,12 +58,12 @@
                                 <div class="col text-center">
                                     <p>Your prints total is: $@{{ totalPriceCountAll }}</p>
                                     <p><strong>If you order more than $200, you will get a 10% discount!</strong></p>
-                                    <p>Discount @{{ discount }}</p>
+                                   {{-- <p>Discount @{{ discount }}</p>--}}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col text-center">
-                                    <a href="#" class="btn btn-sm btn-info"><i class="fas fa-image"></i> Add more files
+                                    <a href="/start-journey" class="btn btn-sm btn-info"><i class="fas fa-image"></i> Add more files
                                         to your order - Upload More
                                         Photos</a>
                                 </div>
@@ -78,11 +79,15 @@
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    Prints: <span class="float-right">1</span>
+                                    Prints: <span class="float-right" ng--bind="total_item"></span>
                                 </li>
                                 <li class="list-group-item">
                                     Subtotal: <span
                                         class="float-right"><strong>$@{{ totalPriceCountAll }}</strong></span>
+                                </li>
+                                <li class="list-group-item">
+                                    Discount: <span
+                                        class="float-right"><strong>$@{{ discount }}</strong></span>
                                 </li>
                                 <li class="list-group-item">
                                     <form action="/carts/add_coupon" method="get">
@@ -99,7 +104,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <strong>Subtotal: <span
-                                            class="float-right">$@{{ totalPriceCountAll }}</span></strong>
+                                            class="float-right">$@{{ totalPriceWithDiscount }}</span></strong>
                                 </li>
 
                                 <li class="list-group-item text-center">

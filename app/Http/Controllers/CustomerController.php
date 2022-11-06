@@ -61,10 +61,11 @@ class CustomerController extends Controller
         try {
             $request['password'] = Hash::make($request['password']);
             Customer::create($request->except('checkbox1','_token'));
-            return redirect('/customer/profile')->with('success', "Successfully Created");
+            Alert::success('Registration! ', " You have done Successfully Registered ");
+            return redirect('/customer/profile');
         } catch (Exception $exception) {
-
-            return back()->with('success', $exception->getMessage());
+            Alert::error('Registration Failed! ', $exception->getMessage());
+            return back();
         }
     }
 
@@ -106,10 +107,11 @@ class CustomerController extends Controller
         $request['customer_id']= Auth::guard('customer')->user()->id;
         try {
             CustomerAddress::create($request->except('_token'));
-            return redirect('/customer/bill/pay')->with('success', "Successfully Created");
+            Alert::success('Address! ', " Successfully Added ");
+            return redirect('/customer/bill/pay');
         } catch (Exception $exception) {
-
-            return back()->with('success', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 
@@ -126,10 +128,11 @@ class CustomerController extends Controller
         //$request['customer_id'];
         try {
             CustomerAddress::where('customer_id', $request['customer_id'])->update($request->except('_token'));
+            Alert::success('Address! ', " Successfully Updated ");
             return redirect('/customer/bill/pay')->with('success', "Successfully Created");
         } catch (Exception $exception) {
-
-            return back()->with('success', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 

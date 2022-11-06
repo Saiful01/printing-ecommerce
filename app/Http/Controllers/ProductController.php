@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
 {
@@ -44,13 +45,14 @@ class ProductController extends Controller
             $image_resize->save(public_path('/wallPoster/' . $image_name));
             $request['featured_image'] = '/wallPoster/' . $image_name;
         }
-      //  return $request->all();
+       // return $request->all();
         try {
             Product::create($request->except(['_token','image']));
+            Alert::success('Wall art & Poster! ', " Successfully Added");
             return redirect('/admin/wall-art-poster/show')->with('success', "Successfully Created");
         } catch (Exception $exception) {
-
-            return back()->with('success', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 
@@ -109,10 +111,11 @@ class ProductController extends Controller
         //  return $request->all();
         try {
             Product::where('id', $request['id'])->update($request->except(['_token', 'image']));
-            return redirect('/admin/wall-art-poster/show')->with('success', "Successfully Updated");
+            Alert::success('Wall art & Poster! ', " Successfully Updated");
+            return redirect('/admin/wall-art-poster/show');
         } catch (Exception $exception) {
-
-            return back()->with('success', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 
@@ -125,10 +128,11 @@ class ProductController extends Controller
     public function destroy($id)
     {try {
         Product::where('id', $id)->delete();
-        return back()->with('success', "Successfully Deleted");
+        Alert::success('Wall art & Poster! ', " Successfully Deleted");
+        return back();
     } catch (Exception $exception) {
-
-        return back()->with('success', $exception->getMessage());
+        Alert::error('Sorry! ', $exception->getMessage());
+        return back();
     }
     }
 }

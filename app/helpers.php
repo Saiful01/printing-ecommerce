@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\InOutMonitor;
 use App\Models\Leave;
 use App\Models\LoginHistory;
+use App\Models\PosterPrint;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -14,6 +15,10 @@ use Illuminate\Support\Facades\Auth;
 function getErrorMessage($param)
 {
     return $param;
+}
+function getPosterSize()
+{
+    return PosterPrint::all();
 }
 
 function getNameFromId($id)

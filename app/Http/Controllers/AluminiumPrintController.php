@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AluminiumPrint;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AluminiumPrintController extends Controller
 {
@@ -42,10 +43,11 @@ class AluminiumPrintController extends Controller
         ]);
         try {
             AluminiumPrint::create($request->all());
-            return redirect('/admin/aluminum/price/show')->with('success', "Successfully Created");
+            Alert::success('Aluminium Print! ', " Price Successfully Added");
+            return redirect('/admin/aluminum/price/show');
         } catch (Exception $exception) {
-
-            return back()->with('success', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 
@@ -95,10 +97,11 @@ class AluminiumPrintController extends Controller
     {
         try {
             AluminiumPrint::where('id', $id)->delete();
-            return back()->with('success', "Successfully Deleted");
+            Alert::success('Aluminium Print! ', " Price Successfully Deleted");
+            return back();
         } catch (Exception $exception) {
-
-            return back()->with('success', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 }

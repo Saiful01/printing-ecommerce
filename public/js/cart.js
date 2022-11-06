@@ -3,11 +3,17 @@ app.controller('printingCartController', function ($scope, $http, $location) {
     $scope.cart_products = [];
     $scope.discount = 0;
     $scope.coupon_code = "";
+    $scope.poster_size = "";
+    $scope.total_item = 0;
     $scope.coupon_value = 0;
     $scope.quantity = 1;
+    $scope.totalPriceWithDiscount = 0;
     $scope.customer_address_type = "Home";
     $scope.addToCart = function (item) {
         console.log(item);
+        if ($scope.poster_size == "") {
+            return messageError("Please select poster size");
+        }
         let flag = false;
         let tempProduct = {
             "id": item.id,
@@ -15,7 +21,7 @@ app.controller('printingCartController', function ($scope, $http, $location) {
             "price": item.price,
             "featured_image": item.featured_image,
             "quantity": $scope.quantity,
-            "size": "",
+            "size": $scope.poster_size,
         };
         let cartProductList = localStorage.getItem('cart_product');
         if (cartProductList !== null && cartProductList !== undefined) {
@@ -47,6 +53,11 @@ app.controller('printingCartController', function ($scope, $http, $location) {
         $scope.getList();
     }
 
+    function InitialSize(size) {
+        $scope.poster_size = size;
+        console.log($scope.poster_size)
+    }
+
 
     $scope.getTotalPrice = function () {
 
@@ -56,11 +67,14 @@ app.controller('printingCartController', function ($scope, $http, $location) {
             cartProductList = JSON.parse(cartProductList);
             for (var cartProduct of cartProductList) {
                 totalPrice = totalPrice + parseInt(cartProduct.price) * parseInt(cartProduct.quantity);
+
             }
         }
         $scope.totalPriceCountAll = totalPrice;
         if (totalPrice > 200) {
             $scope.discount = $scope.totalPriceCountAll * .10;
+            $scope.totalPriceWithDiscount = totalPrice - $scope.discount;
+
         }
 
 
@@ -72,7 +86,7 @@ app.controller('printingCartController', function ($scope, $http, $location) {
             cartProductList = JSON.parse(cartProductList);
             $scope.cart_products = cartProductList;
             $scope.cartActive = true;
-            $scope.total_item = cartProductList.length;
+            $scope.total_item = $scope.cart_products.length;
             console.log($scope.cart_products)
 
         }

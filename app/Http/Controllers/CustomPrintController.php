@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CustomPrint;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CustomPrintController extends Controller
 {
@@ -30,10 +31,11 @@ class CustomPrintController extends Controller
         ]);
         try {
             CustomPrint::create($request->all());
-            return redirect('/admin/custom/price/show')->with('success', "Successfully Created");
+            Alert::success('Custom Print! ', " Price Successfully Added");
+            return redirect('/admin/custom/price/show');
         } catch (Exception $exception) {
-
-            return back()->with('success', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 
@@ -83,10 +85,11 @@ class CustomPrintController extends Controller
     {
         try {
             CustomPrint::where('id', $id)->delete();
-            return back()->with('success', "Successfully Deleted");
+            Alert::success('Custom Print! ', " Price Successfully Deleted");
+            return back();
         } catch (Exception $exception) {
-
-            return back()->with('success', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 }

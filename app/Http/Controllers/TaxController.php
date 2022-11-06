@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tax;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TaxController extends Controller
 {
@@ -29,10 +30,12 @@ class TaxController extends Controller
         // return $request->all();
         try {
             Tax::create($request->except('_token'));
-            return redirect('/admin/tax/show')->with('success', "Successfully Created");
+            Alert::success('Tax! ', "Successfully Added");
+            return redirect('/admin/tax/show');
 
         } catch (Exception $exception) {
-            return back()->with('failed', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 
@@ -55,9 +58,9 @@ class TaxController extends Controller
      * @param  \App\Models\Tax  $tax
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tax $tax)
     {
-        $results = Tax::where('id', $id)->first();
+        $results = Tax::orderby('created_at', 'DESC')->first();
         return view('admin.tax.edit')->with('results', $results);
     }
 
@@ -73,10 +76,12 @@ class TaxController extends Controller
         // return $request->all();
         try {
             Tax::where('id', $request['id'])->update($request->except(['id', '_token']));
-            return redirect('/admin/tax/show')->with('success', "Successfully Updated");
+            Alert::success('Tax! ', "Successfully  Updated ");
+            return back();
 
         } catch (Exception $exception) {
-            return back()->with('failed', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 
@@ -90,10 +95,12 @@ class TaxController extends Controller
     {
         try {
             Tax::where('id', $id)->delete();
-            return back()->with('success', "Successfully Deleted");
+            Alert::success('Tax! ', "Successfully  Deleted ");
+            return back();
 
         } catch (Exception $exception) {
-            return back()->with('failed', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 }

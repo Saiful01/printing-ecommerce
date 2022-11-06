@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Coupon;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CouponController extends Controller
 {
@@ -30,10 +31,12 @@ class CouponController extends Controller
         // return $request->all();
         try {
             Coupon::create($request->except('_token'));
-            return redirect('/admin/coupon/show')->with('success', "Successfully Created");
+            Alert::success('Coupon! ', " Successfully Added");
+            return redirect('/admin/coupon/show');
 
         } catch (Exception $exception) {
-            return back()->with('failed', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 
@@ -74,10 +77,12 @@ class CouponController extends Controller
         // return $request->all();
         try {
             Coupon::where('id', $request['id'])->update($request->except(['id', '_token']));
-            return redirect('/admin/coupon/show')->with('success', "Successfully Updated");
+            Alert::success('Coupon! ', " Successfully Updated");
+            return redirect('/admin/coupon/show');
 
         } catch (Exception $exception) {
-            return back()->with('failed', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 
@@ -91,10 +96,12 @@ class CouponController extends Controller
     {
         try {
             Coupon::where('id', $id)->delete();
-            return back()->with('success', "Successfully Deleted");
+            Alert::success('Coupon! ', " Successfully Deleted");
+            return back();
 
         } catch (Exception $exception) {
-            return back()->with('failed', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 }

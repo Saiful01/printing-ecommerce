@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Shipping;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ShippingController extends Controller
 {
@@ -29,10 +30,12 @@ class ShippingController extends Controller
         // return $request->all();
         try {
             Shipping::create($request->except('_token'));
-            return redirect('/admin/shipping/show')->with('success', "Successfully Created");
+            Alert::success('Shipping Details! ', " Successfully Added");
+            return redirect('/admin/shipping/show');
 
         } catch (Exception $exception) {
-            return back()->with('failed', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 
@@ -73,10 +76,12 @@ class ShippingController extends Controller
         // return $request->all();
         try {
             Shipping::where('id', $request['id'])->update($request->except(['id', '_token']));
-            return redirect('/admin/shipping/show')->with('success', "Successfully Updated");
+            Alert::success('Shipping Details! ', " Successfully Updated");
+            return redirect('/admin/shipping/show');
 
         } catch (Exception $exception) {
-            return back()->with('failed', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 
@@ -91,9 +96,11 @@ class ShippingController extends Controller
         try {
             Shipping::where('id', $id)->delete();
             return back()->with('success', "Successfully Deleted");
+            return back();
 
         } catch (Exception $exception) {
-            return back()->with('failed', $exception->getMessage());
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
         }
     }
 }

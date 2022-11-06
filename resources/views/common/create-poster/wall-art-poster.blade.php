@@ -1,5 +1,11 @@
 @extends("layouts.common")
 @section("content")
+    <style>
+        .prd-size select {
+            width: 150px;
+
+        }
+    </style>
 
     <div class="page-content">
         <div class="holder breadcrumbs-wrap mt-0">
@@ -59,16 +65,29 @@
                                                     <h2 class="prd-title"><a
                                                             href="/product-details/{{$poster->id}}">{{$poster->title}}</a>
                                                     </h2>
-                                                    <div class="prd-description">
-                                                        >{{$poster->details}}
+                                                    <div class="prd-size swatches">
+                                                        <center>
+                                                            <select class="form-control" name="size" id="size" ng-model="poster_size" ng-int="InitialSize(poster_size)" required>
+                                                                <option value="">Select Size</option>
+                                                                @foreach(getPosterSize() as $size)
+                                                                    <option value="{{$size->title}}">"{{$size->title}}"</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </center>
+
+
+
                                                     </div>
+
                                                 </div>
                                                 <div class="prd-hovers">
                                                     <div class="prd-price">
 
                                                         <div class="price-new">$ {{$poster->price}}</div>
                                                     </div>
+
                                                     <div class="prd-action">
+
                                                         <div class="prd-action-left">
 
                                                             <button class="btn js-prd-addtocart"

@@ -32,7 +32,7 @@
     <script>
         var app = angular.module('myApp', []);
     </script>
-    <script src="js/cart.js"></script>
+    <script src="/js/cart.js"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
 
