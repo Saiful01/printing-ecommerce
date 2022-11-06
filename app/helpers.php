@@ -50,6 +50,16 @@ function getDateFormat($date)
     return $createdAt->format('d M, Y g:i A');
 }
 
+function getExpireDateFormat($date)
+{
+
+    if ($date == null) {
+        return "-";
+    }
+    $createdAt = Carbon::parse($date);
+    return $createdAt->format('d/m/Y');
+}
+
 
 function getTimeOnly($date)
 {

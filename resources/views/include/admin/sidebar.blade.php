@@ -172,7 +172,7 @@
                                        data-key="t-horizontal">Add Coupon</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/admin/coupon/list" class="nav-link"
+                                    <a href="/admin/coupon/show" class="nav-link"
                                        data-key="t-detached">Coupon List</a>
                                 </li>
                             </ul>
@@ -192,7 +192,7 @@
                                        data-key="t-horizontal">Add Shipping</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/admin/shipping/list" class="nav-link"
+                                    <a href="/admin/shipping/show" class="nav-link"
                                        data-key="t-detached">Shipping List</a>
                                 </li>
                             </ul>
@@ -212,7 +212,7 @@
                                        data-key="t-horizontal">Add Tax</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/admin/tax/list" class="nav-link"
+                                    <a href="/admin/tax/show" class="nav-link"
                                        data-key="t-detached">Tax List</a>
                                 </li>
                             </ul>
@@ -229,10 +229,10 @@
                             <ul class="nav nav-sm flex-column">
                                 {{--<li class="nav-item">
                                     <a href="/admin/product/add" class="nav-link"
-                                       data-key="t-horizontal">Add Customers</a>
+                                       data-key="t-horizontal">Add customers</a>
                                 </li>--}}
                                 <li class="nav-item">
-                                    <a href="/admin/customers/list" class="nav-link"
+                                    <a href="/admin/customers/show" class="nav-link"
                                        data-key="t-detached">Customers List</a>
                                 </li>
                             </ul>

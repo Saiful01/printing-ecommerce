@@ -37,60 +37,70 @@
                         <div class="live-preview">
                             <form action="/admin/wall-art-poster/store" method="post"
                                   enctype="multipart/form-data">
-                                <div class="row gy-4">
-                                    <div class="col-xxl-2 col-md-2 col-6">
+                                <div class="row gy-4 mt-0">
+                                    <div class="col-xxl-4 col-md-4 col-8">
                                         <div>
-                                            <label for="placeholderInput" class="form-label">Min Size</label>
-                                            <input type="text" class="form-control" name="min" id="min"
-                                                   placeholder="2001" required>
+                                            <label for="placeholderInput" class="form-label">Title</label>
+                                            <input type="text" class="form-control" name="title" id="title"
+                                                   placeholder="Title" required>
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="row gy-4 mt-0">
                                     <!--end col-->
-                                    <div class="col-xxl-2 col-md-2 col-6">
+                                    <div class="col-xxl-4 col-md-4 col-8">
                                         <div>
-                                            <label for="placeholderInput" class="form-label">Max Size</label>
-                                            <input type="text" class="form-control" name="max" id="max"
-                                                   placeholder="400" required>
+                                            <label for="placeholderInput" class="form-label">Short Details</label>
+                                            <textarea class="form-control" id="short_details" name="short_details" rows="3"></textarea>
                                         </div>
                                     </div>
                                     <!--end col-->
-                                    <div class="col-xxl-2 col-md-2 col-6">
+                                    <div class="col-xxl-4 col-md-4 col-8">
                                         <div>
-                                            <label for="labelInput" class="form-label">Photo Premium Glossy
-                                                Price</label>
-                                            <input type="text" class="form-control" name="photo_premium_glossy" id="photo_premium_glossy"
-                                                   placeholder="0.0485" required>
+                                            <label for="placeholderInput" class="form-label">Details</label>
+                                            <textarea class="form-control" id="details" name="details" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row gy-4 mt-0">
+                                    <!--end col-->
+                                    <div class="col-xxl-4 col-md-4 col-8">
+                                        <div>
+                                            <label for="placeholderInput" class="form-label">Price</label>
+                                            <div class="form-icon">
+                                                <input type="text" class="form-control form-control-icon" name="price" id="price" placeholder="24">
+                                                <i class="ri-money-dollar-circle-line"></i>
+                                            </div>
                                         </div>
                                     </div>
                                     <!--end col-->
-                                    <div class="col-xxl-2 col-md-2 col-6">
+                                    <div class="col-xxl-4 col-md-4 col-8">
                                         <div>
-                                            <label for="placeholderInput" class="form-label">Canvas Price</label>
-                                            <input type="text" class="form-control" name="canvas" id="canvas"
-                                                   placeholder="0.1499" required>
+                                            <label for="placeholderInput" class="form-label">Tags</label>
+                                            <input type="text" class="form-control" name="tag" id="tag"
+                                                   placeholder="wall & art, design" required>
                                         </div>
                                     </div>
                                     <!--end col-->
-                                    <div class="col-xxl-2 col-md-2 col-6">
+                                </div>
+
+                                <div class="row gy-4 mt-0">
+                                    <div class="col-xxl-4 col-md-4 col-8">
                                         <div>
-                                            <label for="placeholderInput" class="form-label">Banner Price</label>
-                                            <input type="text" class="form-control" name="banner" id="banner"
-                                                   placeholder="0.1249" required>
+                                            <label for="placeholderInput" class="form-label">Feature Image</label>
+                                            <input type="file" class="form-control" name="image" id="image"
+                                                   placeholder="Feature image" required>
                                         </div>
                                     </div>
                                     <!--end col-->
-                                    <div class="col-xxl-2 col-md-2 col-6">
-                                        <div>
-                                            <label for="placeholderInput" class="form-label">Self Adhesive Synthetic
-                                                Price</label>
-                                            <input type="text" class="form-control" name="self_adhesive" id="self_adhesive"
-                                                   placeholder="0.0702" required>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-xxl-2 col-md-2 col-6">
-                                        <button type="submit" class="btn btn-success form-control">Submit</button>
+                                </div>
+
+                                <div class="row gy-4 mt-0">
+                                    <div class="col-xxl-4 col-md-4 col-8">
+                                        <button type="submit" class="btn btn-success form-control">Save</button>
                                     </div>
                                     <!--end col-->
                                 </div>

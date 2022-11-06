@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\AdminRole;
+use App\Models\Customer;
 use App\Models\Department;
 use App\Models\InOutMonitor;
 use App\Models\Leave;
@@ -171,11 +172,17 @@ class AdminController extends Controller
             Alert::error('Sorry! ', "Email or password does not match or Your are not active");
             return back()->withInput();
 
-
         }
-
 
         return view('admin.login');
 
+    }
+
+
+    public function customersList()
+    {
+        $results = Customer::with('customerAddress')->where('id',Auth::guard('customer')->user()->id)->get();
+       // return $results;
+        return view('admin.customers.index')->with('results',$results);
     }
 }

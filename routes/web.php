@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminRoleController;
 use App\Http\Controllers\AluminiumPrintController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CustomPrintController;
 use App\Http\Controllers\FoamCoreBoardController;
@@ -13,7 +14,9 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PosterPrintController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\TaxController;
 use App\Http\Controllers\WebApiController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -35,7 +38,7 @@ Route::get('/', [Controller::class, 'home']);
 Route::get('/start-journey', [Controller::class, 'startJourney']);
 Route::get('/create-poster', [Controller::class, 'createPoster']);
 Route::get('/poster-print', [Controller::class, 'showBanner']);
-Route::get('/wall-art-poster', [Controller::class, 'wallArtPoster']);
+Route::get('/tax', [Controller::class, 'wallArtPoster']);
 Route::get('/poster-details/{id}', [Controller::class, 'wallArtPosterDetails']);
 Route::get('/foam-board-print', [Controller::class, 'foamBoard']);
 Route::get('/mounted-foam-board-print', [Controller::class, 'mountedFoamBoard']);
@@ -130,9 +133,36 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/wall-art-poster/add', [ProductController::class, 'index']);
     Route::post('/admin/wall-art-poster/store', [ProductController::class, 'store']);
     Route::get('/admin/wall-art-poster/show', [ProductController::class, 'show']);
-    Route::get('/admin/wall-art-poster/edit/{id}', [ProductController::class, 'destroy']);
-    Route::get('/admin/wall-art-poster/update', [ProductController::class, 'destroy']);
+    Route::get('/admin/wall-art-poster/edit/{id}', [ProductController::class, 'edit']);
+    Route::post('/admin/wall-art-poster/update', [ProductController::class, 'update']);
     Route::get('/admin/wall-art-poster/delete/{id}', [ProductController::class, 'destroy']);
+
+    //Coupon Section
+    Route::get('/admin/coupon/add', [CouponController::class, 'index']);
+    Route::post('/admin/coupon/store', [CouponController::class, 'store']);
+    Route::get('/admin/coupon/show', [CouponController::class, 'show']);
+    Route::get('/admin/coupon/edit/{id}', [CouponController::class, 'edit']);
+    Route::post('/admin/coupon/update', [CouponController::class, 'update']);
+    Route::get('/admin/coupon/delete/{id}', [CouponController::class, 'destroy']);
+
+    //Shipping Section
+    Route::get('/admin/shipping/add', [ShippingController::class, 'index']);
+    Route::post('/admin/shipping/store', [ShippingController::class, 'store']);
+    Route::get('/admin/shipping/show', [ShippingController::class, 'show']);
+    Route::get('/admin/shipping/edit/{id}', [ShippingController::class, 'edit']);
+    Route::post('/admin/shipping/update', [ShippingController::class, 'update']);
+    Route::get('/admin/shipping/delete/{id}', [ShippingController::class, 'destroy']);
+
+    //Tax Section
+    Route::get('/admin/tax/add', [TaxController::class, 'index']);
+    Route::post('/admin/tax/store', [TaxController::class, 'store']);
+    Route::get('/admin/tax/show', [TaxController::class, 'show']);
+    Route::get('/admin/tax/edit/{id}', [TaxController::class, 'edit']);
+    Route::post('/admin/tax/update', [TaxController::class, 'update']);
+    Route::get('/admin/tax/delete/{id}', [TaxController::class, 'destroy']);
+
+    //Customers Section
+    Route::any('/admin/customers/show', [AdminController::class, 'customersList']);
 
     //Manage Order
     Route::any('/admin/order/show', [OrderController::class, 'show']);

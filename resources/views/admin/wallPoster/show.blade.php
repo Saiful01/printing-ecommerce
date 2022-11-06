@@ -70,23 +70,18 @@
                                         <td class="institute">{{$item->title}}</td>
                                         <td class="institute">{{$item->short_details}}</td>
                                         <td class="institute">{{$item->details}}</td>
-                                        <td class="institute">{{$item->price}}</td>
-                                        <td class="institute">{{$item->featured_image}}</td>
+                                        <td class="institute">${{$item->price}}</td>
+                                        <td class="institute"><img src="{{$item->featured_image}}" width="80px"/></td>
                                         <td class="institute">{{$item->tag}}</td>
                                         <td>
                                             <div class="d-flex gap-2">
                                                 <div class="edit">
-                                                    <a href="/admin/custom/price/edit/{{$item->id}}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-sm btn-info edit-item-btn">
+                                                    <a href="/admin/wall-art-poster/edit/{{$item->id}}" class="btn btn-sm btn-info edit-item-btn">
                                                         Edit
                                                     </a>
                                                 </div>
-                                                <div class="show">
-                                                    <a href="/admin/custom/price/show/{{$item->id}}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-sm btn-success show-item-btn">
-                                                        Details
-                                                    </a>
-                                                </div>
                                                 <div class="remove">
-                                                    <a href="/admin/custom/price/delete/{{$item->id}}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-sm btn-danger remove-item-btn">
+                                                    <a href="/admin/wall-art-poster/delete/{{$item->id}}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-sm btn-danger remove-item-btn">
                                                         Remove
                                                     </a>
                                                 </div>

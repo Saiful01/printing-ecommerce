@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Coupon;
-use App\Models\Customer;
+use App\Models\Shipping;
 use Illuminate\Http\Request;
 
-class CouponController extends Controller
+class ShippingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class CouponController extends Controller
      */
     public function index()
     {
-        return view("admin.coupon.create");
+        return view("admin.shipping.create");
     }
 
     /**
@@ -29,8 +28,8 @@ class CouponController extends Controller
 
         // return $request->all();
         try {
-            Coupon::create($request->except('_token'));
-            return redirect('/admin/coupon/show')->with('success', "Successfully Created");
+            Shipping::create($request->except('_token'));
+            return redirect('/admin/shipping/show')->with('success', "Successfully Created");
 
         } catch (Exception $exception) {
             return back()->with('failed', $exception->getMessage());
@@ -40,41 +39,41 @@ class CouponController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param \App\Models\Coupon $coupon
+     * @param \App\Models\Shipping $shipping
      * @return \Illuminate\Http\Response
      */
-    public function show(Coupon $coupon)
+    public function show(Shipping $shipping)
     {
-
-        $results = Coupon::orderBy('created_at', 'DESC')->get();
-        return view("admin.coupon.show")->with('results', $results);
+        $results = Shipping::orderBy('created_at', 'DESC')->get();
+        //return $results;
+        return view("admin.shipping.show")->with('results', $results);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Coupon $coupon
+     * @param \App\Models\Shipping $shipping
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $results = Coupon::where('id', $id)->first();
-        return view('admin.coupon.edit')->with('results', $results);
+        $results = Shipping::where('id', $id)->first();
+        return view('admin.shipping.edit')->with('results', $results);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Models\Coupon $coupon
+     * @param \App\Models\Shipping $shipping
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Coupon $coupon)
+    public function update(Request $request, Shipping $shipping)
     {
         // return $request->all();
         try {
-            Coupon::where('id', $request['id'])->update($request->except(['id', '_token']));
-            return redirect('/admin/coupon/show')->with('success', "Successfully Updated");
+            Shipping::where('id', $request['id'])->update($request->except(['id', '_token']));
+            return redirect('/admin/shipping/show')->with('success', "Successfully Updated");
 
         } catch (Exception $exception) {
             return back()->with('failed', $exception->getMessage());
@@ -84,13 +83,13 @@ class CouponController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param \App\Models\Coupon $coupon
+     * @param \App\Models\Shipping $shipping
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         try {
-            Coupon::where('id', $id)->delete();
+            Shipping::where('id', $id)->delete();
             return back()->with('success', "Successfully Deleted");
 
         } catch (Exception $exception) {
