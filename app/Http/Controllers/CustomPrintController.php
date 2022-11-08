@@ -58,9 +58,10 @@ class CustomPrintController extends Controller
      * @param  \App\Models\CustomPrint  $customPrint
      * @return \Illuminate\Http\Response
      */
-    public function edit(CustomPrint $customPrint)
+    public function edit($id)
     {
-        //
+        $results = CustomPrint::where('id', $id)->first();
+        return view("admin.customPrint.edit")->with('results', $results);
     }
 
     /**
@@ -72,7 +73,24 @@ class CustomPrintController extends Controller
      */
     public function update(Request $request, CustomPrint $customPrint)
     {
-        //
+        $request->validate([
+            'min' => 'required',
+            'max' => 'required',
+            'photo_premium_glossy' => 'required',
+            'canvas' => 'required',
+            'banner' => 'required',
+            'self_adhesive' => 'required',
+        ]);
+
+        //  return $request->all();
+        try {
+            CustomPrint::where('id', $request['id'])->update($request->except(['_token']));
+            Alert::success('Custom Print! ', " Price Successfully Updated");
+            return redirect('/admin/custom/price/show');
+        } catch (Exception $exception) {
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
+        }
     }
 
     /**

@@ -38,7 +38,8 @@
                              data-prd-handle="/products/copy-of-suede-leather-mini-skirt">
                             <div class="prd-block_info-top prd-block_info_item order-0 order-md-2">
                                 <div class="prd-block_price prd-block_price--style2">
-                                    <div class="prd-block_price--actual">${{$poster->price}}</div>
+                                    <div class="prd-block_price--actual" id="new_price{{$poster->id}}">${{$poster->price}}</div>
+
                                 </div>
                                 <div class="prd-block_viewed-wrap d-none d-md-flex">
                                     <div class="prd-block_viewed">
@@ -73,9 +74,12 @@
                                 <div class="prd-block_options">
                                     <div class="prd-size swatches">
                                         <div class="option-label">Size:</div>
-                                        <select class="form-control" name="size" id="size" ng-model="poster_size" ng-int="InitialSize(poster_size)" required>
+                                        <select class="form-control"  name="size" id="size"
+                                                ng-model="poster_size{{$poster->id}}"
+                                                ng-change="changePosterSize({{$poster->id}},poster_size{{$poster->id}}, {{$poster->price}})"
+                                                required>
                                             <option value="">Select Size</option>
-                                            @foreach($posterPrint as $size)
+                                            @foreach($poster_size as $size)
                                                 <option value="{{$size->title}}">"{{$size->title}}"</option>
                                             @endforeach
                                         </select>
@@ -85,7 +89,7 @@
                                 <div class="prd-block_actions prd-block_actions--wishlist">
                                     <div class="btn-wrap">
                                         <button class="btn btn--add-to-cart js-trigger-addtocart js-prd-addtocart"
-                                                ng-click="addToCart({{$poster}})">
+                                                ng-click="addToCart2({{$poster_size}},{{$poster}}, poster_size{{$poster->id}}, {{$poster->price}})">>
                                             Add to cart
                                         </button>
                                     </div>
@@ -142,4 +146,82 @@
             </div>
         </div>
     </div>
+
+    <script>
+
+        let poster_array = <?php echo json_encode($poster_size) ?>;
+        app.controller('printingCartController', function ($scope, $http) {
+
+            $scope.product_type = "1";
+            $scope.poster_size = "1";
+            $scope.paper_type = "1";
+            $scope.changePosterSize = function (id, size, price) {
+                let data = poster_array.find((poster) => poster.title == size,);
+                document.getElementById("new_price" + id).innerHTML = price + data['photo_premium_glossy'];
+
+            }
+
+            $scope.addToCart2 = function (poster_size, item, size, old_price) {
+
+                let poster_array2 = <?php echo json_encode($poster_size) ?>;
+                let data = poster_array2.find((mposter) => mposter.title == size);
+                let new_price = old_price + data['photo_premium_glossy'];
+
+                let tempProduct = {
+                    "id": item.id,
+                    "title": item.title,
+                    "price": new_price,
+                    "featured_image": item.featured_image,
+                    "quantity": 1,
+                    "size": size,
+                };
+
+                if ($scope.size == "") {
+                    return messageError("Please select poster size");
+                }
+                let flag = false;
+
+                let cartProductList = localStorage.getItem('cart_product');
+                if (cartProductList !== null && cartProductList !== undefined) {
+                    cartProductList = JSON.parse(cartProductList);
+
+                    if (cartProductList.length <= 0) {
+                        //Nothing
+                    } else {
+                        for (var cartProduct of cartProductList) {
+                            if (cartProduct.id === item.id) {
+                                cartProduct.quantity += 1;
+                                flag = true;
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    cartProductList = [];
+                }
+
+                if (!flag) {
+                    cartProductList.push(tempProduct);
+                    messageSuccess("Product added to cart")
+                } else {
+                    messageSuccess("Product added to cart")
+                }
+                localStorage.setItem('cart_product', JSON.stringify(cartProductList));
+                // $scope.getTotalPrice();
+                //$scope.getList();
+
+            }
+
+            function messageError(message) {
+                toastr.warning(message, 'Failed')
+            }
+
+            function messageSuccess(message) {
+                toastr.success(message, 'Success')
+            }
+
+
+        });
+
+    </script>
 @endsection

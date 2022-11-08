@@ -118,7 +118,7 @@
             </div>
         </div>
     </div>
-    <div class="holder holder-subscribe-full holder-subscribe--compact">
+    {{--<div class="holder holder-subscribe-full holder-subscribe--compact">
         <div class="container">
             <div class="row">
                 <div class="col-auto">
@@ -143,5 +143,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
 @endsection

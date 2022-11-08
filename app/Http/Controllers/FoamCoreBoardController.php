@@ -70,9 +70,10 @@ class FoamCoreBoardController extends Controller
      * @param  \App\Models\FoamCoreBoard  $foamCoreBoard
      * @return \Illuminate\Http\Response
      */
-    public function edit(FoamCoreBoard $foamCoreBoard)
+    public function edit($id)
     {
-        //
+        $results = FoamCoreBoard::where('id', $id)->first();
+        return view("admin.foamPrint.edit")->with('results', $results);
     }
 
     /**
@@ -84,7 +85,20 @@ class FoamCoreBoardController extends Controller
      */
     public function update(Request $request, FoamCoreBoard $foamCoreBoard)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'price' => 'required',
+        ]);
+
+        //  return $request->all();
+        try {
+            FoamCoreBoard::where('id', $request['id'])->update($request->except(['_token']));
+            Alert::success('Foam Core Board Print! ', " Price Successfully Updated");
+            return redirect('/admin/foam-board/price/show');
+        } catch (Exception $exception) {
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
+        }
     }
 
     /**

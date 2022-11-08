@@ -6,6 +6,7 @@ use App\Models\AdminRole;
 use App\Models\Applicant;
 use App\Models\Coupon;
 use App\Models\Customer;
+use App\Models\CustomerAddress;
 use App\Models\Department;
 use App\Models\Event;
 use App\Models\Product;
@@ -55,6 +56,26 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123456'),
 
         ]);
+        CustomerAddress::create([
+            'id' => 1,
+            'customer_id' => 1,
+            'address' => "Dhaka",
+            'address2' => "Dhaka",
+            'city' => "Dhaka",
+            'state' => "Dhaka",
+            'zipCode' => "1200",
+            'phone' => "01303106024",
+        ]);
+        CustomerAddress::create([
+            'id' => 2,
+            'customer_id' => 2,
+            'address' => "Dhaka",
+            'address2' => "Dhaka",
+            'city' => "Dhaka",
+            'state' => "Dhaka",
+            'zipCode' => "1200",
+            'phone' => "01303106024",
+        ]);
 
         $this->call(FrameSeeder::class);
 
@@ -63,9 +84,10 @@ class DatabaseSeeder extends Seeder
             'title' => "Wall Art Poster",
             'details' => "Wall Art Poster",
             'short_details' => "Wall Art Poster",
-            'price' => 100,
+            'price' => 90,
             'tag' => "wall art poster, poster, unique design, wall art",
-            'featured_image' => "/wallPoster/1.jpg"
+            'featured_image' => "/wallPoster/1.jpg",
+            'is_public'=>1
         ]);
         Product::create([
             'title' => "Wall Art Poster",
@@ -73,15 +95,17 @@ class DatabaseSeeder extends Seeder
             'short_details' => "Wall Art Poster",
             'price' => 100,
             'tag' => "wall art poster, poster, unique design, wall art",
-            'featured_image' => "/wallPoster/1.jpg"
+            'featured_image' => "/wallPoster/1.jpg",
+            'is_public'=>1
         ]);
         Product::create([
             'title' => "Wall Art Poster",
             'details' => "Wall Art Poster",
             'short_details' => "Wall Art Poster",
-            'price' => 100,
+            'price' => 150,
             'tag' => "wall art poster, poster, unique design, wall art",
-            'featured_image' => "/wallPoster/1.jpg"
+            'featured_image' => "/wallPoster/1.jpg",
+            'is_public'=>1
         ]);
 
         Coupon::create([

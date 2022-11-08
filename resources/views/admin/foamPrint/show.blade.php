@@ -17,7 +17,7 @@
     <div class="row">
         <div class="col-12">
             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                <h4 class="mb-sm-0">Poster</h4>
+                <h4 class="mb-sm-0">FOAM BOARD PAGE</h4>
 
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
@@ -67,24 +67,26 @@
                                         <td class="institute">{{$item->price}}</td>
                                         <td>
                                             <div class="d-flex gap-2">
+                                                <div class="edit">
+                                                    <a href="/admin/foam-board/price/edit/{{$item->id}}"
+                                                       class="btn btn-sm btn-info edit-item-btn">
+                                                        Edit
+                                                    </a>
+                                                </div>
                                                 <div class="remove">
-                                                    <a href="/admin/foam-board/price/delete/{{$item->id}}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-sm btn-danger remove-item-btn">
+                                                    <a href="/admin/foam-board/price/delete/{{$item->id}}"
+                                                       onclick="return confirm('Are you sure you want to delete?');"
+                                                       class="btn btn-sm btn-danger remove-item-btn">
                                                         Remove
                                                     </a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-
-
-
                                 @endforeach
                                 </tbody>
                             </table>
-
                         </div>
-
-
                     </div>
                 </div><!-- end card -->
             </div>

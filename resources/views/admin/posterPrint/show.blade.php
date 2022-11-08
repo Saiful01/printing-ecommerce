@@ -71,6 +71,11 @@
                                         <td class="institute">{{$item->self_adhesive}}</td>
                                         <td>
                                             <div class="d-flex gap-2">
+                                                <div class="edit">
+                                                    <a href="/admin/poster/price/edit/{{$item->id}}" class="btn btn-sm btn-info edit-item-btn">
+                                                        Edit
+                                                    </a>
+                                                </div>
                                                 <div class="remove">
                                                     <a href="/admin/poster/price/delete/{{$item->id}}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-sm btn-danger remove-item-btn">
                                                         Remove

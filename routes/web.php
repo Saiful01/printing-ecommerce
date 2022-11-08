@@ -18,6 +18,7 @@ use App\Http\Controllers\ShippingController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\TaxController;
 use App\Http\Controllers\WebApiController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -53,8 +54,6 @@ Route::get('/cart', [Controller::class, 'cart']);
 Route::get('/orders/new', [Controller::class, 'orderNew']);
 
 
-
-
 Route::any('/dropzone/store', [Controller::class, 'dropZoneStore']);
 Route::any('/upload/crop', [Controller::class, 'uploadCropImage']);
 
@@ -64,7 +63,7 @@ Route::any('/customer/register', [CustomerController::class, 'register']);
 Route::any('/customer/register/store', [CustomerController::class, 'registerSave']);
 Route::any('/customer/login-check', [CustomerController::class, 'loginCheck']);
 
-Route::group(['prefix' => 'customer','middleware' => 'customer'], function () {
+Route::group(['prefix' => 'customer', 'middleware' => 'customer'], function () {
     Route::any('/profile', [CustomerController::class, 'customerProfile']);
     Route::any('/order/history', [CustomerController::class, 'customerOrderHistory']);
     Route::any('/address', [CustomerController::class, 'customerAddress']);
@@ -109,24 +108,32 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/poster/price', [PosterPrintController::class, 'index']);
     Route::post('/admin/poster/price/store', [PosterPrintController::class, 'store']);
     Route::get('/admin/poster/price/show', [PosterPrintController::class, 'show']);
+    Route::get('/admin/poster/price/edit/{id}', [PosterPrintController::class, 'edit']);
+    Route::post('/admin/poster/price/update', [PosterPrintController::class, 'update']);
     Route::get('/admin/poster/price/delete/{id}', [PosterPrintController::class, 'destroy']);
 
     //Foam Board Print
     Route::get('/admin/foam-board/price', [FoamCoreBoardController::class, 'index']);
     Route::post('/admin/foam-board/price/store', [FoamCoreBoardController::class, 'store']);
     Route::get('/admin/foam-board/price/show', [FoamCoreBoardController::class, 'show']);
+    Route::get('/admin/foam-board/price/edit/{id}', [FoamCoreBoardController::class, 'edit']);
+    Route::post('/admin/foam-board/price/update', [FoamCoreBoardController::class, 'update']);
     Route::get('/admin/foam-board/price/delete/{id}', [FoamCoreBoardController::class, 'destroy']);
 
     //Aluminum Print
     Route::get('/admin/aluminum/price', [AluminiumPrintController::class, 'index']);
     Route::post('/admin/aluminum/price/store', [AluminiumPrintController::class, 'store']);
     Route::get('/admin/aluminum/price/show', [AluminiumPrintController::class, 'show']);
+    Route::get('/admin/aluminum/price/edit/{id}', [AluminiumPrintController::class, 'edit']);
+    Route::post('/admin/aluminum/price/update', [AluminiumPrintController::class, 'update']);
     Route::get('/admin/aluminum/price/delete/{id}', [AluminiumPrintController::class, 'destroy']);
 
     //Custom Print
     Route::get('/admin/custom/price', [CustomPrintController::class, 'index']);
     Route::post('/admin/custom/price/store', [CustomPrintController::class, 'store']);
     Route::get('/admin/custom/price/show', [CustomPrintController::class, 'show']);
+    Route::get('/admin/custom/price/edit/{id}', [CustomPrintController::class, 'edit']);
+    Route::post('/admin/custom/price/update', [CustomPrintController::class, 'update']);
     Route::get('/admin/custom/price/delete/{id}', [CustomPrintController::class, 'destroy']);
 
     //Wall Art & Poster Print
@@ -203,6 +210,28 @@ Route::get('/migrate', function () {
     Artisan::call('migrate:fresh');
     Artisan::call('db:seed');
     Artisan::call('config:clear');
+
+    return "Migrate!";
+
+});
+
+Route::get('/test', function () {
+
+    $array = [
+        'title' => "dddddd",
+        'price' => "50",
+        'featured_image' => "ffff",
+        'size' => "12X511",
+        'short_details' => "Saved from custom",
+        'details' => "Saved from custom",
+        'tag' => "Saved from custom",
+    ];
+    try {
+        $get_id = Product::insertGetId($array);
+        return $get_id;
+    } catch (\Exception $exception) {
+        return $exception->getMessage();
+    }
 
     return "Migrate!";
 

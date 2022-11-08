@@ -46,58 +46,73 @@ class Controller extends BaseController
             ->with("foam_board", $foam_board)
             ->with("temporary_image", $temporary_image);
     }
+
     public function wallArtPoster()
     {
-        $posters= Product::get();
-        return view('common.create-poster.wall-art-poster')->with("posters",$posters);
+        $posters = Product::where("is_public", 1)->get();
+        $poster_size = PosterPrint::get();
+        return view('common.create-poster.wall-art-poster')
+            ->with("posters", $posters)
+            ->with("poster_size", $poster_size);
     }
+
     public function wallArtPosterDetails($id)
     {
-        $poster= Product::where('id', $id)->first();
+        $poster = Product::where('id', $id)->first();
         $posterPrint = PosterPrint::get();
         //return $posterPrint;
         return view('common.create-poster.wall-art-poster-details')
             ->with("poster", $poster)
-            ->with("posterPrint", $posterPrint);
+            ->with("poster_size", $posterPrint);
     }
+
     public function showBanner()
     {
         return view('common.pages.banner');
     }
+
     public function foamBoard()
     {
         return view('common.pages.foam-board-print');
     }
+
     public function aluminiumPrint()
     {
         return view('common.pages.aluminum-prints');
     }
+
     public function mountedFoamBoard()
     {
         return view('common.pages.mounted-foam-board');
     }
+
     public function customizePosterPrint()
     {
         return view('common.pages.customize-poster-print');
     }
+
     public function showContactUs()
     {
         return view('common.pages.contact');
     }
+
     public function showPricing()
     {
         $result = PosterPrint::get();
         //return $result;
         return view('common.pages.pricing')->with('result', $result);
     }
+
     public function showTermsAndConditions()
     {
         return view('common.pages.terms-and-conditions');
     }
+
     public function showReturnPolicy()
     {
         return view('common.pages.return');
     }
+
     public function showFAQ()
     {
         return view('common.pages.faq');
@@ -107,6 +122,7 @@ class Controller extends BaseController
     {
         return view('common.create-poster.cart');
     }
+
     public function orderNew()
 
     {
@@ -142,18 +158,36 @@ class Controller extends BaseController
 
     public function uploadCropImage(Request $request)
     {
+        //return $request['title'];
+        $array = [
+            'title' => $request['title'],
+            'price' => $request['price'],
+            'featured_image' => $request['featured_image'],
+            'size' => $request['size'],
+        ];
 
-
+        $name = $request['name'];
+        $get_id = "";
         if ($request->hasFile('avatar')) {
             $image = $request->file('avatar');
-            $imageName = "ggg".time() . '.' . $image->extension();
+            $imageName = $name . '.' . $image->extension();
             $image->move(public_path('uploads'), $imageName);
-            Session::put("temporary_image", $imageName);
+            Session::put("temporary_image2", $imageName);
+            try {
+                $get_id = Product::insertGetId($array);
+            } catch (\Exception $exception) {
+                return $exception->getMessage();
+            }
 
-            return $imageName;
+            return [
+                'status' => 'success',
+                'message' => 'Image Uploaded Successfully',
+                'image' => $imageName,
+                'id' => $get_id
+            ];
         }
 
-        return $request->all();
+        return $get_id;
     }
 
 

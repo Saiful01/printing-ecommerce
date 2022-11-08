@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Stripe\Stripe;
+use Symfony\Component\Console\Input\Input;
 
 class StripeController extends Controller
 {public function stripe()
@@ -12,6 +13,7 @@ class StripeController extends Controller
 }
     public function payStripe(Request $request)
     {
+      return $request->all();
         $this->validate($request, [
             'card_no' => 'required',
             'expiry_month' => 'required',

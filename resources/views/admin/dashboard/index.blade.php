@@ -11,7 +11,7 @@
                     <div class="col-12">
                         <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                             <div class="flex-grow-1">
-                                <h4 class="fs-16 mb-1">Good Morning, Anna!</h4>
+                                <h4 class="fs-16 mb-1">Good Morning, {{Auth::user()->name}}</h4>
                                 <p class="text-muted mb-0">Here's what's happening with your store
                                     today.</p>
                             </div>
@@ -33,8 +33,8 @@
                                             Total Earnings</p>
                                     </div>
                                     <div class="flex-shrink-0">
-                                        <h5 class="text-success fs-14 mb-0">
-                                            <i class="ri-arrow-right-up-line fs-13 align-middle"></i>
+                                        <h5 class="text-info fs-14 mb-0">
+                                            <i class=" fs-13 align-middle"></i>
                                             +16.24 %
                                         </h5>
                                     </div>
@@ -44,8 +44,7 @@
                                         <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span
                                                 class="counter-value" data-target="559.25">0</span>k
                                         </h4>
-                                        {{--<a href="#" class="text-decoration-underline">View net
-                                            earnings</a>--}}
+                                        <a href="/admin/order/show" class="text-decoration-underline">View Source</a>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
                                                         <span class="avatar-title bg-success rounded fs-3">
@@ -68,8 +67,8 @@
                                             Orders</p>
                                     </div>
                                     <div class="flex-shrink-0">
-                                        <h5 class="text-danger fs-14 mb-0">
-                                            <i class="ri-arrow-right-down-line fs-13 align-middle"></i>
+                                        <h5 class="text-info fs-14 mb-0">
+                                            <i class="fs-13 align-middle"></i>
                                             -3.57 %
                                         </h5>
                                     </div>
@@ -78,10 +77,11 @@
                                     <div>
                                         <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span
                                                 class="counter-value" data-target="36894">0</span></h4>
-                                        <a href="/admin/order/show" class="text-decoration-underline">View all orders</a>
+                                        <a href="/admin/order/show" class="text-decoration-underline">View all
+                                            orders</a>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-info rounded fs-3">
+                                                        <span class="avatar-title bg-danger rounded fs-3">
                                                             <i class="bx bx-shopping-bag"></i>
                                                         </span>
                                     </div>
@@ -101,18 +101,18 @@
                                             Customers</p>
                                     </div>
                                     <div class="flex-shrink-0">
-                                        <h5 class="text-success fs-14 mb-0">
-                                            <i class="ri-arrow-right-up-line fs-13 align-middle"></i>
-                                            +29.08 %
+                                        <h5 class="text-info fs-14 mb-0">
+                                            <i class=" fs-13 align-middle"></i>
+                                            {{$customerDifferenceInpercentage}} %
                                         </h5>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span
-                                                class="counter-value" data-target="183.35">0</span>M
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span>{{$customers}}</span>
                                         </h4>
-                                        <a href="/admin/customers/show" class="text-decoration-underline">See details</a>
+                                        <a href="/admin/customers/show" class="text-decoration-underline">See
+                                            details</a>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
                                                         <span class="avatar-title bg-warning rounded fs-3">
@@ -124,42 +124,8 @@
                         </div><!-- end card -->
                     </div><!-- end col -->
 
-                    <div class="col-xl-3 col-md-6">
-                        <!-- card -->
-                        <div class="card card-animate">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1 overflow-hidden">
-                                        <p
-                                            class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                            My Balance</p>
-                                    </div>
-                                    <div class="flex-shrink-0">
-                                        <h5 class="text-muted fs-14 mb-0">
-                                            +0.00 %
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-end justify-content-between mt-4">
-                                    <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span
-                                                class="counter-value" data-target="165.89">0</span>k
-                                        </h4>
-                                       {{-- <a href="#" class="text-decoration-underline">Withdraw money</a>--}}
-                                    </div>
-                                    <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-danger rounded fs-3">
-                                                            <i class="bx bx-wallet"></i>
-                                                        </span>
-                                    </div>
-                                </div>
-                            </div><!-- end card body -->
-                        </div><!-- end card -->
-                    </div><!-- end col -->
-                </div> <!-- end row-->
 
-                <div class="row">
-                    <div class="col-xl-3 col-md-6">
+                    <div class="col-xl-3 col-md-">
                         <!-- card -->
                         <div class="card card-animate">
                             <div class="card-body">
@@ -170,29 +136,31 @@
                                             Wall Art & Poster</p>
                                     </div>
                                     <div class="flex-shrink-0">
-                                        <h5 class="text-danger fs-14 mb-0">
-                                            <i class="ri-arrow-right-down-line fs-13 align-middle"></i>
-                                            -3.57 %
+                                        <h5 class="text-info fs-14 mb-0">
+                                            <i class="fs-13 align-middle"></i>
+                                            {{$wallArtDifferenceInpercentage}} %
                                         </h5>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span
-                                                class="counter-value" data-target="36894">0</span></h4>
-                                        <a href="/admin/order/show" class="text-decoration-underline">View all orders</a>
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span>{{$wallArtCount}}</span></h4>
+                                        <a href="/admin/order/show" class="text-decoration-underline">View all
+                                            orders</a>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-info rounded fs-3">
-                                                            <i class="bx bx-shopping-bag"></i>
-                                                        </span>
+                                                    <span class="avatar-title bg-info rounded-2 fs-2">
+                                                        <i data-feather="briefcase"></i>
+                                                    </span>
                                     </div>
                                 </div>
                             </div><!-- end card body -->
                         </div><!-- end card -->
                     </div><!-- end col -->
+                </div> <!-- end row-->
 
-                    <div class="col-xl-3 col-md-6">
+                <div class="row">
+                    <div class="col-xl-4 col-md-8">
                         <!-- card -->
                         <div class="card card-animate">
                             <div class="card-body">
@@ -203,62 +171,29 @@
                                             Active Coupon</p>
                                     </div>
                                     <div class="flex-shrink-0">
-                                        <h5 class="text-muted fs-14 mb-0">
-                                            +0.00 %
+                                        <h5 class="text-info fs-14 mb-0">
+                                            <i class="fs-13 align-middle"></i>
+                                            {{$activeCouponDifferenceInpercentage}} %
                                         </h5>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span
-                                                class="counter-value" data-target="165.89">0</span>k
-                                        </h4>
-                                        {{-- <a href="#" class="text-decoration-underline">Withdraw money</a>--}}
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span>{{$activeCouponCount}}</span></h4>
+                                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                            </p>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-danger rounded fs-3">
-                                                            <i class="bx bx-wallet"></i>
-                                                        </span>
+                                                            <span class="avatar-title bg-danger rounded fs-2">
+                                                                <i data-feather="activity"></i>
+                                                            </span>
                                     </div>
                                 </div>
                             </div><!-- end card body -->
                         </div><!-- end card -->
                     </div><!-- end col -->
 
-                    <div class="col-xl-3 col-md-6">
-                        <!-- card -->
-                        <div class="card card-animate">
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                    <div class="flex-grow-1 overflow-hidden">
-                                        <p
-                                            class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                            Inactive Coupon</p>
-                                    </div>
-                                    <div class="flex-shrink-0">
-                                        <h5 class="text-muted fs-14 mb-0">
-                                            +0.00 %
-                                        </h5>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-end justify-content-between mt-4">
-                                    <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span
-                                                class="counter-value" data-target="165.89">0</span>k
-                                        </h4>
-                                        {{-- <a href="#" class="text-decoration-underline">Withdraw money</a>--}}
-                                    </div>
-                                    <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-danger rounded fs-3">
-                                                            <i class="bx bx-wallet"></i>
-                                                        </span>
-                                    </div>
-                                </div>
-                            </div><!-- end card body -->
-                        </div><!-- end card -->
-                    </div><!-- end col -->
-
-                    <div class="col-xl-3 col-md-6">
+                    <div class="col-xl-4 col-md-8">
                         <!-- card -->
                         <div class="card card-animate">
                             <div class="card-body">
@@ -269,23 +204,54 @@
                                             Total Coupon</p>
                                     </div>
                                     <div class="flex-shrink-0">
-                                        <h5 class="text-success fs-14 mb-0">
-                                            <i class="ri-arrow-right-up-line fs-13 align-middle"></i>
-                                            +29.08 %
+                                        <h5 class="text-info fs-14 mb-0">
+                                            <i class=" fs-13 align-middle"></i>
+                                            {{$couponDifferenceInpercentage}} %
                                         </h5>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span
-                                                class="counter-value" data-target="183.35">0</span>M
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span>{{$couponCount}}</span>
                                         </h4>
-                                        <a href="/admin/customers/show" class="text-decoration-underline">See details</a>
+                                        <a href="/admin/customers/show" class="text-decoration-underline">See
+                                            details</a>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-warning rounded fs-3">
-                                                            <i class="bx bx-user-circle"></i>
-                                                        </span>
+                                                    <span class="avatar-title bg-warning rounded-2 fs-2">
+                                                        <i data-feather="award"></i>
+                                                    </span>
+                                    </div>
+                                </div>
+                            </div><!-- end card body -->
+                        </div><!-- end card -->
+                    </div><!-- end col -->
+                    <div class="col-xl-4 col-md-8">
+                        <!-- card -->
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1 overflow-hidden">
+                                        <p
+                                            class="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                            Inactive Coupon</p>
+                                    </div>
+                                    <div class="flex-shrink-0">
+                                        <h5 class="text-info fs-14 mb-0">
+                                            {{$inActiveCouponDifferenceInpercentage}} %
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                    <div>
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span>{{$inActiveCouponCount}}</span>
+                                        </h4>
+                                        {{-- <a href="#" class="text-decoration-underline">Withdraw money</a>--}}
+                                    </div>
+                                    <div class="avatar-sm flex-shrink-0">
+                                                    <span class="avatar-title bg-danger rounded-2 fs-2">
+                                                        <i data-feather="clock"></i>
+                                                    </span>
                                     </div>
                                 </div>
                             </div><!-- end card body -->
@@ -294,7 +260,7 @@
                 </div> <!-- end row-->
 
                 <div class="row">
-                    <div class="col-xl-5">
+                    {{--<div class="col-xl-5">
                         <div class="card">
                             <div class="card-header border-0 align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Revenue</h4>
@@ -364,9 +330,9 @@
                                 </div>
                             </div><!-- end card body -->
                         </div><!-- end card -->
-                    </div><!-- end col -->
+                    </div>--}}<!-- end col -->
 
-                    <div class="col-xl-7">
+                    <div class="col-xl-12">
                         <!-- card -->
                         <div class="card card-height-100">
 
@@ -384,163 +350,131 @@
                                     <table
                                         class="table table-borderless table-centered align-middle table-nowrap mb-0">
                                         <thead class="text-muted table-light">
-                                            <tr>
-                                                <th scope="col">Order ID</th>
-                                                <th scope="col">Customer</th>
-                                                <th scope="col">Product</th>
-                                                <th scope="col">Amount</th>
-                                                <th scope="col">Vendor</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Rating</th>
-                                            </tr>
+                                        <tr>
+                                            <th scope="col">Order ID</th>
+                                            <th scope="col">Customer</th>
+                                            <th scope="col">Product</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <a href="apps-ecommerce-order-details.html"
-                                                       class="fw-medium link-primary">#VZ2112</a>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="flex-shrink-0 me-2">
-                                                            <img src="assets/images/users/avatar-1.jpg"
-                                                                 alt=""
-                                                                 class="avatar-xs rounded-circle shadow" />
-                                                        </div>
-                                                        <div class="flex-grow-1">Alex Smith</div>
+                                        <tr>
+                                            <td>
+                                                <a href="apps-ecommerce-order-details.html"
+                                                   class="fw-medium link-primary">#VZ2112</a>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-2">
+                                                        <img src="assets/images/users/avatar-1.jpg"
+                                                             alt=""
+                                                             class="avatar-xs rounded-circle shadow"/>
                                                     </div>
-                                                </td>
-                                                <td>Clothes</td>
-                                                <td>
-                                                    <span class="text-success">$109.00</span>
-                                                </td>
-                                                <td>Zoetic Fashion</td>
-                                                <td>
-                                                    <span class="badge badge-soft-success">Paid</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 fw-medium mb-0">5.0<span
-                                                            class="text-muted fs-11 ms-1">(61
-                                                                            votes)</span></h5>
-                                                </td>
-                                            </tr><!-- end tr -->
-                                            <tr>
-                                                <td>
-                                                    <a href="apps-ecommerce-order-details.html"
-                                                       class="fw-medium link-primary">#VZ2111</a>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="flex-shrink-0 me-2">
-                                                            <img src="assets/images/users/avatar-2.jpg"
-                                                                 alt=""
-                                                                 class="avatar-xs rounded-circle shadow" />
-                                                        </div>
-                                                        <div class="flex-grow-1">Jansh Brown</div>
+                                                    <div class="flex-grow-1">Alex Smith</div>
+                                                </div>
+                                            </td>
+                                            <td>Clothes</td>
+                                            <td>
+                                                <span class="text-success">$109.00</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-soft-success">Paid</span>
+                                            </td>
+                                        </tr><!-- end tr -->
+                                        <tr>
+                                            <td>
+                                                <a href="apps-ecommerce-order-details.html"
+                                                   class="fw-medium link-primary">#VZ2111</a>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-2">
+                                                        <img src="assets/images/users/avatar-2.jpg"
+                                                             alt=""
+                                                             class="avatar-xs rounded-circle shadow"/>
                                                     </div>
-                                                </td>
-                                                <td>Kitchen Storage</td>
-                                                <td>
-                                                    <span class="text-success">$149.00</span>
-                                                </td>
-                                                <td>Micro Design</td>
-                                                <td>
+                                                    <div class="flex-grow-1">Jansh Brown</div>
+                                                </div>
+                                            </td>
+                                            <td>Kitchen Storage</td>
+                                            <td>
+                                                <span class="text-success">$149.00</span>
+                                            </td>
+                                            <td>
                                                                     <span
                                                                         class="badge badge-soft-warning">Pending</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 fw-medium mb-0">4.5<span
-                                                            class="text-muted fs-11 ms-1">(61
-                                                                            votes)</span></h5>
-                                                </td>
-                                            </tr><!-- end tr -->
-                                            <tr>
-                                                <td>
-                                                    <a href="apps-ecommerce-order-details.html"
-                                                       class="fw-medium link-primary">#VZ2109</a>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="flex-shrink-0 me-2">
-                                                            <img src="assets/images/users/avatar-3.jpg"
-                                                                 alt=""
-                                                                 class="avatar-xs rounded-circle shadow" />
-                                                        </div>
-                                                        <div class="flex-grow-1">Ayaan Bowen</div>
+                                            </td>
+                                        </tr><!-- end tr -->
+                                        <tr>
+                                            <td>
+                                                <a href="apps-ecommerce-order-details.html"
+                                                   class="fw-medium link-primary">#VZ2109</a>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-2">
+                                                        <img src="assets/images/users/avatar-3.jpg"
+                                                             alt=""
+                                                             class="avatar-xs rounded-circle shadow"/>
                                                     </div>
-                                                </td>
-                                                <td>Bike Accessories</td>
-                                                <td>
-                                                    <span class="text-success">$215.00</span>
-                                                </td>
-                                                <td>Nesta Technologies</td>
-                                                <td>
-                                                    <span class="badge badge-soft-success">Paid</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 fw-medium mb-0">4.9<span
-                                                            class="text-muted fs-11 ms-1">(89
-                                                                            votes)</span></h5>
-                                                </td>
-                                            </tr><!-- end tr -->
-                                            <tr>
-                                                <td>
-                                                    <a href="apps-ecommerce-order-details.html"
-                                                       class="fw-medium link-primary">#VZ2108</a>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="flex-shrink-0 me-2">
-                                                            <img src="assets/images/users/avatar-4.jpg"
-                                                                 alt=""
-                                                                 class="avatar-xs rounded-circle shadow" />
-                                                        </div>
-                                                        <div class="flex-grow-1">Prezy Mark</div>
+                                                    <div class="flex-grow-1">Ayaan Bowen</div>
+                                                </div>
+                                            </td>
+                                            <td>Bike Accessories</td>
+                                            <td>
+                                                <span class="text-success">$215.00</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-soft-success">Paid</span>
+                                            </td>
+                                        </tr><!-- end tr -->
+                                        <tr>
+                                            <td>
+                                                <a href="apps-ecommerce-order-details.html"
+                                                   class="fw-medium link-primary">#VZ2108</a>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-2">
+                                                        <img src="assets/images/users/avatar-4.jpg"
+                                                             alt=""
+                                                             class="avatar-xs rounded-circle shadow"/>
                                                     </div>
-                                                </td>
-                                                <td>Furniture</td>
-                                                <td>
-                                                    <span class="text-success">$199.00</span>
-                                                </td>
-                                                <td>Syntyce Solutions</td>
-                                                <td>
-                                                    <span class="badge badge-soft-danger">Unpaid</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 fw-medium mb-0">4.3<span
-                                                            class="text-muted fs-11 ms-1">(47
-                                                                            votes)</span></h5>
-                                                </td>
-                                            </tr><!-- end tr -->
-                                            <tr>
-                                                <td>
-                                                    <a href="apps-ecommerce-order-details.html"
-                                                       class="fw-medium link-primary">#VZ2107</a>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="flex-shrink-0 me-2">
-                                                            <img src="assets/images/users/avatar-6.jpg"
-                                                                 alt=""
-                                                                 class="avatar-xs rounded-circle shadow" />
-                                                        </div>
-                                                        <div class="flex-grow-1">Vihan Hudda</div>
+                                                    <div class="flex-grow-1">Prezy Mark</div>
+                                                </div>
+                                            </td>
+                                            <td>Furniture</td>
+                                            <td>
+                                                <span class="text-success">$199.00</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-soft-danger">Unpaid</span>
+                                            </td>
+                                        </tr><!-- end tr -->
+                                        <tr>
+                                            <td>
+                                                <a href="apps-ecommerce-order-details.html"
+                                                   class="fw-medium link-primary">#VZ2107</a>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-shrink-0 me-2">
+                                                        <img src="assets/images/users/avatar-6.jpg"
+                                                             alt=""
+                                                             class="avatar-xs rounded-circle shadow"/>
                                                     </div>
-                                                </td>
-                                                <td>Bags and Wallets</td>
-                                                <td>
-                                                    <span class="text-success">$330.00</span>
-                                                </td>
-                                                <td>iTest Factory</td>
-                                                <td>
-                                                    <span class="badge badge-soft-success">Paid</span>
-                                                </td>
-                                                <td>
-                                                    <h5 class="fs-14 fw-medium mb-0">4.7<span
-                                                            class="text-muted fs-11 ms-1">(161
-                                                                            votes)</span></h5>
-                                                </td>
-                                            </tr><!-- end tr -->
+                                                    <div class="flex-grow-1">Vihan Hudda</div>
+                                                </div>
+                                            </td>
+                                            <td>Bags and Wallets</td>
+                                            <td>
+                                                <span class="text-success">$330.00</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-soft-success">Paid</span>
+                                            </td>
+                                        </tr><!-- end tr -->
                                         </tbody><!-- end tbody -->
                                     </table><!-- end table -->
                                 </div>
@@ -577,9 +511,6 @@
         <!-- Dashboard init -->
         <script src="/admin-assets/js/pages/dashboard-ecommerce.init.js"></script>
 
-
-
     @endpush
-
 
 @endsection

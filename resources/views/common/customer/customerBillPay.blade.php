@@ -2,12 +2,6 @@
 @section('title', 'Order History Page')
 @section('content')
 
-    <style>
-        input[type="text"] {
-            border: 2px !important;
-            border-color: #0a0c0d !important;
-        }
-    </style>
     <div class="page-content" ng-controller="printingCartController">
         <div class="holder breadcrumbs-wrap mt-0">
             <div class="container">
@@ -33,14 +27,14 @@
                                     </div>
                                     <div class="card-body row justify-content-around">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="billingAddress"
+                                            <input class="form-check-input" type="radio" value="{{$result->customerAddress->address}}" name="billingAddress"
                                                    id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 {{$result->customerAddress->address}}
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="billingAddress"
+                                            <input class="form-check-input" type="radio" value="{{$result->customerAddress->address2}}" name="billingAddress"
                                                    id="flexRadioDefault2" checked>
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 {{$result->customerAddress->address2}}
@@ -55,25 +49,24 @@
                                 <div class="card">
                                     <div class="card-header">Select Delivery Option</div>
                                     <div class="card-body row">
+                                        @foreach($shipping as $ship)
                                         <div class="col-md-4 text-center delivery_option selected_delivery"
                                              id="delivery_option_1">
-                                            <div onclick="update_delivery(1, 8.99);">
-                                                <p><strong>USPS 3-10 Days</strong></p>
-                                                <h3>$8.99</h3>
+                                            {{--<div>
+                                                <p><strong>{{$ship->title}}</strong></p>
+                                                <h3>{{$ship->Shipping_charge}}</h3>
+                                            </div>--}}
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="shippingPrice" value="{{$ship->Shipping_charge}}"
+                                                       id="{{$ship->Shipping_charge}}" checked>
+                                                <label class="form-check-label" for="{{$ship->Shipping_charge}}">
+                                                    <p><strong>{{$ship->title}}</strong></p>
+                                                    <h3>{{$ship->Shipping_charge}}</h3>
+                                                </label>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 text-center delivery_option " id="delivery_option_2">
-                                            <div onclick="update_delivery(2, 12.99);">
-                                                <p><strong>Ground 2-5 Days</strong></p>
-                                                <h3>$12.99</h3>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4 text-center delivery_option " id="delivery_option_3">
-                                            <div onclick="update_delivery(3, 32.99);">
-                                                <p><strong>Express 1-2 Days</strong></p>
-                                                <h3>$32.99</h3>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -121,11 +114,15 @@
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    Prints: <span class="float-right">1</span>
+                                    Prints: <span class="float-right" ng--bind="total_item"></span>
                                 </li>
                                 <li class="list-group-item">
                                     Subtotal: <span
                                         class="float-right"><strong>$@{{ totalPriceCountAll }}</strong></span>
+                                </li>
+                                <li class="list-group-item">
+                                    Discount: <span
+                                        class="float-right"><strong>$@{{ discount }}</strong></span>
                                 </li>
                                 <li class="list-group-item">
                                     <form action="/carts/add_coupon" method="get">
@@ -142,7 +139,7 @@
                                 </li>
                                 <li class="list-group-item">
                                     <strong>Subtotal: <span
-                                            class="float-right">$@{{ totalPriceCountAll }}</span></strong>
+                                            class="float-right">$@{{ totalPriceWithDiscount }}</span></strong>
                                 </li>
 
                                 <li class="list-group-item text-center">

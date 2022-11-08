@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 
 use App\Models\AdminRole;
+use App\Models\Coupon;
 use App\Models\Customer;
 use App\Models\Department;
 use App\Models\InOutMonitor;
 use App\Models\Leave;
 use App\Models\LoginHistory;
 use App\Models\OutSideVisit;
+use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,14 +24,84 @@ class AdminController extends Controller
 {
     public function index()
     {
+        //Customer Count & Percentage Count
+        $customers = Customer::count();
+        $customePreviousMonthUsers = Customer::whereMonth('created_at', now()->month - 1)->count();
+        $customeThisMonthUsers = Customer::whereMonth('created_at', now()->month)->count();
+        if ($customePreviousMonthUsers > 0) {
+            // If it has decreased then it will give you a percentage with '-'
+            $customerDifferenceInpercentage = ($customeThisMonthUsers - $customePreviousMonthUsers) * 100 / $customePreviousMonthUsers;
+        } else {
+            $customerDifferenceInpercentage = $customeThisMonthUsers > 0 ? '100' : '0';
+        }
 
-        return view('admin.dashboard.index');
+        //Wall Art & Poster Count & Percentage Count
+        $wallArtCount = Product::count();
+        $wallArtPreviousMonth = Product::whereMonth('created_at', now()->month - 1)->count();
+        $wallArtThisMonth = Product::whereMonth('created_at', now()->month)->count();
+        if ($wallArtPreviousMonth > 0) {
+            // If it has decreased then it will give you a percentage with '-'
+            $wallArtDifferenceInpercentage = ($wallArtThisMonth - $wallArtPreviousMonth) * 100 / $wallArtPreviousMonth;
+        } else {
+            $wallArtDifferenceInpercentage = $wallArtThisMonth > 0 ? '100' : '0';
+        }
+
+        //Total Coupon Count & Percentage Count
+        $couponCount = Coupon::count();
+        $couponPreviousMonth = Coupon::whereMonth('created_at', now()->month - 1)->count();
+        $couponThisMonth = Coupon::whereMonth('created_at', now()->month)->count();
+        if ($couponPreviousMonth > 0) {
+            // If it has decreased then it will give you a percentage with '-'
+            $couponDifferenceInpercentage = ($couponThisMonth - $couponPreviousMonth) * 100 / $couponPreviousMonth;
+        } else {
+            $couponDifferenceInpercentage = $couponThisMonth > 0 ? '100' : '0';
+        }
+        // return $couponDifferenceInpercentage;
+        //return $couponCount;
+
+        //Active  Coupon Count & Percentage Count
+        $activeCouponCount = Coupon::where('is_active', 1)->count();
+        $activeCouponPreviousMonth = Coupon::whereMonth('created_at', now()->month - 1)->count();
+        $activeCouponThisMonth = Coupon::whereMonth('created_at', now()->month)->count();
+        if ($activeCouponPreviousMonth > 0) {
+            // If it has decreased then it will give you a percentage with '-'
+            $activeCouponDifferenceInpercentage = ($activeCouponThisMonth - $activeCouponPreviousMonth) * 100 / $activeCouponPreviousMonth;
+        } else {
+            $activeCouponDifferenceInpercentage = $activeCouponThisMonth > 0 ? '100' : '0';
+        }
+        // return $activeCouponDifferenceInpercentage;
+        //return $activeCouponCount;
+
+        //Active  Coupon Count & Percentage Count
+        $inActiveCouponCount = Coupon::where('is_active', 0)->count();
+        $inActiveCouponPreviousMonth = Coupon::whereMonth('created_at', now()->month - 1)->count();
+        $inActiveCouponThisMonth = Coupon::whereMonth('created_at', now()->month)->count();
+        if ($inActiveCouponPreviousMonth > 0) {
+            // If it has decreased then it will give you a percentage with '-'
+            $inActiveCouponDifferenceInpercentage = ($inActiveCouponThisMonth - $inActiveCouponPreviousMonth) * 100 / $inActiveCouponPreviousMonth;
+        } else {
+            $inActiveCouponDifferenceInpercentage = $inActiveCouponThisMonth > 0 ? '100' : '0';
+        }
+        // return $inActiveCouponDifferenceInpercentage;
+        //return $inActiveCouponCount;
+
+        return view('admin.dashboard.index')
+            ->with('customers', $customers)
+            ->with('customerDifferenceInpercentage', $customerDifferenceInpercentage)
+            ->with('wallArtCount', $wallArtCount)
+            ->with('wallArtDifferenceInpercentage', $wallArtDifferenceInpercentage)
+            ->with('couponCount', $couponCount)
+            ->with('couponDifferenceInpercentage', $couponDifferenceInpercentage)
+            ->with('activeCouponCount', $activeCouponCount)
+            ->with('activeCouponDifferenceInpercentage', $activeCouponDifferenceInpercentage)
+            ->with('inActiveCouponCount', $inActiveCouponCount)
+            ->with('inActiveCouponDifferenceInpercentage', $inActiveCouponDifferenceInpercentage);
 
     }
 
     public function login()
     {
-        if (Auth::check()){
+        if (Auth::check()) {
             return \redirect('/admin/dashboard');
         }
         return view('admin.login');
@@ -178,11 +250,10 @@ class AdminController extends Controller
 
     }
 
-
     public function customersList()
     {
         $results = Customer::with('customerAddress')->where('id',Auth::guard('customer')->user()->id)->get();
-       // return $results;
+        // return $results;
         return view('admin.customers.index')->with('results',$results);
     }
 }

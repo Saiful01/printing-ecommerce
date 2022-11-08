@@ -116,10 +116,15 @@
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    Prints: <span class="float-right">1</span>
+                                    Prints: <span class="float-right" ng--bind="total_item"></span>
                                 </li>
                                 <li class="list-group-item">
-                                    Subtotal: <span class="float-right"><strong>$@{{ totalPriceCountAll }}</strong></span>
+                                    Subtotal: <span
+                                        class="float-right"><strong>$@{{ totalPriceCountAll }}</strong></span>
+                                </li>
+                                <li class="list-group-item">
+                                    Discount: <span
+                                        class="float-right"><strong>$@{{ discount }}</strong></span>
                                 </li>
                                 <li class="list-group-item">
                                     <form action="/carts/add_coupon" method="get">
@@ -135,7 +140,8 @@
                                     </form>
                                 </li>
                                 <li class="list-group-item">
-                                    <strong>Subtotal: <span class="float-right">$@{{ totalPriceCountAll }}</span></strong>
+                                    <strong>Subtotal: <span
+                                            class="float-right">$@{{ totalPriceWithDiscount }}</span></strong>
                                 </li>
 
                                 <li class="list-group-item text-center">
@@ -149,10 +155,23 @@
                                   Order in 7 hours and 6 minutes and we will SHIP OUT TODAY!
                                   <br><small>For rolled poster prints only.</small>
                                 </li-->
-                                {{--<li class="list-group-item text-center">
-                                    <a class="btn btn-lg btn-success" href="/customer/address"><i
-                                            class="fas fa-shopping-cart"></i> SECURE CHECKOUT</a>
-                                </li>--}}
+                                @if(isAddress() == true)
+                                    <li class="list-group-item text-center">
+                                        <a class="btn btn-lg btn-success" href="/customer/bill/pay"><i
+                                                class="fas fa-shopping-cart"></i> SECURE CHECKOUT</a>
+                                    </li>
+                                @elseif(Auth::guard('customer')->check())
+
+                                    <li class="list-group-item text-center">
+                                        <a class="btn btn-lg btn-success" href="/customer/address"><i
+                                                class="fas fa-shopping-cart"></i> SECURE CHECKOUT</a>
+                                    </li>
+                                @else
+                                    <li class="list-group-item text-center">
+                                        <a class="btn btn-lg btn-success" href="/customer/login"><i
+                                                class="fas fa-shopping-cart"></i> SECURE CHECKOUT</a>
+                                    </li>
+                                @endif
                             </ul>
 
                         </div>

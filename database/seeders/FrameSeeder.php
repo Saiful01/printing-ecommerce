@@ -6,6 +6,7 @@ use App\Models\AluminiumPrint;
 use App\Models\FoamCoreBoard;
 use App\Models\PosterPrint;
 use App\Models\CustomPrint;
+use App\Models\Shipping;
 use App\Models\Tax;
 use Illuminate\Database\Seeder;
 
@@ -239,6 +240,21 @@ class FrameSeeder extends Seeder
         ]);
         Tax::create([
             "amount" => '15',
+        ]);
+        Shipping::create([
+            "id" => '1',
+            "title" => 'USPS 3-10 Days',
+            "Shipping_charge" => '8.9',
+        ]);
+        Shipping::create([
+            "id" => '2',
+            "title" => 'Ground 2-5 Days',
+            "Shipping_charge" => '12.99',
+        ]);
+        Shipping::create([
+            "id" => '3',
+            "title" => 'Express 1-2 Days',
+            "Shipping_charge" => '32.99',
         ]);
     }
 }

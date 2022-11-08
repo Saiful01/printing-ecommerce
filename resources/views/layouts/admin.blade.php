@@ -76,7 +76,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="text-sm-end d-none d-sm-block">
-                            <a href="https://abgict.co/" target="_blank"> Design & Develop by {{ getCopyright() }}</a>
+                            Design & Develop by<a href="https://qubitsolutionlab.com/" target="_blank"> {{ getCopyright() }}</a>
 
                         </div>
                     </div>

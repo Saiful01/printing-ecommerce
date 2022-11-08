@@ -70,9 +70,10 @@ class AluminiumPrintController extends Controller
      * @param  \App\Models\AluminiumPrint  $aluminiumPrint
      * @return \Illuminate\Http\Response
      */
-    public function edit(AluminiumPrint $aluminiumPrint)
+    public function edit($id)
     {
-        //
+        $results = AluminiumPrint::where('id', $id)->first();
+        return view("admin.aluminumPrint.edit")->with('results', $results);
     }
 
     /**
@@ -84,7 +85,20 @@ class AluminiumPrintController extends Controller
      */
     public function update(Request $request, AluminiumPrint $aluminiumPrint)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'price' => 'required',
+        ]);
+
+        //  return $request->all();
+        try {
+            AluminiumPrint::where('id', $request['id'])->update($request->except(['_token']));
+            Alert::success('Aluminium Print! ', " Price Successfully Updated");
+            return redirect('/admin/aluminum/price/show');
+        } catch (Exception $exception) {
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
+        }
     }
 
     /**

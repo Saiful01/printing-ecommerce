@@ -1,5 +1,6 @@
 app.controller('printingCartController', function ($scope, $http, $location) {
 
+    //localStorage.clear();
     $scope.cart_products = [];
     $scope.discount = 0;
     $scope.coupon_code = "";
@@ -10,7 +11,6 @@ app.controller('printingCartController', function ($scope, $http, $location) {
     $scope.totalPriceWithDiscount = 0;
     $scope.customer_address_type = "Home";
     $scope.addToCart = function (item) {
-        console.log(item);
         if ($scope.poster_size == "") {
             return messageError("Please select poster size");
         }
@@ -110,6 +110,8 @@ app.controller('printingCartController', function ($scope, $http, $location) {
 
 
     $scope.incQty = function (item) {
+
+        console.log(item);
         let cartProductList = localStorage.getItem('cart_product');
         if (cartProductList != null && cartProductList !== undefined) {
             cartProductList = JSON.parse(cartProductList);

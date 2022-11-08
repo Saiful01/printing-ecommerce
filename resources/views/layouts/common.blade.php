@@ -36,6 +36,22 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
 
+    <style>
+        #result canvas {
+            width: 100%;
+        }
+        input[type="text"] {
+            border: 1px solid #cfcbcb;
+            width: 100%;
+            padding-right: 59px;
+            height: 60px;
+        }
+        input[type="text"] {
+            border: 1px solid #c9bebe !important;
+            /* border-color: #0a0c0d !important; */
+        }
+    </style>
+
 </head>
 <body class="has-smround-btns has-loader-bg equal-height" ng-app="myApp">
 <!--header-->
@@ -90,12 +106,12 @@
                                 <li>
                                     <a href="#"><i class="icon-facebook"></i></a>
                                 </li>
-                                <li>
+                                {{--<li>
                                     <a href="#"><i class="icon-twitter"></i></a>
                                 </li>
                                 <li>
                                     <a href="#"><i class="icon-google"></i></a>
-                                </li>
+                                </li>--}}
                                 <li>
                                     <a href="#"><i class="icon-instagram"></i></a>
                                 </li>
@@ -188,7 +204,8 @@
                                                         <li><a href="/foam-board-print">Turn your into a sign,<span
                                                                     class="submenu-link-txt">display or presentation board for exhibitions</span></a>
                                                         </li>
-                                                        <li><a href="/mounted-foam-board-print">Mounted print on foam<span
+                                                        <li><a href="/mounted-foam-board-print">Mounted print on
+                                                                foam<span
                                                                     class="submenu-link-txt">Core board for easy hanging, framing or display</span></a>
                                                         </li>
                                                     </ul>
@@ -248,7 +265,7 @@
         </div>
     </div>
 </header>
-<div class="header-side-panel" >
+<div class="header-side-panel">
     <!-- Mobile Menu -->
     <div class="mobilemenu js-push-mbmenu">
         <div class="mobilemenu-content">
@@ -275,28 +292,30 @@
             <div class="dropdn-close"><span class="js-dropdn-close">Close</span></div>
             @if (!Auth::guard('customer')->check())
 
-            <ul>
-                <li><a href="/customer/register"><span>Register</span><i class="icon-user2"></i></a></li>
-            </ul>
-            <div class="dropdn-form-wrapper">
-                <h5>Quick Login</h5>
-                <form action="/customer/login-check" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <input type="text" class="form-control form-control--sm is-invalid"
-                               placeholder="Enter your e-mail" name="email" required>
-                        <div class="invalid-feedback">Can't be blank</div>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control form-control--sm"
-                               placeholder="Enter your password" name="password" required>
-                    </div>
-                    <button type="submit" class="btn">Login</button>
-                </form>
-            </div>
+                <ul>
+                    <li><a href="/customer/register"><span>Register</span><i class="icon-user2"></i></a></li>
+                </ul>
+                <div class="dropdn-form-wrapper">
+                    <h5>Quick Login</h5>
+                    <form action="/customer/login-check" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control--sm is-invalid"
+                                   placeholder="Enter your e-mail" name="email" required>
+                            <div class="invalid-feedback">Can't be blank</div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control form-control--sm"
+                                   placeholder="Enter your password" name="password" required>
+                        </div>
+                        <button type="submit" class="btn">Login</button>
+                    </form>
+                </div>
             @else
                 <ul>
-                    <li><a href="/customer/profile"><span>{{Auth::guard('customer')->user()->firstName}} {{Auth::guard('customer')->user()->lastName}}</span><i class="icon-user2"></i></a></li>
+                    <li>
+                        <a href="/customer/profile"><span>{{Auth::guard('customer')->user()->firstName}} {{Auth::guard('customer')->user()->lastName}}</span><i
+                                class="icon-user2"></i></a></li>
                 </ul>
                 <ul>
                     <li><a href="/customer/logout"><span>Logout</span><i class="icon-locker"></i></a></li>
@@ -373,12 +392,12 @@
                             <li>
                                 <a href="#" class="icon icon-facebook"></a>
                             </li>
-                            <li>
+                            {{--<li>
                                 <a href="#" class="icon icon-twitter"></a>
                             </li>
                             <li>
                                 <a href="#" class="icon icon-google"></a>
-                            </li>
+                            </li>--}}
                             <li>
                                 <a href="#" class="icon icon-vimeo"></a>
                             </li>
@@ -431,9 +450,9 @@
                         </div>
                         <div class="collapsed-content">
                             <ul class="payment-link">
-                                <li><i class="icon-google-pay-logo"></i></li>
+                                <li><i class="icon-stripe-logo"></i></li>
                                 <li><i class="icon-visa-pay-logo"></i></li>
-                                <li><i class="icon-apple-pay-logo"></i></li>
+                                <li><i class="icon-master-card-logo"></i></li>
                             </ul>
                         </div>
                     </div>

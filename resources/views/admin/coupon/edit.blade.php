@@ -58,11 +58,26 @@
                                         </div>
                                     </div>
                                     <!--end col-->
+                                </div>
+                                <div class="row gy-4 mt-2">
                                     <div class="col-xxl-4 col-md-4 col-8">
                                         <div>
                                             <label for="placeholderInput" class="form-label">Expire Date</label>
                                             <input type="date" class="form-control" name="expiration_date" value="{{$results->expiration_date}}" id="expiration_date" required>
                                         </div>
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col-xxl-4 col-md-4 col-8">
+                                        <label for="placeholderInput" class="form-label">Change Active Status</label>
+                                        <select class="form-control" name="is_active" aria-label="Default select example">
+                                            @if($results->is_active == 1)
+                                                <option value="1" selected>Active</option>
+                                                <option value="0">Inactive</option>
+                                            @else
+                                                <option value="0" selected>Inactive</option>
+                                                <option value="1">Active</option>
+                                            @endif
+                                        </select>
                                     </div>
                                     <!--end col-->
                                 </div>

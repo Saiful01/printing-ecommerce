@@ -171,7 +171,7 @@
                 $leave_list=getPendingLeaveRequest();
 
                 ?>--}}
-                <div class="dropdown topbar-head-dropdown ms-1 header-item">
+                {{--<div class="dropdown topbar-head-dropdown ms-1 header-item">
                     <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                             id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
@@ -191,7 +191,7 @@
                                         <h6 class="m-0 fs-16 fw-semibold text-white"> Notifications </h6>
                                     </div>
                                     <div class="col-auto dropdown-tabs">
-                                        <span class="badge badge-soft-light fs-13"> {{--{{count($leave_list)}}--}} New</span>
+                                        <span class="badge badge-soft-light fs-13"> --}}{{--{{count($leave_list)}}--}}{{-- New</span>
                                     </div>
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
                                         <a class="nav-link active" data-bs-toggle="tab" href="#all-noti-tab"
                                            role="tab"
                                            aria-selected="true">
-                                            Pending Leave Request{{--({{count($leave_list)}})--}}
+                                            Pending Leave Request--}}{{--({{count($leave_list)}})--}}{{--
                                         </a>
                                     </li>
                                 </ul>
@@ -215,7 +215,7 @@
                             <div class="tab-pane fade show active py-2 ps-2" id="all-noti-tab" role="tabpanel">
                                 <div data-simplebar style="max-height: 300px;" class="pe-2">
 
-                                 {{--   @foreach($leave_list as $item)
+                                 --}}{{--   @foreach($leave_list as $item)
                                         <div
                                             class="text-reset notification-item d-block dropdown-item position-relative">
                                             <div class="d-flex">
@@ -235,7 +235,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    @endforeach--}}
+                                    @endforeach--}}{{--
 
 
                                     <div class="my-3 text-center">
@@ -249,7 +249,7 @@
 
                         </div>
                     </div>
-                </div>
+                </div>--}}
 
                 <div class="dropdown ms-sm-3 header-item topbar-user">
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"

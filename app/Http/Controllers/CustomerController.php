@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\CustomerAddress;
+use App\Models\Shipping;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -139,8 +140,9 @@ class CustomerController extends Controller
     public function customerBillPay()
     {
         $result = Customer::with('customerAddress')->where('id',Auth::guard('customer')->user()->id)->first();
+        $shipping = Shipping::get();
         // return $result;
-        return view('common.customer.customerBillPay')->with('result',$result);
+        return view('common.customer.customerBillPay')->with('result',$result)->with('shipping',$shipping);
     }
 
 

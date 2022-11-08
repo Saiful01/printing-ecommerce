@@ -57,9 +57,10 @@ class PosterPrintController extends Controller
      * @param  \App\Models\PosterPrint  $posterPrint
      * @return \Illuminate\Http\Response
      */
-    public function edit(PosterPrint $posterPrint)
+    public function edit($id)
     {
-        //
+        $results = PosterPrint::where('id', $id)->first();
+        return view("admin.posterPrint.edit")->with('results', $results);
     }
 
     /**
@@ -71,7 +72,23 @@ class PosterPrintController extends Controller
      */
     public function update(Request $request, PosterPrint $posterPrint)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'photo_premium_glossy' => 'required',
+            'canvas' => 'required',
+            'banner' => 'required',
+            'self_adhesive' => 'required',
+        ]);
+
+        //  return $request->all();
+        try {
+            PosterPrint::where('id', $request['id'])->update($request->except(['_token']));
+            Alert::success('Poster Print! ', " Price Successfully Updated");
+            return redirect('/admin/poster/price/show');
+        } catch (Exception $exception) {
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
+        }
     }
 
     /**
