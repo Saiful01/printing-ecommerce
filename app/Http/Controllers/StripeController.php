@@ -13,7 +13,7 @@ class StripeController extends Controller
 }
     public function payStripe(Request $request)
     {
-      return $request->all();
+     // return $request->all();
         $this->validate($request, [
             'card_no' => 'required',
             'expiry_month' => 'required',
@@ -23,6 +23,20 @@ class StripeController extends Controller
         $stripe_obj = new Stripe();
         $stripe = $stripe_obj->setApiKey('sk_test_51M009nCHxrrecZpaAsFzw9oYf3MDtnEFWfY45HnTBGyhpbkG09lQ6xvNXE61rBAE598wiZMXIxOory16DeEwddSz00UoIPq5C4');
         //$stripe = Stripe\Stripe::setApiKey(env(''));
+
+       foreach ($request['order_data'] as $item) {
+           return $item;
+
+            $order_item = ([
+                'total_print_item' => $item['total_item'],
+                'subTotal_price' => $item['totalPriceCountAll'],
+                'discount' => $item['discount'],
+                /*'coupon' => $item['coupon'],*/
+                'totalPriceWithDiscount' => 'totalPriceWithDiscount',
+                'quantity' => $item['quantity'],
+            ]);
+            return $order_item;
+        }
         try {
             $response = \Stripe\Token::create(array(
                 "card" => array(

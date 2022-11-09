@@ -104,6 +104,7 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" name="order_data" value="@{{ cart_products }}">
                             <button type="submit" class="btn btn-primary">Pay</button>
                     </form>
                 </div>
@@ -127,8 +128,7 @@
                                 <li class="list-group-item">
                                     <form action="/carts/add_coupon" method="get">
                                         <div class="input-group add_promo float-right">
-                                            <input type="text" name="cart[coupon]" class="form-control rounded-0"
-                                                   id="validationDefaultUsername" placeholder="Enter Promo Code"
+                                            <input type="text" name="coupon" class="form-control rounded-0" placeholder="Enter Promo Code"
                                                    aria-describedby="inputGroupPrepend2" required="">
                                             <div class="input-group-prepend">
                                                 <input type="submit" value="Add"
@@ -138,7 +138,7 @@
                                     </form>
                                 </li>
                                 <li class="list-group-item">
-                                    <strong>Subtotal: <span
+                                    <strong>Total: <span
                                             class="float-right">$@{{ totalPriceWithDiscount }}</span></strong>
                                 </li>
 
