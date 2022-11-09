@@ -88,4 +88,12 @@
             </div>
         </div>
     </div>
+    @push('custom-scripts')
+
+
+        <script>
+            localStorage.clear()
+        </script>
+
+    @endpush
 @endsection
