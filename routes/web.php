@@ -88,6 +88,7 @@ Route::post('checkout', [CheckoutController::class, 'afterPayment'])->name('chec
 
 
 Route::get('/login', [AdminController::class, 'login']);
+Route::get('/admin', [AdminController::class, 'login']);
 Route::get('/admin/login', [AdminController::class, 'login']);
 Route::get('/admin/forgot-password', [AdminController::class, 'forgotPassword']);
 Route::post('/admin/login-check', [AdminController::class, 'loginCheck']);
@@ -174,7 +175,7 @@ Route::group(['middleware' => 'admin'], function () {
 
     //Manage Order
     Route::any('/admin/order/show', [OrderController::class, 'show']);
-    Route::get('/admin/order/details/{invoice}', [OrderController::class, 'orderDetails']);
+    Route::get('/admin/order/details/{id}', [OrderController::class, 'orderDetails']);
     Route::get('/admin/order-invoice/print/{invoice}', [OrderController::class, 'invoicePrint']);
     Route::get('/admin/order-status/history/{id}', [OrderController::class, 'orderDeliveryStatus']);
     Route::post('/admin/order/store', [OrderController::class, 'store']);

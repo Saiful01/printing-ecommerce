@@ -150,7 +150,7 @@
                             <a href="/start-journey" class="btn btn-sm btn-secondary float-left"><span
                                     class="fas fa-undo-alt"></span> Change Uploaded Image</a>
                             <button type="button" class="btn btn-lg btn-success float-right" id="crop">
-                                PREVIEW YOUR PRINT
+                                PREVIEW & Add TO Cart
                             </button>
                         </div>
                     </div>

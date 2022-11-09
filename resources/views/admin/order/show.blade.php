@@ -48,37 +48,49 @@
                             <table class="table align-middle table-nowrap" id="data-table">
                                 <thead class="table-light">
                                 <tr>
+                                    <th class="sort" data-sort="Image">#</th>
                                     <th class="sort" data-sort="Image">Invoice</th>
+                                    <th class="sort" data-sort="Image">Order Date</th>
                                     <th class="sort" data-sort="Details">Customer Name</th>
-                                    <th class="sort" data-sort="Details">Coupon</th>
+                                    {{--<th class="sort" data-sort="Details">Coupon</th>--}}
                                     <th class="sort" data-sort="status">Total Price</th>
-                                    <th class="sort" data-sort="status">Order Status</th>
+                                    <th class="sort" data-sort="status">Discount</th>
+                                    <th class="sort" data-sort="status">Subtotal Price</th>
+                                    <th class="sort" data-sort="status">Payment Status</th>
                                     <th class="sort" data-sort="action">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody class="list form-check-all">
 
-                                {{--@foreach($results as $item)
+                                @php($i=1)
+                                @foreach($order as $item)
                                     <tr>
-                                        <td class="institute">{{$item->title}}</td>
-                                        <td class="institute">{{$item->photo_premium_glossy}}</td>
-                                        <td class="institute">{{$item->canvas}}</td>
-                                        <td class="institute">{{$item->banner}}</td>
-                                        <td class="institute">{{$item->self_adhesive}}</td>
+                                        <td class="institute">{{$i++}}</td>
+                                        <td class="institute">{{$item->invoice}}</td>
+                                        <td class="institute">{{date('d-m-Y', strtotime($item->updated_at))}}</td>
+                                        <td class="institute">{{$item->customer->firstName}} {{$item->customer->lastName}}</td>
+                                        <td class="institute">${{round($item->total_price)}}</td>
+                                        <td class="institute">${{round($item->discount_price)}}</td>
+                                        <td class="institute">${{round($item->sub_price)}}</td>
+
+                                        <td class="institute">@if($item->is_paid ==1) <span class="badge badge-soft-success">Paid</span>
+                                            @else <span class="badge badge-soft-danger">Unpaid</span>@endif</td>
+                                        {{--@if($item->is_paid ==1)
+                                            <td><span class="institute badge badge-success">Paid</span></td>
+                                        @else
+                                            <td><span class="institute badge badge-danger">Unpaid</span></td>
+                                        @endif--}}
                                         <td>
                                             <div class="d-flex gap-2">
-                                                <div class="remove">
-                                                    <a href="/admin/poster/price/delete/{{$item->id}}" onclick="return confirm('Are you sure you want to delete?');" class="btn btn-sm btn-danger remove-item-btn">
-                                                        Remove
+                                                <div class="show">
+                                                    <a href="/admin/order/details/{{$item->id}}"  class="btn btn-sm btn-info show-item-btn">
+                                                        Details
                                                     </a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
-
-
-
-                                @endforeach--}}
+                                @endforeach
                                 </tbody>
                             </table>
 

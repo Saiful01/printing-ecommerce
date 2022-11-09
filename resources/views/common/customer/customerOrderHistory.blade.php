@@ -33,7 +33,7 @@
                                     <th scope="col">Payment Status</th>
                                     <th scope="col">Total Price</th>
                                     <th scope="col">Discount</th>
-                                    <th scope="col">Total Price</th>
+                                    <th scope="col">Subtotal Price</th>
                                     <th scope="col">Order Details</th>
                                 </tr>
                                 </thead>
