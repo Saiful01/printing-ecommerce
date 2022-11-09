@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\CustomerAddress;
+use App\Models\Order;
+use App\Models\OrderDetails;
 use App\Models\Shipping;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -85,7 +87,21 @@ class CustomerController extends Controller
 
     public function customerOrderHistory()
     {
-        return view('common.customer.customerOrderDetails');
+        $customer_id = Auth::guard('customer')->user()->id;
+
+        $order = Order::where('customer_id', $customer_id)->get();
+        //return $order;
+        return view('common.customer.customerOrderHistory')->with('order',$order);
+    }
+
+    public function customerOrderDetails($id)
+    {
+      //  $customer_id = Auth::guard('customer')->user()->id;
+        //return $id;
+
+        $orderItems = OrderDetails::with('product')->where('order_id',$id)->get();
+        //return $orderItems;
+        return view('common.customer.customerOrderDetails')->with('orderItems',$orderItems);
     }
 
     public function customerAddress()

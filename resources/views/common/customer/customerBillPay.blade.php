@@ -61,9 +61,8 @@
                                                 </div>--}}
 
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="shippingPrice" ng-model="shippingPrice"
-                                                           value="{{$ship->Shipping_charge}}" ng-change="deliverCharge(shippingPrice)"
-                                                           id="{{$ship->Shipping_charge}}" checked>
+                                                    <input class="form-check-input" type="radio" name="shippingPrice"
+                                                           value="{{$ship->Shipping_charge}}" id="{{$ship->Shipping_charge}}" checked>
                                                     <label class="form-check-label" for="{{$ship->Shipping_charge}}">
                                                         <p><strong>{{$ship->title}}</strong></p>
                                                         <h3>{{$ship->Shipping_charge}}</h3>

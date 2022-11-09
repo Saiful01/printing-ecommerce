@@ -7,6 +7,7 @@ use App\Models\OrderDetails;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 use Stripe\Stripe;
 use Symfony\Component\Console\Input\Input;
 
@@ -82,11 +83,12 @@ class StripeController extends Controller
                 ]);
                 Payment::create($payment);
 
-                return $request->all();
-                return redirect('/')->with('success', 'Payment Success!');
+                Alert::success('Cart', " Payment Successfully Done");
+                //return $request->all();
+                return redirect('/customer/order/history')->with('success', 'Payment Success!');
 
             } else {
-                return redirect('/')->with('error', 'something went to wrong.');
+                return redirect()->back()->with('error', 'something went to wrong.');
             }
 
         }

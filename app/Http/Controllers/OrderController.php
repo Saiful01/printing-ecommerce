@@ -9,6 +9,8 @@ class OrderController extends Controller
 {
     public function Show()
     {
+        $results = Order::with("orderItems","payment","customer")->orderBy('created_at', 'DESC')->get();
+        return $results;
 
         return view('admin.order.show');
     }

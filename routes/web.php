@@ -66,6 +66,7 @@ Route::any('/customer/login-check', [CustomerController::class, 'loginCheck']);
 Route::group(['prefix' => 'customer', 'middleware' => 'customer'], function () {
     Route::any('/profile', [CustomerController::class, 'customerProfile']);
     Route::any('/order/history', [CustomerController::class, 'customerOrderHistory']);
+    Route::any('/orders-detail/{id}', [CustomerController::class, 'customerOrderDetails']);
     Route::any('/address', [CustomerController::class, 'customerAddress']);
     Route::any('/address/store', [CustomerController::class, 'customerAddressStore']);
     Route::any('/address/show', [CustomerController::class, 'customerAddressShow']);

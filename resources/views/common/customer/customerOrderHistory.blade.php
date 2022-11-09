@@ -8,7 +8,7 @@
                 <ul class="breadcrumbs">
                     <li><a href="/">Home</a></li>
                     <li><span>My account</span></li>
-                    <li><span>Order Details</span></li>
+                    <li><span>Order History</span></li>
                 </ul>
             </div>
         </div>
@@ -27,30 +27,33 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col">Short Details</th>
-                                    <th scope="col">Details</th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Size Details</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Price</th>
+                                    <th scope="col">Order Number</th>
+                                    {{--<th scope="col">Order Details</th>--}}
+                                    <th scope="col">Order Date</th>
+                                    <th scope="col">Payment Status</th>
+                                    <th scope="col">Total Price</th>
+                                    <th scope="col">Discount</th>
+                                    <th scope="col">Total Price</th>
+                                    <th scope="col">Order Details</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @php($i=1)
-                                @foreach($orderItems as $item)
+                                @foreach($order as $item)
                                     <tr>
                                         <td>{{$i++}}</td>
-                                        <td><b>{{$item->product->title}}</b></td>
-                                        <td>{{$item->product->short_details}}</td>
-                                        <td>{{$item->product->details}}</td>
-                                        {{--@if($item->productis_public ==1)
-                                            <td><img src="{{$item->product->featured_image}}" width="80px"></td>
-                                        @endif--}}
-                                        <td class="institute"><img src="{{$item->product->featured_image}}" width="80px"/></td>
-                                        <td>{{$item->size}}</td>
-                                        <td>{{$item->quantity}}</td>
-                                        <td>${{round($item->price)}}</td>
+                                        <td><b>{{$item->invoice}}</b></td>
+                                        {{--<td><a href="cart.html" class="ml-1">View Details</a></td>--}}
+                                        <td>{{date('d-m-Y', strtotime($item->updated_at))}}</td>
+                                        @if($item->is_paid ==1)
+                                            <td><span class="badge badge-success">Paid</span></td>
+                                        @else
+                                            <td><span class="badge badge-danger">Unpaid</span></td>
+                                        @endif
+                                        <td>${{$item->total_price}}</td>
+                                        <td>${{$item->discount_price}}</td>
+                                        <td><span class="color">${{$item->sub_price}}</span></td>
+                                        <td><a href="/customer/orders-detail/{{$item->id}}" class="btn btn--grey btn--sm">Details</a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
