@@ -32,6 +32,11 @@ function getNameFromId($id)
 
     }
 }
+function getIntValue($value)
+{
+
+  return intval($value);
+}
 
 function getTotalDuration($inTime, $outTime)
 {

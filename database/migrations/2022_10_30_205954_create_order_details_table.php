@@ -21,6 +21,8 @@ class CreateOrderDetailsTable extends Migration
             $table->string("size");
             $table->integer("quantity");
             $table->timestamps();
+            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 

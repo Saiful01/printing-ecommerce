@@ -10,4 +10,10 @@ class Order extends Model
     use HasFactory;
     public $timestamps=true;
     protected $guarded=[];
+    public  function orderItems(){
+        return $this->hasMany(OrderDetails::class);
+    }
+    public  function payment(){
+        return $this->belongsTo(Payment::class);
+    }
 }

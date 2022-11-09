@@ -17,11 +17,15 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->unsignedBigInteger("customer_id");
             $table->string("invoice");
-            $table->double("total_price");
+            $table->double("total_price")->default(0);
+            $table->double("sub_price")->default(0);
+            $table->double("discount_price")->default(0);
             $table->string("coupon_code")->nullable();
             $table->double("coupon_value")->default(0);
             $table->boolean("is_paid")->default(0);
             $table->timestamps();
+
+
         });
     }
 

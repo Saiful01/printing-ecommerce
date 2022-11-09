@@ -7,6 +7,7 @@ app.controller('printingCartController', function ($scope, $http, $location) {
     $scope.poster_size = "";
     $scope.total_item = 0;
     $scope.coupon_value = 0;
+    $scope.shipping_charge = 0;
     $scope.quantity = 1;
     $scope.totalPriceWithDiscount = 0;
     $scope.customer_address_type = "Home";
@@ -56,6 +57,14 @@ app.controller('printingCartController', function ($scope, $http, $location) {
     function InitialSize(size) {
         $scope.poster_size = size;
         console.log($scope.poster_size)
+    }
+
+    function deliverCharge(i) {
+        console.log('okace')
+        return;
+        $scope.shipping_charge = value;
+        console.log($scope.shipping_charge)
+
     }
 
 

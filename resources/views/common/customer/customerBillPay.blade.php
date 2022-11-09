@@ -15,7 +15,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <form class="new_order" id="new_order" action="{{url('customer/bill/payment')}}" accept-charset="UTF-8"
+                    <form class="new_order" id="new_order" action="{{url('customer/bill/payment')}}"
+                          accept-charset="UTF-8"
                           method="post">
                         <div class="row mb-4">
                             <div class="col-md-18">
@@ -27,14 +28,16 @@
                                     </div>
                                     <div class="card-body row justify-content-around">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="{{$result->customerAddress->address}}" name="billingAddress"
+                                            <input class="form-check-input" type="radio"
+                                                   value="{{$result->customerAddress->address}}" name="billingAddress"
                                                    id="flexRadioDefault1">
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 {{$result->customerAddress->address}}
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="{{$result->customerAddress->address2}}" name="billingAddress"
+                                            <input class="form-check-input" type="radio"
+                                                   value="{{$result->customerAddress->address2}}" name="billingAddress"
                                                    id="flexRadioDefault2" checked>
                                             <label class="form-check-label" for="flexRadioDefault2">
                                                 {{$result->customerAddress->address2}}
@@ -50,22 +53,23 @@
                                     <div class="card-header">Select Delivery Option</div>
                                     <div class="card-body row">
                                         @foreach($shipping as $ship)
-                                        <div class="col-md-4 text-center delivery_option selected_delivery"
-                                             id="delivery_option_1">
-                                            {{--<div>
-                                                <p><strong>{{$ship->title}}</strong></p>
-                                                <h3>{{$ship->Shipping_charge}}</h3>
-                                            </div>--}}
-
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="shippingPrice" value="{{$ship->Shipping_charge}}"
-                                                       id="{{$ship->Shipping_charge}}" checked>
-                                                <label class="form-check-label" for="{{$ship->Shipping_charge}}">
+                                            <div class="col-md-4 text-center delivery_option selected_delivery"
+                                                 id="delivery_option_1">
+                                                {{--<div>
                                                     <p><strong>{{$ship->title}}</strong></p>
                                                     <h3>{{$ship->Shipping_charge}}</h3>
-                                                </label>
+                                                </div>--}}
+
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="shippingPrice" ng-model="shippingPrice"
+                                                           value="{{$ship->Shipping_charge}}" ng-change="deliverCharge(shippingPrice)"
+                                                           id="{{$ship->Shipping_charge}}" checked>
+                                                    <label class="form-check-label" for="{{$ship->Shipping_charge}}">
+                                                        <p><strong>{{$ship->title}}</strong></p>
+                                                        <h3>{{$ship->Shipping_charge}}</h3>
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div>
                                         @endforeach
                                     </div>
                                 </div>
@@ -104,8 +108,11 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="order_data" value="@{{ cart_products }}">
-                            <button type="submit" class="btn btn-primary">Pay</button>
+                        <input type="hidden" name="products" value="@{{cart_products}}">
+                        <input type="hidden" name="total_price" value="@{{ totalPriceCountAll }}">
+                        <input type="hidden" name="discount_price" value="@{{ discount }}">
+                        <input type="hidden" name="sub_total" value="@{{ totalPriceWithDiscount }}">
+                        <button type="submit" class="btn btn-primary">Pay</button>
                     </form>
                 </div>
                 <div class="col-6">
@@ -118,7 +125,7 @@
                                     Prints: <span class="float-right" ng--bind="total_item"></span>
                                 </li>
                                 <li class="list-group-item">
-                                    Subtotal: <span
+                                    Total: <span
                                         class="float-right"><strong>$@{{ totalPriceCountAll }}</strong></span>
                                 </li>
                                 <li class="list-group-item">
@@ -128,7 +135,8 @@
                                 <li class="list-group-item">
                                     <form action="/carts/add_coupon" method="get">
                                         <div class="input-group add_promo float-right">
-                                            <input type="text" name="coupon" class="form-control rounded-0" placeholder="Enter Promo Code"
+                                            <input type="text" name="coupon" class="form-control rounded-0"
+                                                   placeholder="Enter Promo Code"
                                                    aria-describedby="inputGroupPrepend2" required="">
                                             <div class="input-group-prepend">
                                                 <input type="submit" value="Add"
@@ -138,7 +146,7 @@
                                     </form>
                                 </li>
                                 <li class="list-group-item">
-                                    <strong>Total: <span
+                                    <strong>SubTotal: <span
                                             class="float-right">$@{{ totalPriceWithDiscount }}</span></strong>
                                 </li>
 

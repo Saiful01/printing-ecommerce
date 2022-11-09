@@ -17,6 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger("order_id");
             $table->double("payment_amount")->default(0);
+            $table->foreign('order_id')->references('id')->on('orders');
             $table->timestamps();
         });
     }
