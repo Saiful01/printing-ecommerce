@@ -35,14 +35,13 @@
                                     <div class="flex-shrink-0">
                                         <h5 class="text-info fs-14 mb-0">
                                             <i class=" fs-13 align-middle"></i>
-                                            +16.24 %
+                                            {{$earningDifferenceInpercentage}} %
                                         </h5>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span
-                                                class="counter-value" data-target="559.25">0</span>k
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">$<span>{{$earningCount}}</span>
                                         </h4>
                                         <a href="/admin/order/show" class="text-decoration-underline">View Source</a>
                                     </div>
@@ -69,14 +68,14 @@
                                     <div class="flex-shrink-0">
                                         <h5 class="text-info fs-14 mb-0">
                                             <i class="fs-13 align-middle"></i>
-                                            -3.57 %
+                                            {{$orderDifferenceInpercentage}} %
                                         </h5>
                                     </div>
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span
-                                                class="counter-value" data-target="36894">0</span></h4>
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span>{{$orderCount}}</span>
+                                        </h4>
                                         <a href="/admin/order/show" class="text-decoration-underline">View all
                                             orders</a>
                                     </div>
@@ -144,7 +143,8 @@
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span>{{$wallArtCount}}</span></h4>
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span>{{$wallArtCount}}</span>
+                                        </h4>
                                         <a href="/admin/order/show" class="text-decoration-underline">View all
                                             orders</a>
                                     </div>
@@ -179,9 +179,10 @@
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span>{{$activeCouponCount}}</span></h4>
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                            <span>{{$activeCouponCount}}</span></h4>
                                         <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                            </p>
+                                        </p>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
                                                             <span class="avatar-title bg-danger rounded fs-2">
@@ -244,7 +245,8 @@
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
-                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span>{{$inActiveCouponCount}}</span>
+                                        <h4 class="fs-22 fw-semibold ff-secondary mb-4">
+                                            <span>{{$inActiveCouponCount}}</span>
                                         </h4>
                                         {{-- <a href="#" class="text-decoration-underline">Withdraw money</a>--}}
                                     </div>
@@ -339,9 +341,9 @@
                             <div class="card-header align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Recent Orders</h4>
                                 <div class="flex-shrink-0">
-                                    <button type="button" class="btn btn-soft-info btn-sm shadow-none">
+                                    {{--<button type="button" class="btn btn-soft-info btn-sm shadow-none">
                                         <i class="ri-file-list-3-line align-middle"></i> Generate Report
-                                    </button>
+                                    </button>--}}
                                 </div>
                             </div><!-- end card header -->
 
@@ -350,131 +352,44 @@
                                     <table
                                         class="table table-borderless table-centered align-middle table-nowrap mb-0">
                                         <thead class="text-muted table-light">
-                                        <tr>
-                                            <th scope="col">Order ID</th>
-                                            <th scope="col">Customer</th>
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Amount</th>
-                                            <th scope="col">Status</th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Order ID</th>
+                                                <th class="sort" data-sort="Image">Order Date</th>
+                                                <th scope="col">Customer</th>
+                                                <th scope="col">Amount</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>
-                                                <a href="apps-ecommerce-order-details.html"
-                                                   class="fw-medium link-primary">#VZ2112</a>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 me-2">
-                                                        <img src="assets/images/users/avatar-1.jpg"
-                                                             alt=""
-                                                             class="avatar-xs rounded-circle shadow"/>
-                                                    </div>
-                                                    <div class="flex-grow-1">Alex Smith</div>
-                                                </div>
-                                            </td>
-                                            <td>Clothes</td>
-                                            <td>
-                                                <span class="text-success">$109.00</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-soft-success">Paid</span>
-                                            </td>
-                                        </tr><!-- end tr -->
-                                        <tr>
-                                            <td>
-                                                <a href="apps-ecommerce-order-details.html"
-                                                   class="fw-medium link-primary">#VZ2111</a>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 me-2">
-                                                        <img src="assets/images/users/avatar-2.jpg"
-                                                             alt=""
-                                                             class="avatar-xs rounded-circle shadow"/>
-                                                    </div>
-                                                    <div class="flex-grow-1">Jansh Brown</div>
-                                                </div>
-                                            </td>
-                                            <td>Kitchen Storage</td>
-                                            <td>
-                                                <span class="text-success">$149.00</span>
-                                            </td>
-                                            <td>
-                                                                    <span
-                                                                        class="badge badge-soft-warning">Pending</span>
-                                            </td>
-                                        </tr><!-- end tr -->
-                                        <tr>
-                                            <td>
-                                                <a href="apps-ecommerce-order-details.html"
-                                                   class="fw-medium link-primary">#VZ2109</a>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 me-2">
-                                                        <img src="assets/images/users/avatar-3.jpg"
-                                                             alt=""
-                                                             class="avatar-xs rounded-circle shadow"/>
-                                                    </div>
-                                                    <div class="flex-grow-1">Ayaan Bowen</div>
-                                                </div>
-                                            </td>
-                                            <td>Bike Accessories</td>
-                                            <td>
-                                                <span class="text-success">$215.00</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-soft-success">Paid</span>
-                                            </td>
-                                        </tr><!-- end tr -->
-                                        <tr>
-                                            <td>
-                                                <a href="apps-ecommerce-order-details.html"
-                                                   class="fw-medium link-primary">#VZ2108</a>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 me-2">
-                                                        <img src="assets/images/users/avatar-4.jpg"
-                                                             alt=""
-                                                             class="avatar-xs rounded-circle shadow"/>
-                                                    </div>
-                                                    <div class="flex-grow-1">Prezy Mark</div>
-                                                </div>
-                                            </td>
-                                            <td>Furniture</td>
-                                            <td>
-                                                <span class="text-success">$199.00</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-soft-danger">Unpaid</span>
-                                            </td>
-                                        </tr><!-- end tr -->
-                                        <tr>
-                                            <td>
-                                                <a href="apps-ecommerce-order-details.html"
-                                                   class="fw-medium link-primary">#VZ2107</a>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0 me-2">
-                                                        <img src="assets/images/users/avatar-6.jpg"
-                                                             alt=""
-                                                             class="avatar-xs rounded-circle shadow"/>
-                                                    </div>
-                                                    <div class="flex-grow-1">Vihan Hudda</div>
-                                                </div>
-                                            </td>
-                                            <td>Bags and Wallets</td>
-                                            <td>
-                                                <span class="text-success">$330.00</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-soft-success">Paid</span>
-                                            </td>
-                                        </tr><!-- end tr -->
+
+                                            @php($i=1)
+                                            @foreach($recentOrder as $item)
+                                                <tr>
+                                                    <td>{{$i++}}</td>
+                                                    <td>
+                                                        <a href="/admin/order/details/{{$item->id}}"
+                                                           class="fw-medium link-primary">{{$item->invoice}}</a>
+                                                    </td>
+                                                    <td class="institute">{{date('d-m-Y', strtotime($item->updated_at))}}</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <div
+                                                                class="flex-grow-1">{{$item->customer->firstName}} {{$item->customer->lastName}}</div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span class="text-success">${{round($item->sub_price)}}</span>
+                                                    </td>
+                                                    <td>
+                                                        @if($item->is_paid ==1)
+                                                            <span class="badge badge-soft-success">Paid</span>
+                                                        @else
+                                                            <span class="badge badge-soft-danger">Unpaid</span>
+                                                        @endif
+                                                    </td>
+                                                </tr><!-- end tr -->
+                                            @endforeach
                                         </tbody><!-- end tbody -->
                                     </table><!-- end table -->
                                 </div>

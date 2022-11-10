@@ -10,11 +10,13 @@ use App\Models\Department;
 use App\Models\InOutMonitor;
 use App\Models\Leave;
 use App\Models\LoginHistory;
+use App\Models\Order;
 use App\Models\OutSideVisit;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Intervention\Image\Facades\Image;
@@ -85,6 +87,36 @@ class AdminController extends Controller
         // return $inActiveCouponDifferenceInpercentage;
         //return $inActiveCouponCount;
 
+        //Order Count & Percentage Count
+        $orderCount = Order::count();
+        $orderPreviousMonth = Order::whereMonth('updated_at', now()->month - 1)->count();
+        $orderThisMonth = Order::whereMonth('updated_at', now()->month)->count();
+        if ($orderPreviousMonth > 0) {
+            // If it has decreased then it will give you a percentage with '-'
+            $orderDifferenceInpercentage = ($orderThisMonth - $orderPreviousMonth) * 100 / $orderPreviousMonth;
+        } else {
+            $orderDifferenceInpercentage = $orderThisMonth > 0 ? '100' : '0';
+        }
+        // return $orderDifferenceInpercentage;
+        //return $orderCount;
+
+        //Earning Count & Percentage Count
+        $earningCount = Order::sum('sub_price');;
+        $earningPreviousMonth = Order::whereMonth('updated_at', now()->month - 1)->count();
+        $earningThisMonth = Order::whereMonth('updated_at', now()->month)->count();
+        if ($earningPreviousMonth > 0) {
+            // If it has decreased then it will give you a percentage with '-'
+            $earningDifferenceInpercentage = ($earningThisMonth - $earningPreviousMonth) * 100 / $earningPreviousMonth;
+        } else {
+            $earningDifferenceInpercentage = $earningThisMonth > 0 ? '100' : '0';
+        }
+        // return $earningDifferenceInpercentage;
+        //return $earningCount;
+
+        //Recent Order List
+        $recentOrder = Order::with("customer")->orderBy('created_at', 'DESC')->get();
+        //return $recentOrder;
+
         return view('admin.dashboard.index')
             ->with('customers', $customers)
             ->with('customerDifferenceInpercentage', $customerDifferenceInpercentage)
@@ -94,8 +126,13 @@ class AdminController extends Controller
             ->with('couponDifferenceInpercentage', $couponDifferenceInpercentage)
             ->with('activeCouponCount', $activeCouponCount)
             ->with('activeCouponDifferenceInpercentage', $activeCouponDifferenceInpercentage)
+            ->with('orderCount', $orderCount)
+            ->with('orderDifferenceInpercentage', $orderDifferenceInpercentage)
+            ->with('earningCount', $earningCount)
+            ->with('earningDifferenceInpercentage', $earningDifferenceInpercentage)
             ->with('inActiveCouponCount', $inActiveCouponCount)
-            ->with('inActiveCouponDifferenceInpercentage', $inActiveCouponDifferenceInpercentage);
+            ->with('inActiveCouponDifferenceInpercentage', $inActiveCouponDifferenceInpercentage)
+            ->with('recentOrder', $recentOrder);
 
     }
 
