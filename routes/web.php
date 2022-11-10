@@ -21,6 +21,7 @@ use App\Http\Controllers\WebApiController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use RealRashid\SweetAlert\Facades\Alert;
 
 /*
 |--------------------------------------------------------------------------
@@ -215,6 +216,27 @@ Route::get('/migrate', function () {
     Artisan::call('config:clear');
 
     return "Migrate!";
+
+});
+Route::post('/contact/send', function (\Illuminate\Http\Request $request) {
+    //return $request->all();
+    $name = $request['name'];
+    $lastname = $request['lastName'];
+    $phone = $request['Phone'];
+    $email = $request['email'];
+    $message = $request['message'];
+
+
+    $msg = "Name : $name,\n Last name: $lastname ,\n Phone: $phone ,\n Email : $email ,\n Message : $message";
+
+
+    try {
+        mail("saiful013101@gmail.com", "Poster print store", $msg);
+        Alert::success('Congrats', 'Your Message Successfully Send');
+    }catch (\Exception $exception){
+        return $exception->getMessage();
+    }
+
 
 });
 

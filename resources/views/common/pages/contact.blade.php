@@ -70,7 +70,8 @@
                             because it is pain, but because occasionally in which toil and pain
                         </div>
                     </div>
-                    <form data-toggle="validator" class="contact-form" id="contactForm">
+                    <form  action="/contact/send" class="contact-form"  method="post">
+                        @csrf
                         <div class="form-confirm">
                             <div class="success-confirm">
                                 Thanks! Your message has been sent. We will get back to you soon!
