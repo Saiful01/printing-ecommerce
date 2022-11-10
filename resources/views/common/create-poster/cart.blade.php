@@ -82,7 +82,7 @@
                                     Prints: <span class="float-right" ng--bind="total_item"></span>
                                 </li>
                                 <li class="list-group-item">
-                                    Subtotal: <span
+                                    Total: <span
                                         class="float-right"><strong>$@{{ totalPriceCountAll }}</strong></span>
                                 </li>
                                 <li class="list-group-item">

@@ -176,6 +176,7 @@ Route::group(['middleware' => 'admin'], function () {
     //Manage Order
     Route::any('/admin/order/show', [OrderController::class, 'show']);
     Route::get('/admin/order/details/{id}', [OrderController::class, 'orderDetails']);
+    Route::get('/admin/order-status-update/{id}/{status}', [OrderController::class, 'orderStatusUpdate']);
     Route::get('/admin/order-invoice/print/{invoice}', [OrderController::class, 'invoicePrint']);
     Route::get('/admin/order-status/history/{id}', [OrderController::class, 'orderDeliveryStatus']);
     Route::post('/admin/order/store', [OrderController::class, 'store']);

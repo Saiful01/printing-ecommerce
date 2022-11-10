@@ -20,6 +20,33 @@ function getPosterSize()
 {
     return PosterPrint::all();
 }
+function getOrderStatus()
+{
+  return  $array=[
+        '1'=> "Pending",
+        '2'=> "Accepted",
+        '3'=> "Processing",
+        '4'=> "delivered",
+        '5'=> "Canceled",
+        '6'=> "Refund",
+    ];
+}
+function getOrderStatusIdToValue($id)
+{
+    if ($id == null) {
+        return "-";
+    }
+    $array=[
+        '1'=> "Pending",
+        '2'=> "Accepted",
+        '3'=> "Processing",
+        '4'=> "delivered",
+        '5'=> "Canceled",
+        '6'=> "Refund",
+    ];
+    return $array[$id];
+
+}
 
 function getNameFromId($id)
 {
@@ -34,8 +61,14 @@ function getNameFromId($id)
 }
 function getIntValue($value)
 {
+    return $value;
 
   return intval($value);
+}
+function getIntDecimalValue($value)
+{
+  return  number_format((float)$value, 2, '.', '');
+
 }
 
 function getTotalDuration($inTime, $outTime)

@@ -56,6 +56,7 @@
                                         <th class="sort" data-sort="status">Details</th>
                                         <th class="sort" data-sort="status">Tags</th>
                                         <th class="sort" data-sort="status">Image</th>
+                                        <th class="sort" data-sort="status">Download image</th>
                                         <th class="sort" data-sort="status">Size Details</th>
                                         <th class="sort" data-sort="status">Quantity</th>
                                         <th class="sort" data-sort="action">Price</th>
@@ -73,6 +74,7 @@
                                             <td class="institute">{{$item->product->details}}</td>
                                             <td class="institute">{{$item->product->tag}}</td>
                                             <td class="institute"><img src="{{$item->product->featured_image}}" width="80px"></td>
+                                            <td class="institute"><a href="{{$item->product->featured_image}}" download="">Download</a></td>
                                             <td class="institute">{{$item->size}}</td>
                                             <td class="institute">{{$item->quantity}}</td>
                                             <td class="institute">${{round($item->price)}}</td>

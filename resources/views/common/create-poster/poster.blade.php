@@ -371,6 +371,8 @@
                                 },
 
                                 success: function (response) {
+                                   // window.location('/cart')
+                                    window.location.href="/cart"
 
                                     console.log("success");
                                 },

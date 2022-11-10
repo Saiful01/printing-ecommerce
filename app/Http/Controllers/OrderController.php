@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class OrderController extends Controller
 {
@@ -22,6 +23,19 @@ class OrderController extends Controller
        // return $orderIteams;
 
         return view('admin.order.showOrderDetails')->with('orderIteams',$orderIteams);
+    }
+    public function orderStatusUpdate($id,$status)
+    {
+        try {
+            Order::where('id', $id)->update([
+                'order_status'=> $status
+            ]);
+            Alert::success('Order Status ! ', " Successfully Updated ");
+            return back();
+        } catch (Exception $exception) {
+            Alert::error('Sorry! ', $exception->getMessage());
+            return back();
+        }
     }
 
     public function create()

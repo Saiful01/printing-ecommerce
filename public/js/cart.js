@@ -65,14 +65,17 @@ app.controller('printingCartController', function ($scope, $http, $location) {
         if (cartProductList !== null && cartProductList !== undefined) {
             cartProductList = JSON.parse(cartProductList);
             for (var cartProduct of cartProductList) {
-                totalPrice = totalPrice + parseInt(cartProduct.price) * parseInt(cartProduct.quantity);
+                totalPrice = totalPrice + parseFloat(cartProduct.price) * parseFloat(cartProduct.quantity);
 
             }
         }
-        $scope.totalPriceCountAll = totalPrice;
+        $scope.totalPriceCountAll = parseFloat(totalPrice).toFixed(2);
         if (totalPrice > 200) {
             $scope.discount = $scope.totalPriceCountAll * .10;
-            $scope.totalPriceWithDiscount = totalPrice - $scope.discount;
+            $scope.totalPriceWithDiscount = parseFloat(totalPrice - $scope.discount).toFixed(2);
+
+        }else {
+            $scope.totalPriceWithDiscount = parseFloat(totalPrice).toFixed(2) ;
 
         }
 

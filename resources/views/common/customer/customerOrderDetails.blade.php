@@ -12,16 +12,16 @@
                 </ul>
             </div>
         </div>
-        <div class="holder">
+        <div class="">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-4 aside aside--left">
+                    <div class="col-md-2 aside aside--left">
                         <div class="list-group">
                             <a href="/customer/order/history" class="list-group-item active">My Order History</a>
                             <a href="/customer/logout" class="list-group-item">Logout</a>
                         </div>
                     </div>
-                    <div class="col-md-12 aside">
+                    <div class="col-md-13 aside">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped table-order-history">
                                 <thead>

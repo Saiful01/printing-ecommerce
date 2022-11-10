@@ -57,6 +57,7 @@
                                     <th class="sort" data-sort="status">Discount</th>
                                     <th class="sort" data-sort="status">Subtotal Price</th>
                                     <th class="sort" data-sort="status">Payment Status</th>
+                                    <th class="sort" data-sort="status">Order Status</th>
                                     <th class="sort" data-sort="action">Action</th>
                                 </tr>
                                 </thead>
@@ -75,6 +76,8 @@
 
                                         <td class="institute">@if($item->is_paid ==1) <span class="badge badge-soft-success">Paid</span>
                                             @else <span class="badge badge-soft-danger">Unpaid</span>@endif</td>
+                                        <td class="institute"> <span class="badge badge-soft-success">{{getOrderStatusIdToValue($item->order_status)}}</span>
+                                            </td>
                                         {{--@if($item->is_paid ==1)
                                             <td><span class="institute badge badge-success">Paid</span></td>
                                         @else
@@ -86,6 +89,19 @@
                                                     <a href="/admin/order/details/{{$item->id}}"  class="btn btn-sm btn-info show-item-btn">
                                                         Details
                                                     </a>
+                                                </div>
+                                                <div class="show">
+                                                    <button id="btnGroupVerticalDrop1" type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Status
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="btnGroupVerticalDrop1">
+                                                        @foreach(getOrderStatus() as $key=>$value)
+                                                        <a class="dropdown-item" href="/admin/order-status-update/{{$item->id}}/{{$key}}">{{$value}}</a>
+                                                        @endforeach
+
+
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </td>

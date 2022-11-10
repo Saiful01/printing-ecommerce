@@ -7,7 +7,7 @@
         }
     </style>
 
-    <div class="page-content">
+    <div class="page-content" ng-controller="printingCartController">
         <div class="holder breadcrumbs-wrap mt-0">
             <div class="container">
                 <ul class="breadcrumbs">
@@ -16,7 +16,7 @@
                 </ul>
             </div>
         </div>
-        <div class="holder holder-mt-medium" ng-controller="printingCartController">
+        <div class="holder holder-mt-medium" >
             <div class="container">
                 <!-- Two columns -->
                 <!-- Page Title -->

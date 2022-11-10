@@ -289,7 +289,7 @@ class AdminController extends Controller
 
     public function customersList()
     {
-        $results = Customer::with('customerAddress')->where('id',Auth::guard('customer')->user()->id)->get();
+        $results = Customer::with('customerAddress')->get();
         // return $results;
         return view('admin.customers.index')->with('results',$results);
     }

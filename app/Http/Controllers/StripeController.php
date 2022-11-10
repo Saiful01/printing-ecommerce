@@ -25,9 +25,10 @@ class StripeController extends Controller
             'expiry_year' => 'required',
             'cvv' => 'required',
         ]);
-        $request['sub_total']=intval($request['sub_total']);
 
-        $orders = ([
+        $request['sub_total']=getIntDecimalValue($request['sub_total']);
+
+         $orders = ([
             'customer_id' => Auth::guard('customer')->user()->id,
             'invoice' => uniqid(),
             'total_price' => $request['total_price'],

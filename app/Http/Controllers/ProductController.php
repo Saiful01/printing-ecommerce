@@ -64,7 +64,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $results = Product::orderBy('created_at', 'DESC')->get();
+        $results = Product::where('is_public',1)->orderBy('created_at', 'DESC')->get();
         //return $results;
         return view("admin.wallPoster.show")->with('results', $results);
     }

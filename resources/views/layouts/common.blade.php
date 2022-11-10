@@ -53,10 +53,10 @@
     </style>
 
 </head>
-<body class="has-smround-btns has-loader-bg equal-height" ng-app="myApp">
+<body class="has-smround-btns has-loader-bg equal-height" ng-app="myApp" ng-controller="printingCartController">
 <!--header-->
 <header class="hdr-wrap">
-    <div class="hdr-content hdr-content-sticky" ng-controller="printingCartController">
+    <div class="hdr-content hdr-content-sticky" >
         <div class="container">
             <div class="row">
                 <div class="col-auto show-mobile">
@@ -87,7 +87,7 @@
                             <a href="/cart" class="dropdn-link only-icon wishlist-link ">
                                 <i class="icon-basket"></i><span
                                     class="dropdn-link-txt">Wishlist</span><span
-                                    class="minicart-qty" ng-bind="total_item"></span>
+                                    class="minicart-qty" ng-bind="total_item">@{{ total_item }}</span>
                             </a>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
             </div>
         </div>
     </div>
-    <div class="hdr" ng-controller="printingCartController">
+    <div class="hdr" >
         <div class="hdr-topline hdr-topline--light js-hdr-top">
             <div class="container">
                 <div class="row flex-nowrap">
@@ -243,7 +243,7 @@
                                 <a href="/cart" class="dropdn-link only-icon wishlist-link ">
                                     <i class="icon-basket"></i><span
                                         class="dropdn-link-txt">Wishlist</span><span
-                                        class="minicart-qty" ng-bind="total_item"></span>
+                                        class="minicart-qty" ng-bind="total_item">@{{ total_item }}</span>
                                 </a>
 
                             </div>
