@@ -18,7 +18,7 @@ class StripeController extends Controller
 }
     public function payStripe(Request $request)
     {
-     //return $request->all();
+        //return $request->all();
         $this->validate($request, [
             'card_no' => 'required',
             'expiry_month' => 'required',
@@ -28,7 +28,7 @@ class StripeController extends Controller
 
         $request['sub_total']=getIntDecimalValue($request['sub_total']);
 
-         $orders = ([
+        $orders = ([
             'customer_id' => Auth::guard('customer')->user()->id,
             'invoice' => uniqid(),
             'total_price' => $request['total_price'],
@@ -38,9 +38,9 @@ class StripeController extends Controller
         ]);
         $order_id= Order::insertGetId($orders);
 
-       foreach (json_decode($request->products, true) as $item) {
+        foreach (json_decode($request->products, true) as $item) {
 
-          // return $item;
+            // return $item;
 
             $order_item = ([
                 'order_id' => $order_id,
@@ -69,7 +69,7 @@ class StripeController extends Controller
             $charge = \Stripe\Charge::create([
                 'card' => $response['id'],
                 'currency' => 'USD',
-                'amount' =>  $request['sub_total'],
+                'amount' =>  round($request['sub_total']),
                 'description' => 'wallet',
             ]);
 

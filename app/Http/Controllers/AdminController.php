@@ -101,7 +101,8 @@ class AdminController extends Controller
         //return $orderCount;
 
         //Earning Count & Percentage Count
-        $earningCount = Order::sum('sub_price');;
+        $earningCountF = Order::sum('sub_price');
+        $earningCount = round($earningCountF);
         $earningPreviousMonth = Order::whereMonth('updated_at', now()->month - 1)->count();
         $earningThisMonth = Order::whereMonth('updated_at', now()->month)->count();
         if ($earningPreviousMonth > 0) {

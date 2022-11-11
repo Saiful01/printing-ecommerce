@@ -25,7 +25,7 @@ class CustomerController extends Controller
     {
         //return $request->all();
 
-        if (Auth::guard('customer')->attempt(['email' => $request['email'], 'password' => $request['password']], /*$remember*/)) {
+        if (Auth::guard('customer')->attempt(['email' => $request['email'], 'password' => $request['password']])) {
             if($request->previous_url != null){
                 return \redirect($request['previous_url']);
             }

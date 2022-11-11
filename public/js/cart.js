@@ -71,11 +71,11 @@ app.controller('printingCartController', function ($scope, $http, $location) {
         }
         $scope.totalPriceCountAll = parseFloat(totalPrice).toFixed(2);
         if (totalPrice > 200) {
-            $scope.discount = parseFloat($scope.totalPriceCountAll * .10).toFixed(2);
-            $scope.totalPriceWithDiscount = parseFloat(totalPrice - $scope.discount).toFixed(2);
+            $scope.discount = parseInt($scope.totalPriceCountAll * .10);
+            $scope.totalPriceWithDiscount = parseInt(totalPrice - $scope.discount);
 
         }else {
-            $scope.totalPriceWithDiscount = parseFloat(totalPrice).toFixed(2) ;
+            $scope.totalPriceWithDiscount = parseInt(totalPrice) ;
 
         }
 
@@ -295,4 +295,5 @@ app.controller('printingCartController', function ($scope, $http, $location) {
         });
     }
 });
+
 

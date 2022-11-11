@@ -67,7 +67,7 @@
                                                     {{--<p id="new_price{{$poster->id}}">$ {{$poster->price}}</p>--}}
 
                                                     <h2 class="prd-title"><a
-                                                            href="/product-details/{{$poster->id}}">{{$poster->title}}</a>
+                                                            href="/poster-details/{{$poster->id}}">{{$poster->title}}</a>
                                                     </h2>
 
                                                     <b><p style="margin-left: 110px;" id="new_price{{$poster->id}}">$ {{$poster->price}}</p></b>
