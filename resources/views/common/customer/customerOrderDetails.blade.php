@@ -50,7 +50,7 @@
                                         <td class="institute"><img src="{{$item->product->featured_image}}" width="80px"/></td>
                                         <td>{{$item->size}}</td>
                                         <td>{{$item->quantity}}</td>
-                                        <td>${{round($item->price)}}</td>
+                                        <td>${{$item->price}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

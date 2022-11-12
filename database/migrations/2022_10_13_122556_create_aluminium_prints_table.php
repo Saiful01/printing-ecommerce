@@ -17,6 +17,7 @@ class CreateAluminiumPrintsTable extends Migration
             $table->id();
             $table->string("title");
             $table->double("price");
+            $table->string("value")->nullable();
             $table->timestamps();
         });
     }

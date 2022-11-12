@@ -10,8 +10,8 @@
 
     <?php
 
-    $name = time();
-    $image = time() . ".png";
+    $name = $image_name;
+    $image = $name . ".png";
     ?>
 
     <div class="page-content">
@@ -225,10 +225,8 @@
             }
 
             $scope.changePosterSize = function () {
-
+                console.log(poster_array);
                 let data = poster_array.find((poster) => poster.id == $scope.poster_size);
-                $scope.setRatio(data);
-
                 if ($scope.paper_type == 1) {
                     $scope.price = data['photo_premium_glossy'];
                     $scope.cart_poster_size = data['title'];
@@ -257,195 +255,21 @@
             }
 
             $scope.changeAluminium = function () {
-
                 let al_array = <?php echo json_encode($aluminium_print) ?>;
                 let data = al_array.find((poster) => poster.id == $scope.poster_size);
                 console.log(data["price"]);
 
                 $scope.price = data["price"];
-                $scope.setRatio(data);
             }
             $scope.changeFoamBoard = function () {
                 let array = <?php echo json_encode($foam_board) ?>;
-                console.log("Foam Board:" + $scope.poster_size);
+                console.log($scope.poster_size);
+
                 let data = array.find((poster) => poster.id == $scope.poster_size);
-                $scope.setRatio(data);
-
                 $scope.price = data['price'];
-
             }
-
-            $scope.changeCropSize = function () {
-
-                var image = document.querySelector('#image');
-                var minAspectRatio = 1;
-                var maxAspectRatio = 1;
-                var previews = document.querySelectorAll('.preview');
-                var previewReady = false;
-
-
-                var cropper = new Cropper(image, {
-
-                    //aspectRatio: $scope.custom_ratio,
-                    aspectRatio: 1/1,
-                    ready: function () {
-                        var cropper = this.cropper;
-                        var containerData = cropper.getContainerData();
-                        var cropBoxData = cropper.getCropBoxData();
-                        var aspectRatio = cropBoxData.width / cropBoxData.height;
-                        var newCropBoxWidth;
-
-                        if (aspectRatio < minAspectRatio || aspectRatio > maxAspectRatio) {
-                            newCropBoxWidth = cropBoxData.height * ((minAspectRatio + maxAspectRatio) / 2);
-
-                            cropper.setCropBoxData({
-                                left: (containerData.width - newCropBoxWidth) / 2,
-                                width: newCropBoxWidth
-                            });
-                        }
-                    },
-
-                    cropmove: function () {
-                        var cropper = this.cropper;
-                        var cropBoxData = cropper.getCropBoxData();
-                        var aspectRatio = cropBoxData.width / cropBoxData.height;
-
-                        /* if (aspectRatio < minAspectRatio) {
-                             cropper.setCropBoxData({
-                                 width: cropBoxData.height * minAspectRatio
-                             });
-                         } else if (aspectRatio > maxAspectRatio) {
-                             cropper.setCropBoxData({
-                                 width: cropBoxData.height * maxAspectRatio
-                             });
-                         }*/
-                    },
-
-
-                });
-
-
-                var result = document.getElementById('result');
-                document.getElementById('crop').addEventListener('click', function () {
-                    var initialAvatarURL;
-                    var canvas;
-
-                    result.innerHTML = '';
-                    result.appendChild(cropper.getCroppedCanvas());
-
-                    if (cropper) {
-                        canvas = cropper.getCroppedCanvas({
-                            width: 100,
-                            height: 160,
-                        });
-
-                        canvas.toBlob(function (blob) {
-                            var formData = new FormData();
-                            formData.append('avatar', blob, 'avatar.jpg');
-                            formData.append('name', {{$name}});
-                            formData.append('title', $scope.cart_product_name + " " + $scope.cart_product_type);
-                            formData.append('price', $scope.price);
-                            formData.append('featured_image', "/uploads/" + $scope.preview + ".png");
-                            formData.append('size', $scope.cart_poster_size);
-
-                            $.ajax('/upload/crop', {
-                                method: 'POST',
-                                data: formData,
-                                processData: false,
-                                contentType: false,
-
-                                xhr: function () {
-                                    var xhr = new XMLHttpRequest();
-
-                                    xhr.upload.onprogress = function (e) {
-                                        var percent = '0';
-                                        var percentage = '0%';
-
-                                        if (e.lengthComputable) {
-                                            percent = Math.round((e.loaded / e.total) * 100);
-                                            percentage = percent + '%';
-
-                                        }
-                                    };
-                                    return xhr;
-                                },
-
-                                success: function (response) {
-                                    // window.location('/cart')
-                                    window.location.href = "/cart"
-
-                                    console.log("success");
-                                },
-
-                                error: function () {
-                                    console.log("errr");
-                                },
-
-                                complete: function (response) {
-
-                                    response.responseText = JSON.parse(response.responseText);
-                                    let id = response.responseText['id'];
-                                    let image = response.responseText['image'];
-
-                                    //Add to Cart Function
-                                    let flag = false;
-                                    let tempProduct = {
-                                        "id": id,
-                                        "title": $scope.cart_product_name + "(" + $scope.cart_product_type + ")",
-                                        "price": $scope.price,
-                                        "featured_image": "/uploads/" + image,
-                                        "quantity": 1,
-                                        "size": $scope.cart_poster_size,
-                                    };
-                                    let cartProductList = localStorage.getItem('cart_product');
-                                    if (cartProductList !== null && cartProductList !== undefined) {
-                                        cartProductList = JSON.parse(cartProductList);
-
-                                        if (cartProductList.length <= 0) {
-                                            //Nothing
-                                        } else {
-                                            for (var cartProduct of cartProductList) {
-                                                if (cartProduct.id === id) {
-                                                    cartProduct.quantity += 1;
-                                                    flag = true;
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                    } else {
-                                        cartProductList = [];
-                                    }
-
-                                    if (!flag) {
-                                        cartProductList.push(tempProduct);
-                                        messageSuccess("Product added to cart")
-                                    } else {
-                                        messageSuccess("Product added to cart")
-                                    }
-                                    localStorage.setItem('cart_product', JSON.stringify(cartProductList));
-
-                                    console.log($scope.product_type);
-
-                                },
-                            });
-                        });
-                    }
-                });
-
-            }
-
-
-            $scope.setRatio = function (poster) {
-
-                let list = poster['title'].split('X');
-                $scope.custom_ratio = list[0] / list[1];
-                console.log($scope.custom_ratio);
-                $scope.changeCropSize();
-            };
-
 
             $scope.changePosterSize();
-
             $scope.changeImage = function (preview) {
                 $scope.preview = preview;
                 $scope.hhh = "1111";
@@ -463,7 +287,7 @@
 
 
                 var cropper = new Cropper(image, {
-                    aspectRatio: $scope.custom_ratio,
+                    /* aspectRatio: 18 / 12,*/
                     ready: function () {
                         var cropper = this.cropper;
                         var containerData = cropper.getContainerData();
@@ -486,15 +310,15 @@
                         var cropBoxData = cropper.getCropBoxData();
                         var aspectRatio = cropBoxData.width / cropBoxData.height;
 
-                        /* if (aspectRatio < minAspectRatio) {
-                             cropper.setCropBoxData({
-                                 width: cropBoxData.height * minAspectRatio
-                             });
-                         } else if (aspectRatio > maxAspectRatio) {
-                             cropper.setCropBoxData({
-                                 width: cropBoxData.height * maxAspectRatio
-                             });
-                         }*/
+                        if (aspectRatio < minAspectRatio) {
+                            cropper.setCropBoxData({
+                                width: cropBoxData.height * minAspectRatio
+                            });
+                        } else if (aspectRatio > maxAspectRatio) {
+                            cropper.setCropBoxData({
+                                width: cropBoxData.height * maxAspectRatio
+                            });
+                        }
                     },
 
 
@@ -518,12 +342,16 @@
                         canvas.toBlob(function (blob) {
                             var formData = new FormData();
                             formData.append('avatar', blob, 'avatar.jpg');
-                            formData.append('name', {{$name}});
+                            formData.append('name', '{{$name}}');
                             formData.append('title', $scope.cart_product_name + " " + $scope.cart_product_type);
                             formData.append('price', $scope.price);
-                            formData.append('featured_image', "/uploads/" + $scope.preview + ".png");
+                            formData.append('featured_image', "/uploads/" + '{{$name}}' + ".png");
                             formData.append('size', $scope.cart_poster_size);
 
+                            console.log('{{$name}}');
+                            console.log("/uploads/" + '{{$name}}' + ".png");
+
+                            //return;
                             $.ajax('/upload/crop', {
                                 method: 'POST',
                                 data: formData,
@@ -546,7 +374,9 @@
                                     return xhr;
                                 },
 
+
                                 success: function (response) {
+
                                     // window.location('/cart')
                                     window.location.href = "/cart"
 
@@ -608,7 +438,6 @@
                     }
                 });
             });
-
 
             function messageError(message) {
                 toastr.warning(message, 'Failed')

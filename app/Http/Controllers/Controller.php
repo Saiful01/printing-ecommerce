@@ -44,7 +44,8 @@ class Controller extends BaseController
             ->with("poster_print", $poster_print)
             ->with("aluminium_print", $aluminium_print)
             ->with("foam_board", $foam_board)
-            ->with("temporary_image", $temporary_image);
+            ->with("temporary_image", $temporary_image)
+            ->with("image_name", uniqid());
     }
 
     public function wallArtPoster()

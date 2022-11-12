@@ -60,13 +60,25 @@
                                                     <h3>{{$ship->Shipping_charge}}</h3>
                                                 </div>--}}
 
-                                                <div class="form-check" ng-click="changeDeliveryCharge({{$ship->Shipping_charge}})">
-                                                    <input class="form-check-input" type="radio" name="shippingPrice"
-                                                           value="{{$ship->Shipping_charge}}" id="{{$ship->Shipping_charge}}" checked>
+                                                <div class="form-check">
+                                                   {{-- <input class="form-check-input" type="radio" name="shippingPrice"
+                                                           value="{{$ship->Shipping_charge}}" id="{{$ship->Shipping_charge}}" checked ng-click="changeDeliveryCharge({{$ship->Shipping_charge}})">
                                                     <label class="form-check-label" for="{{$ship->Shipping_charge}}">
                                                         <p><strong>{{$ship->title}}</strong></p>
                                                         <h3>{{$ship->Shipping_charge}}</h3>
-                                                    </label>
+                                                    </label>--}}
+
+
+                                                    <div class="form-check">
+                                                        <input type="radio" class="form-check-input" id="{{$ship->id}}" name="optradio" value="{{$ship->Shipping_charge}}" ng-change="changeDeliveryCharge({{$ship->Shipping_charge}})" ng-model="myValue">
+                                                        <label class="form-check-label" for="{{$ship->id}}">
+                                                            <p><strong>{{$ship->title}}</strong></p>
+                                                            <h3>{{$ship->Shipping_charge}}</h3>
+                                                        </label>
+                                                    </div>
+
+
+
                                                 </div>
                                             </div>
                                         @endforeach
@@ -121,7 +133,7 @@
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    Prints: <span class="float-right" ng--bind="total_item"></span>
+                                    Prints: <span class="float-right" ng-bind="total_item"></span>
                                 </li>
                                 <li class="list-group-item">
                                     Total: <span

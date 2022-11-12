@@ -67,6 +67,7 @@ function getIntValue($value)
 }
 function getIntDecimalValue($value)
 {
+    return intval ($value* 100);
   return  number_format((float)$value, 2, '.', '');
 
 }

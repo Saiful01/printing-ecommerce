@@ -9,13 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Stripe\Stripe;
-use Symfony\Component\Console\Input\Input;
 
 class StripeController extends Controller
-{public function stripe()
 {
-    return view('stripe');
-}
+    public function stripe()
+    {
+        return view('stripe');
+    }
+
     public function payStripe(Request $request)
     {
         //return $request->all();
@@ -26,7 +27,7 @@ class StripeController extends Controller
             'cvv' => 'required',
         ]);
 
-        $request['sub_total']=getIntDecimalValue($request['sub_total']);
+        $stripe_price = getIntDecimalValue($request['sub_total']);
 
         $orders = ([
             'customer_id' => Auth::guard('customer')->user()->id,
@@ -36,7 +37,7 @@ class StripeController extends Controller
             'sub_price' => $request['sub_total'],
 
         ]);
-        $order_id= Order::insertGetId($orders);
+        $order_id = Order::insertGetId($orders);
 
         foreach (json_decode($request->products, true) as $item) {
 
@@ -53,48 +54,58 @@ class StripeController extends Controller
         }
         $stripe_obj = new Stripe();
         $stripe = $stripe_obj->setApiKey('sk_test_51M009nCHxrrecZpaAsFzw9oYf3MDtnEFWfY45HnTBGyhpbkG09lQ6xvNXE61rBAE598wiZMXIxOory16DeEwddSz00UoIPq5C4');
-        //$stripe = Stripe\Stripe::setApiKey(env(''));
+
+        ## Step1: Create Token ##
         try {
             $response = \Stripe\Token::create(array(
                 "card" => array(
-                    "number"    => $request->input('card_no'),
+                    "number" => $request->input('card_no'),
                     "exp_month" => $request->input('expiry_month'),
-                    "exp_year"  => $request->input('expiry_year'),
-                    "cvc"       => $request->input('cvv'),
+                    "exp_year" => $request->input('expiry_year'),
+                    "cvc" => $request->input('cvv'),
 
                 )));
-            if (!isset($response['id'])) {
-                return redirect()->route('/bill/pay');
-            }
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+            return redirect()->back();
+        }
+
+        ## Step2: Payment Start ##
+        try {
             $charge = \Stripe\Charge::create([
                 'card' => $response['id'],
                 'currency' => 'USD',
-                'amount' =>  round($request['sub_total']),
+                'amount' => $stripe_price,
                 'description' => 'wallet',
             ]);
 
-            if($charge['status'] == 'succeeded') {
-                Order::where('id',$order_id)->update([
-                    'is_paid'=>true
-                ]);
-                $payment = ([
-                    'order_id' => $order_id,
-                    'payment_amount' => $request['sub_total'],
-
-                ]);
-                Payment::create($payment);
-
-                Alert::success('Cart', " Payment Successfully Done");
-                //return $request->all();
-                return redirect('/customer/order/history')->with('success', 'Payment Success!');
-
-            } else {
-                return redirect()->back()->with('error', 'something went to wrong.');
+            if ($charge['status'] == 'succeeded') {
+                $status=true;
+            }else{
+                $status=false;
             }
 
-        }
-        catch (Exception $e) {
+            ## Step2: Update Payment status ##
+            Order::where('id', $order_id)->update([
+                'is_paid' => $status,
+            ]);
+
+
+            $payment = ([
+                'order_id' => $order_id,
+                'payment_amount' => $request['sub_total'],
+                'details'=>json_encode($charge),
+            ]);
+            Payment::create($payment);
+
+            Alert::success('Cart', " Payment Successfully Done");
+            //return $request->all();
+            return redirect('/customer/order/history')->with('success', 'Payment Success!');
+
+        } catch (\Exception $e) {
             return $e->getMessage();
+            return redirect()->back();
         }
 
     }

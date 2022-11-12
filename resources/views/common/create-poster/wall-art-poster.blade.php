@@ -81,9 +81,7 @@
                                                                     required>
                                                                 <option value="">Select Size</option>
                                                                 @foreach($poster_size as $size)
-                                                                    <option value="{{$size->title}}">"{{$size->title}}
-                                                                        "
-                                                                    </option>
+                                                                    <option value="{{$size->title}}" {{$size->value}}>{{$size->title}}</option>
                                                                 @endforeach
                                                             </select>
                                                         </center>

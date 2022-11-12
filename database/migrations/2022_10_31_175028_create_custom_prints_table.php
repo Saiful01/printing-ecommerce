@@ -21,6 +21,7 @@ class CreateCustomPrintsTable extends Migration
             $table->double("canvas");
             $table->double("banner");
             $table->double("self_adhesive");
+            $table->string("value")->nullable();
             $table->timestamps();
         });
     }

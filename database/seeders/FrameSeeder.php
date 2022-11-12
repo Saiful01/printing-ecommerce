@@ -58,6 +58,7 @@ class FrameSeeder extends Seeder
         ]);
 
         PosterPrint::create([
+            'value' => "",
             "title" => '12 X 18',
             "photo_premium_glossy" => '10.48',
             "canvas" => '32.38',
@@ -66,14 +67,23 @@ class FrameSeeder extends Seeder
         ]);
 
         PosterPrint::create([
+            'value' => "",
             "title" => '16 X 20',
             "photo_premium_glossy" => '15.26',
             "canvas" => '42.24',
             "banner" => '35.20',
             "self_adhesive" => '20.57',
         ]);
-
         PosterPrint::create([
+            'value' => "",
+            "title" => '16 X 20',
+            "photo_premium_glossy" => '15.26',
+            "canvas" => '42.24',
+            "banner" => '35.20',
+            "self_adhesive" => '20.57',
+        ]);
+        PosterPrint::create([
+            'value' => "",
             "title" => '16 X 24',
             "photo_premium_glossy" => '17.27',
             "canvas" => '46.06',
@@ -81,6 +91,7 @@ class FrameSeeder extends Seeder
             "self_adhesive" => '22.40',
         ]);
         PosterPrint::create([
+            'value' => "",
             "title" => '18 X 24',
             "photo_premium_glossy" => '19.42',
             "canvas" => '51.80',
@@ -88,6 +99,7 @@ class FrameSeeder extends Seeder
             "self_adhesive" => '25.20',
         ]);
         PosterPrint::create([
+            'value' => "",
             "title" => '20 X 30',
             "photo_premium_glossy" => '21.60',
             "canvas" => '57.02',
@@ -95,6 +107,7 @@ class FrameSeeder extends Seeder
             "self_adhesive" => '28.05',
         ]);
         PosterPrint::create([
+            'value' => "",
             "title" => '24 X 32',
             "photo_premium_glossy" => '23.96',
             "canvas" => '70.04',
@@ -102,6 +115,7 @@ class FrameSeeder extends Seeder
             "self_adhesive" => '34.47',
         ]);
         PosterPrint::create([
+            'value' => "selected",
             "title" => '24 X 36 Best Value!',
             "photo_premium_glossy" => '18.99',
             "canvas" => '76.73',
@@ -109,6 +123,7 @@ class FrameSeeder extends Seeder
             "self_adhesive" => '37.32',
         ]);
         PosterPrint::create([
+            'value' => "",
             "title" => '30 X 40 Best Value!',
             "photo_premium_glossy" => '41.99',
             "canvas" => '125.80',
@@ -116,12 +131,14 @@ class FrameSeeder extends Seeder
             "self_adhesive" => '60.59',
         ]);
         PosterPrint::create([
+            'value' => "",
             "title" => '36 X 36 Best Value!',
             "photo_premium_glossy" => '51.73',
             "canvas" => '173.60',
             "banner" => '144.67',
             "self_adhesive" => '83.61',
         ]);
+
 
         CustomPrint::create([
             "min" => '0',

@@ -10,7 +10,7 @@ app.controller('printingCartController', function ($scope, $http, $location) {
     $scope.quantity = 1;
     $scope.totalPriceWithDiscount = 0;
     $scope.customer_address_type = "Home";
-    $scope.delivery_charge="0";
+    $scope.delivery_charge = "0";
     $scope.addToCart = function (item) {
         if ($scope.poster_size == "") {
             return messageError("Please select poster size");
@@ -66,18 +66,22 @@ app.controller('printingCartController', function ($scope, $http, $location) {
         if (cartProductList !== null && cartProductList !== undefined) {
             cartProductList = JSON.parse(cartProductList);
             for (var cartProduct of cartProductList) {
-                totalPrice = totalPrice + parseFloat(cartProduct.price) * parseFloat(cartProduct.quantity);
+                totalPrice = totalPrice + parseFloat(cartProduct.price).toFixed(2) * parseFloat(cartProduct.quantity);
 
             }
         }
         $scope.totalPriceCountAll = parseFloat(totalPrice).toFixed(2);
-        console.log($scope.totalPriceCountAll);
+        console.log($scope.delivery_charge);
         if (totalPrice > 200) {
-            $scope.discount = parseInt($scope.totalPriceCountAll * .10);
-            $scope.totalPriceWithDiscount = parseInt(totalPrice - $scope.discount);
+            $scope.discount = parseFloat($scope.totalPriceCountAll * .10).toFixed(2);
+            $scope.totalPriceWithDiscount = parseFloat(totalPrice - $scope.discount).toFixed(2);
 
-        }else {
-            $scope.totalPriceWithDiscount = parseInt(totalPrice) ;
+
+            $scope.totalPriceWithDiscount =  parseFloat($scope.totalPriceWithDiscount+ parseFloat($scope.delivery_charge));
+
+        } else {
+            $scope.totalPriceWithDiscount = parseFloat(totalPrice).toFixed(2);
+            $scope.totalPriceWithDiscount = parseFloat($scope.totalPriceWithDiscount+ parseFloat($scope.delivery_charge));
 
         }
 
@@ -297,11 +301,12 @@ app.controller('printingCartController', function ($scope, $http, $location) {
         });
     }
 
-    $scope.changeDeliveryCharge=function (charge) {
+    $scope.changeDeliveryCharge = function (charge) {
 
-        $scope.delivery_charge=charge;
-        $scope.totalPriceWithDiscount=parseFloat($scope.totalPriceWithDiscount+charge);
-        console.log($scope.totalPriceWithDiscount)
+        console.log("ffffff");
+        $scope.delivery_charge = charge;
+
+        $scope.getTotalPrice();
     }
 
 });
