@@ -87,7 +87,7 @@
                             <a href="/cart" class="dropdn-link only-icon wishlist-link ">
                                 <i class="icon-basket"></i><span
                                     class="dropdn-link-txt">Wishlist</span><span
-                                    class="minicart-qty" ng-bind="total_item">@{{ total_item }}</span>
+                                    class="minicart-qty" >@{{ total_item }}</span>
                             </a>
                         </div>
                     </div>

@@ -10,6 +10,7 @@ app.controller('printingCartController', function ($scope, $http, $location) {
     $scope.quantity = 1;
     $scope.totalPriceWithDiscount = 0;
     $scope.customer_address_type = "Home";
+    $scope.delivery_charge="0";
     $scope.addToCart = function (item) {
         if ($scope.poster_size == "") {
             return messageError("Please select poster size");
@@ -70,6 +71,7 @@ app.controller('printingCartController', function ($scope, $http, $location) {
             }
         }
         $scope.totalPriceCountAll = parseFloat(totalPrice).toFixed(2);
+        console.log($scope.totalPriceCountAll);
         if (totalPrice > 200) {
             $scope.discount = parseInt($scope.totalPriceCountAll * .10);
             $scope.totalPriceWithDiscount = parseInt(totalPrice - $scope.discount);
@@ -294,6 +296,14 @@ app.controller('printingCartController', function ($scope, $http, $location) {
 
         });
     }
+
+    $scope.changeDeliveryCharge=function (charge) {
+
+        $scope.delivery_charge=charge;
+        $scope.totalPriceWithDiscount=parseFloat($scope.totalPriceWithDiscount+charge);
+        console.log($scope.totalPriceWithDiscount)
+    }
+
 });
 
 

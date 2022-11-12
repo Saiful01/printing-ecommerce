@@ -16,7 +16,7 @@
                 </ul>
             </div>
         </div>
-        <div class="holder holder-mt-medium" >
+        <div class="holder holder-mt-medium">
             <div class="container">
                 <!-- Two columns -->
                 <!-- Page Title -->
@@ -70,7 +70,8 @@
                                                             href="/poster-details/{{$poster->id}}">{{$poster->title}}</a>
                                                     </h2>
 
-                                                    <b><p style="margin-left: 110px;" id="new_price{{$poster->id}}">$ {{$poster->price}}</p></b>
+                                                    <b><p style="margin-left: 110px;" id="new_price{{$poster->id}}">
+                                                            $ {{$poster->price}}</p></b>
                                                     <div class="prd-size swatches">
 
                                                         <center>
@@ -132,6 +133,7 @@
             $scope.product_type = "1";
             $scope.poster_size = "1";
             $scope.paper_type = "1";
+            $scope.total_item=0;
             $scope.changePosterSize = function (id, size, price) {
                 let data = poster_array.find((poster) => poster.title == size,);
                 document.getElementById("new_price" + id).innerHTML = price + data['photo_premium_glossy'];
@@ -187,6 +189,8 @@
                // $scope.getTotalPrice();
                 //$scope.getList();
 
+                window.location.reload();
+
             }
 
             function messageError(message) {
@@ -197,7 +201,48 @@
                 toastr.success(message, 'Success')
             }
 
+            $scope.getTotalPrice = function () {
 
+                let cartProductList = localStorage.getItem('cart_product');
+                let totalPrice = 0;
+                if (cartProductList !== null && cartProductList !== undefined) {
+                    cartProductList = JSON.parse(cartProductList);
+                    for (var cartProduct of cartProductList) {
+                        totalPrice = totalPrice + parseFloat(cartProduct.price) * parseFloat(cartProduct.quantity);
+
+                    }
+                }
+                $scope.totalPriceCountAll = parseFloat(totalPrice).toFixed(2);
+                if (totalPrice > 200) {
+                    $scope.discount = parseInt($scope.totalPriceCountAll * .10);
+                    $scope.totalPriceWithDiscount = parseInt(totalPrice - $scope.discount);
+
+                } else {
+                    $scope.totalPriceWithDiscount = parseInt(totalPrice);
+
+                }
+
+                console.log($scope.totalPriceWithDiscount)
+
+            };
+
+            $scope.getList = function () {
+                let cartProductList = localStorage.getItem('cart_product');
+                if (cartProductList !== null && cartProductList !== undefined) {
+                    cartProductList = JSON.parse(cartProductList);
+                    $scope.cart_products = cartProductList;
+                    $scope.cartActive = true;
+                    $scope.total_item = $scope.cart_products.length;
+                    console.log($scope.total_item)
+
+                }
+
+                console.log(cartProductList);
+            };
+
+
+            $scope.getTotalPrice();
+            $scope.getList();
         });
 
     </script>

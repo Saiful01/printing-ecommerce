@@ -72,13 +72,7 @@ class FrameSeeder extends Seeder
             "banner" => '35.20',
             "self_adhesive" => '20.57',
         ]);
-        PosterPrint::create([
-            "title" => '16 X 20',
-            "photo_premium_glossy" => '15.26',
-            "canvas" => '42.24',
-            "banner" => '35.20',
-            "self_adhesive" => '20.57',
-        ]);
+
         PosterPrint::create([
             "title" => '16 X 24',
             "photo_premium_glossy" => '17.27',

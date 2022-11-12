@@ -60,7 +60,7 @@
                                                     <h3>{{$ship->Shipping_charge}}</h3>
                                                 </div>--}}
 
-                                                <div class="form-check">
+                                                <div class="form-check" ng-click="changeDeliveryCharge({{$ship->Shipping_charge}})">
                                                     <input class="form-check-input" type="radio" name="shippingPrice"
                                                            value="{{$ship->Shipping_charge}}" id="{{$ship->Shipping_charge}}" checked>
                                                     <label class="form-check-label" for="{{$ship->Shipping_charge}}">
@@ -130,6 +130,10 @@
                                 <li class="list-group-item">
                                     Discount: <span
                                         class="float-right"><strong>$@{{ discount }}</strong></span>
+                                </li>
+                                <li class="list-group-item">
+                                    Delivery Charge: <span
+                                        class="float-right"><strong>$@{{ delivery_charge }}</strong></span>
                                 </li>
                                 <li class="list-group-item">
                                     <form action="/carts/add_coupon" method="get">

@@ -242,6 +242,10 @@ Route::post('/contact/send', function (\Illuminate\Http\Request $request) {
 
 Route::get('/test', function () {
 
+
+
+    return view("test");
+
     $array = [
         'title' => "dddddd",
         'price' => "50",
