@@ -113,13 +113,12 @@
                     <div class="card">
                         <div class="card-header">Cart Summary</div>
                         <div class="card-body">
-
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    Prints: <span class="float-right" ng--bind="total_item"></span>
+                                    Prints: <span class="float-right" ng-bind="total_item"></span>
                                 </li>
                                 <li class="list-group-item">
-                                    Subtotal: <span
+                                    Total: <span
                                         class="float-right"><strong>$@{{ totalPriceCountAll }}</strong></span>
                                 </li>
                                 <li class="list-group-item">
@@ -127,21 +126,20 @@
                                         class="float-right"><strong>$@{{ discount }}</strong></span>
                                 </li>
                                 <li class="list-group-item">
-                                    <form action="/carts/add_coupon" method="get">
-                                        <div class="input-group add_promo float-right">
-                                            <input type="text" name="cart[coupon]" class="form-control rounded-0"
-                                                   id="validationDefaultUsername" placeholder="Enter Promo Code"
-                                                   aria-describedby="inputGroupPrepend2" required="">
-                                            <div class="input-group-prepend">
-                                                <input type="submit" value="Add"
-                                                       class="btn btn-primary btn-sm rounded-0" id="inputGroupPrepend2">
-                                            </div>
-                                        </div>
-                                    </form>
+                                    Delivery Charge: <span
+                                        class="float-right"><strong>$@{{ delivery_charge }}</strong></span>
                                 </li>
                                 <li class="list-group-item">
-                                    <strong>Subtotal: <span
-                                            class="float-right">$@{{ totalPriceWithDiscount }}</span></strong>
+                                    Tax Percentage: <span
+                                        class="float-right"><strong>@{{ tax_fee_integer }} %</strong></span>
+                                </li>
+                                <li class="list-group-item">
+                                    Tax Fee: <span
+                                        class="float-right"><strong>$@{{ totalTaxPrice }} </strong></span>
+                                </li>
+                                <li class="list-group-item">
+                                    <strong>SubTotal: <span
+                                            class="float-right">$@{{ totalPriceWithDiscountWithDeliverycharge }}</span></strong>
                                 </li>
 
                                 <li class="list-group-item text-center">

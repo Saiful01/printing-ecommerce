@@ -57,7 +57,10 @@
                                                  id="delivery_option_1">
                                                 <div class="form-check">
                                                     <div class="form-check">
-                                                        <input type="radio" class="form-check-input" id="{{$ship->id}}" name="Shipping_charge" value="{{$ship->Shipping_charge}}" ng-change="changeDeliveryCharge({{$ship->Shipping_charge}})" ng-model="myValue" required>
+                                                        <input type="radio" class="form-check-input" id="{{$ship->id}}"
+                                                               name="Shipping_charge" value="{{$ship->Shipping_charge}}"
+                                                               ng-change="changeDeliveryCharge({{$ship->Shipping_charge}})"
+                                                               ng-model="myValue" required>
                                                         <label class="form-check-label" for="{{$ship->id}}">
                                                             <p><strong>{{$ship->title}}</strong></p>
                                                             <h3>{{$ship->Shipping_charge}}</h3>
@@ -132,26 +135,37 @@
                                         class="float-right"><strong>$@{{ delivery_charge }}</strong></span>
                                 </li>
                                 <li class="list-group-item">
-                                    Tax Fee: <span
-                                        class="float-right"><strong>@{{ tax_fee }} %</strong></span>
+                                    Tax Percentage: <span
+                                        class="float-right"><strong>@{{ tax_fee_integer }} %</strong></span>
                                 </li>
                                 <li class="list-group-item">
-                                    <form action="/carts/add_coupon" method="get">
+                                    Tax Fee: <span
+                                        class="float-right"><strong>$@{{ totalTaxPrice }} </strong></span>
+                                </li>
+                                <li class="list-group-item">
+                                    <form method="post">
+                                        @csrf
                                         <div class="input-group add_promo float-right">
                                             <input type="text" name="coupon" class="form-control rounded-0"
-                                                   placeholder="Enter Promo Code"
+                                                   placeholder="Enter Promo Code" ng-model="coupon"
                                                    aria-describedby="inputGroupPrepend2" required="">
                                             <div class="input-group-prepend">
-                                                <input type="submit" value="Add"
-                                                       class="btn btn-primary btn-sm rounded-0" id="inputGroupPrepend2">
+                                                <button value="Add"
+                                                        class="btn btn-primary btn-sm rounded-0"
+                                                        ng-click="CouponSave()">Add</button>
                                             </div>
                                         </div>
                                     </form>
                                 </li>
                                 <li class="list-group-item">
-                                    <strong>SubTotal: <span
-                                            class="float-right">$@{{ totalPriceWithDiscount }}</span></strong>
+                                    Coupon Discount: <span
+                                        class="float-right"><strong>$@{{ coupon_value }} </strong></span>
                                 </li>
+                                <li class="list-group-item">
+                                    <strong>SubTotal: <span
+                                            class="float-right">$@{{ totalPriceWithDiscountWithDeliverycharge }}</span></strong>
+                                </li>
+
 
                                 <li class="list-group-item text-center">
                                     If you order your prints before 2 pm EST, your files will be printed and shipped

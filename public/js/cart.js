@@ -9,10 +9,33 @@ app.controller('printingCartController', function ($scope, $http, $location) {
     $scope.coupon_value = 0;
     $scope.quantity = 1;
     $scope.totalPriceWithDiscount = 0;
+    $scope.totalPriceWithDiscountWithDeliverycharge = 0;
+    $scope.totalTaxPrice = 0;
     $scope.customer_address_type = "Home";
     $scope.delivery_charge = "0";
-    $scope.tax_fee = "0";
+    $scope.coupon_value = 0;
+    $scope.CouponAmount = 0;
+
+    $scope.tax_charge_float = "0";
+
+
+    $scope.taxCharge = function () {
+
+        $http.get("/web-api/tax-charge")
+            .then(function (response) {
+                $scope.tax_fee_integer = response.data;
+                $scope.tax_charge_float = (($scope.tax_fee_integer) / 100);
+                console.log($scope.tax_charge_float)
+                localStorage.setItem('tax_charge', $scope.tax_charge_float);
+                console.log("charge ok")
+                console.log(localStorage.getItem('tax_charge'))
+
+            });
+
+    }
     $scope.addToCart = function (item) {
+        console.log($scope.tax_charge_float)
+        console.log("ok tax value")
         if ($scope.poster_size == "") {
             return messageError("Please select poster size");
         }
@@ -50,17 +73,15 @@ app.controller('printingCartController', function ($scope, $http, $location) {
         } else {
             messageSuccess("Product added to cart")
         }
-        localStorage.setItem('cart_product', JSON.stringify(cartProductList));
+        localStorage.setItem('cart_product', JSON.stringify(cartProductList))
         $scope.getTotalPrice();
         $scope.getList();
-    }
 
-    function InitialSize(size) {
-        $scope.poster_size = size;
-        console.log($scope.poster_size)
+
     }
 
     $scope.getTotalPrice = function () {
+
 
         let cartProductList = localStorage.getItem('cart_product');
         let totalPrice = 0;
@@ -72,22 +93,30 @@ app.controller('printingCartController', function ($scope, $http, $location) {
             }
         }
         $scope.totalPriceCountAll = parseFloat(totalPrice).toFixed(2);
-        console.log($scope.delivery_charge);
+        $scope.totalTaxPrice = parseFloat($scope.totalPriceCountAll * localStorage.getItem('tax_charge')).toFixed(2);
+        $scope.CouponAmount = localStorage.getItem('coupon_value');
+
         if (totalPrice > 200) {
             $scope.discount = parseFloat($scope.totalPriceCountAll * .10).toFixed(2);
             $scope.totalPriceWithDiscount = parseFloat(totalPrice - $scope.discount).toFixed(2);
-
-
-            $scope.totalPriceWithDiscount =  parseFloat($scope.totalPriceWithDiscount+ parseFloat($scope.delivery_charge)+ parseFloat($scope.tax_fee));
-
+            $scope.totalPriceWithDiscountWithDeliverycharge = (parseFloat($scope.totalPriceWithDiscount) + parseFloat($scope.delivery_charge) + parseFloat($scope.totalTaxPrice)).toFixed(2) - localStorage.getItem('coupon_value');
+            console.log("coupon_value added")
+            console.log(localStorage.getItem('coupon_value'))
         } else {
             $scope.totalPriceWithDiscount = parseFloat(totalPrice).toFixed(2);
-            $scope.totalPriceWithDiscount = parseFloat($scope.totalPriceWithDiscount+ parseFloat($scope.delivery_charge)+ parseFloat($scope.tax_fee));
-
+            $scope.totalPriceWithDiscountWithDeliverycharge = (parseFloat($scope.totalPriceWithDiscount) + parseFloat($scope.delivery_charge) + parseFloat($scope.totalTaxPrice)).toFixed(2) - localStorage.getItem('coupon_value');
+            console.log("coupon_value added")
+            console.log(localStorage.getItem('coupon_value'))
         }
 
 
     };
+
+
+    function InitialSize(size) {
+        $scope.poster_size = size;
+        console.log($scope.poster_size)
+    }
 
     $scope.getList = function () {
         let cartProductList = localStorage.getItem('cart_product');
@@ -290,27 +319,6 @@ app.controller('printingCartController', function ($scope, $http, $location) {
     $scope.getTotalPrice();
     $scope.getList();
 
-    $scope.getCustomer = function () {
-        $http.post('/web-api/customer-info', {}).then(function (response) {
-            if (response.data.status_code == 200) {
-                $scope.tax_fee = response.data.tax_fee;
-                console.log($scope.tax_fee);
-            }
-        }, function (response) {
-
-        });
-    }
-
-    $scope.tax_fee = function () {
-        $http.get('/web-api/tax-fee', {}).then(function (response) {
-            if (response.data.status_code == 200) {
-                $scope.tax_fee = response.data;
-                console.log( $scope.tax_fee);
-            }
-        }, function (response) {
-
-        });
-    }
 
     $scope.changeDeliveryCharge = function (charge) {
 
@@ -318,6 +326,35 @@ app.controller('printingCartController', function ($scope, $http, $location) {
         $scope.delivery_charge = charge;
 
         $scope.getTotalPrice();
+    }
+    $scope.CouponSave = function () {
+
+
+        if (!$scope.coupon) {
+            messageError('Please Enter Coupon Code')
+            return;
+        }
+        let url = "/web-api/coupon-save";
+        let params = {
+            'coupon': $scope.coupon,
+        };
+        $http.post(url, params).then(function success(response) {
+
+            if (response.data.status_code == 200) {
+                $scope.coupon_value = response.data.discount;
+                localStorage.setItem('coupon_value', $scope.coupon_value);
+                console.log("coupon_value ok")
+                console.log(localStorage.getItem('coupon_value'))
+                $scope.getTotalPrice();
+                messageSuccess(response.data.message);
+
+            } else {
+
+                messageError(response.data.message);
+            }
+
+        });
+
     }
 });
 

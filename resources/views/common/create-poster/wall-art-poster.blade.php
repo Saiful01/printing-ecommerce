@@ -128,6 +128,19 @@
         let poster_array = <?php echo json_encode($poster_size) ?>;
         app.controller('printingCartController', function ($scope, $http) {
 
+            $scope.cart_products = [];
+            $scope.discount = 0;
+            $scope.coupon_code = "";
+            $scope.poster_size = "";
+            $scope.total_item = 0;
+            $scope.coupon_value = 0;
+            $scope.quantity = 1;
+            $scope.totalPriceWithDiscount = 0;
+            $scope.totalPriceWithDiscountWithDeliverycharge = 0;
+            $scope.totalTaxPrice = 0;
+            $scope.customer_address_type = "Home";
+            $scope.delivery_charge = "0";
+            $scope.tax_charge_float = "0";
             $scope.product_type = "1";
             $scope.poster_size = "1";
             $scope.paper_type = "1";
@@ -135,6 +148,20 @@
             $scope.changePosterSize = function (id, size, price) {
                 let data = poster_array.find((poster) => poster.title == size,);
                 document.getElementById("new_price" + id).innerHTML = price + data['photo_premium_glossy'];
+
+            }
+            $scope.taxCharge = function () {
+
+                $http.get("/web-api/tax-charge")
+                    .then(function (response) {
+                        $scope.tax_fee_integer = response.data;
+                        $scope.tax_charge_float = (($scope.tax_fee_integer) / 100);
+                        console.log( $scope.tax_charge_float)
+                        localStorage.setItem('tax_charge', $scope.tax_charge_float);
+                        console.log("charge ok")
+                        console.log(localStorage.getItem('tax_charge'))
+
+                    });
 
             }
 
@@ -184,6 +211,7 @@
                     messageSuccess("Product added to cart")
                 }
                 localStorage.setItem('cart_product', JSON.stringify(cartProductList));
+
                // $scope.getTotalPrice();
                 //$scope.getList();
 
@@ -199,28 +227,34 @@
                 toastr.success(message, 'Success')
             }
 
+
+
             $scope.getTotalPrice = function () {
+
 
                 let cartProductList = localStorage.getItem('cart_product');
                 let totalPrice = 0;
                 if (cartProductList !== null && cartProductList !== undefined) {
                     cartProductList = JSON.parse(cartProductList);
                     for (var cartProduct of cartProductList) {
-                        totalPrice = totalPrice + parseFloat(cartProduct.price) * parseFloat(cartProduct.quantity);
+                        totalPrice = totalPrice + parseFloat(cartProduct.price).toFixed(2) * parseFloat(cartProduct.quantity);
 
                     }
                 }
                 $scope.totalPriceCountAll = parseFloat(totalPrice).toFixed(2);
+                $scope.totalTaxPrice = parseFloat($scope.totalPriceCountAll * localStorage.getItem('tax_charge')).toFixed(2);
+
                 if (totalPrice > 200) {
-                    $scope.discount = parseInt($scope.totalPriceCountAll * .10);
-                    $scope.totalPriceWithDiscount = parseInt(totalPrice - $scope.discount);
+                    $scope.discount = parseFloat($scope.totalPriceCountAll * .10).toFixed(2);
+                    $scope.totalPriceWithDiscount = parseFloat(totalPrice - $scope.discount).toFixed(2);
+                    $scope.totalPriceWithDiscountWithDeliverycharge = (parseFloat($scope.totalPriceWithDiscount) + parseFloat($scope.delivery_charge) + parseFloat($scope.totalTaxPrice)).toFixed(2);
 
                 } else {
-                    $scope.totalPriceWithDiscount = parseInt(totalPrice);
+                    $scope.totalPriceWithDiscount = parseFloat(totalPrice).toFixed(2);
+                    $scope.totalPriceWithDiscountWithDeliverycharge = (parseFloat($scope.totalPriceWithDiscount) + parseFloat($scope.delivery_charge) + parseFloat($scope.totalTaxPrice)).toFixed(2);
 
                 }
 
-                console.log($scope.totalPriceWithDiscount)
 
             };
 

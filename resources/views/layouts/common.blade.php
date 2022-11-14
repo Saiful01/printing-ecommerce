@@ -53,7 +53,7 @@
     </style>
 
 </head>
-<body class="has-smround-btns has-loader-bg equal-height" ng-app="myApp" ng-controller="printingCartController">
+<body class="has-smround-btns has-loader-bg equal-height" ng-app="myApp" ng-controller="printingCartController" ng-init="taxCharge()">
     @include('sweetalert::alert')
 <!--header-->
 <header class="hdr-wrap">
