@@ -204,6 +204,7 @@ Route::group(['prefix' => 'operator', 'middleware' => 'operator'], function () {
 Route::group(['prefix' => 'web-api', 'middleware' => 'admin'], function () {
 
     Route::any('/states/{country_id}', [WebApiController::class, 'getStates']);
+    Route::any('/tax-fee', [WebApiController::class, 'getTaxFee']);
 });
 /*Admin Section End*/
 

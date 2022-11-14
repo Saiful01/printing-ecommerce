@@ -17,6 +17,8 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->unsignedBigInteger("customer_id");
             $table->string("invoice");
+            $table->string("billingAddress")->nullable();
+            $table->double("Shipping_charge")->nullable();
             $table->double("total_price")->default(0);
             $table->double("sub_price")->default(0);
             $table->double("discount_price")->default(0);

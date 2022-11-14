@@ -55,30 +55,14 @@
                                         @foreach($shipping as $ship)
                                             <div class="col-md-4 text-center delivery_option selected_delivery"
                                                  id="delivery_option_1">
-                                                {{--<div>
-                                                    <p><strong>{{$ship->title}}</strong></p>
-                                                    <h3>{{$ship->Shipping_charge}}</h3>
-                                                </div>--}}
-
                                                 <div class="form-check">
-                                                   {{-- <input class="form-check-input" type="radio" name="shippingPrice"
-                                                           value="{{$ship->Shipping_charge}}" id="{{$ship->Shipping_charge}}" checked ng-click="changeDeliveryCharge({{$ship->Shipping_charge}})">
-                                                    <label class="form-check-label" for="{{$ship->Shipping_charge}}">
-                                                        <p><strong>{{$ship->title}}</strong></p>
-                                                        <h3>{{$ship->Shipping_charge}}</h3>
-                                                    </label>--}}
-
-
                                                     <div class="form-check">
-                                                        <input type="radio" class="form-check-input" id="{{$ship->id}}" name="optradio" value="{{$ship->Shipping_charge}}" ng-change="changeDeliveryCharge({{$ship->Shipping_charge}})" ng-model="myValue">
+                                                        <input type="radio" class="form-check-input" id="{{$ship->id}}" name="Shipping_charge" value="{{$ship->Shipping_charge}}" ng-change="changeDeliveryCharge({{$ship->Shipping_charge}})" ng-model="myValue" required>
                                                         <label class="form-check-label" for="{{$ship->id}}">
                                                             <p><strong>{{$ship->title}}</strong></p>
                                                             <h3>{{$ship->Shipping_charge}}</h3>
                                                         </label>
                                                     </div>
-
-
-
                                                 </div>
                                             </div>
                                         @endforeach
@@ -148,6 +132,10 @@
                                         class="float-right"><strong>$@{{ delivery_charge }}</strong></span>
                                 </li>
                                 <li class="list-group-item">
+                                    Tax Fee: <span
+                                        class="float-right"><strong>@{{ tax_fee }} %</strong></span>
+                                </li>
+                                <li class="list-group-item">
                                     <form action="/carts/add_coupon" method="get">
                                         <div class="input-group add_promo float-right">
                                             <input type="text" name="coupon" class="form-control rounded-0"
@@ -179,69 +167,4 @@
             </div>
         </div>
     </div>
-
-    {{-- <script src="https://js.stripe.com/v3/"></script>--}}
-    {{--<script>
-        // Custom styling can be passed to options when creating an Element.
-        // (Note that this demo uses a wider set of styles than the guide below.)
-
-        var style = {
-            base: {
-                color: '#32325d',
-                lineHeight: '18px',
-                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                fontSmoothing: 'antialiased',
-                fontSize: '16px',
-                '::placeholder': {
-                    color: '#aab7c4'
-                }
-            },
-            invalid: {
-                color: '#fa755a',
-                iconColor: '#fa755a'
-            }
-        };
-
-        const stripe = Stripe('{{ $stripe_key }}', { locale: 'en' }); // Create a Stripe client.
-        const elements = stripe.elements(); // Create an instance of Elements.
-        const cardElement = elements.create('card', { style: style }); // Create an instance of the card Element.
-        const cardButton = document.getElementById('card-button');
-        const clientSecret = cardButton.dataset.secret;
-
-        cardElement.mount('#card-element'); // Add an instance of the card Element into the `card-element` <div>.
-
-        // Handle real-time validation errors from the card Element.
-        cardElement.addEventListener('change', function(event) {
-            var displayError = document.getElementById('card-errors');
-            if (event.error) {
-                displayError.textContent = event.error.message;
-            } else {
-                displayError.textContent = '';
-            }
-        });
-
-        // Handle form submission.
-        var form = document.getElementById('payment-form');
-
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            stripe.handleCardPayment(clientSecret, cardElement, {
-                payment_method_data: {
-                    //billing_details: { name: cardHolderName.value }
-                }
-            })
-                .then(function(result) {
-                    console.log(result);
-                    if (result.error) {
-                        // Inform the user if there was an error.
-                        var errorElement = document.getElementById('card-errors');
-                        errorElement.textContent = result.error.message;
-                    } else {
-                        console.log(result);
-                        form.submit();
-                    }
-                });
-        });
-    </script>--}}
 @endsection

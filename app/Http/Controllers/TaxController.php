@@ -73,9 +73,10 @@ class TaxController extends Controller
      */
     public function update(Request $request, Tax $tax)
     {
-        // return $request->all();
+         //return $request->all();
         try {
             Tax::where('id', $request['id'])->update($request->except(['id', '_token']));
+
             Alert::success('Tax! ', "Successfully  Updated ");
             return back();
 

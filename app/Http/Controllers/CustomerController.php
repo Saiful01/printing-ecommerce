@@ -20,7 +20,7 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function loginCheck(Request $request)
     {
@@ -64,10 +64,11 @@ class CustomerController extends Controller
         ]);
         try {
             $request['password'] = Hash::make($request['password']);
-            Customer::create($request->except('checkbox1','_token'));
+           $customerId = Customer::insertGetId($request->except('checkbox1','_token'));
+            Auth::guard('customer')->loginUsingId($customerId);
             Alert::success('Registration! ', " You have done Successfully Registered ");
             return redirect('/customer/profile');
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             Alert::error('Registration Failed! ', $exception->getMessage());
             return back();
         }
@@ -76,6 +77,7 @@ class CustomerController extends Controller
     public function logout()
     {
         Auth::guard('customer')->logout();
+        Alert::success('Successfully Logout! ');
         return \redirect('/');
     }
 
@@ -128,7 +130,7 @@ class CustomerController extends Controller
             CustomerAddress::create($request->except('_token'));
             Alert::success('Address! ', " Successfully Added ");
             return redirect('/customer/bill/pay');
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             Alert::error('Sorry! ', $exception->getMessage());
             return back();
         }
@@ -149,7 +151,7 @@ class CustomerController extends Controller
             CustomerAddress::where('customer_id', $request['customer_id'])->update($request->except('_token'));
             Alert::success('Address! ', " Successfully Updated ");
             return redirect('/customer/bill/pay')->with('success', "Successfully Created");
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             Alert::error('Sorry! ', $exception->getMessage());
             return back();
         }

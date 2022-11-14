@@ -54,6 +54,7 @@
 
 </head>
 <body class="has-smround-btns has-loader-bg equal-height" ng-app="myApp" ng-controller="printingCartController">
+    @include('sweetalert::alert')
 <!--header-->
 <header class="hdr-wrap">
     <div class="hdr-content hdr-content-sticky" >
@@ -220,7 +221,7 @@
                                                 </div>
                                                 <div class="mmenu-bottom justify-content-center">
                                                     <a href="#"><i class="icon-shield icon--lg"></i><b>Poster Print
-                                                            Store</b></i></a>
+                                                            Store</b></a>
                                                 </div>
                                             </div>
                                         </div>

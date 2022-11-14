@@ -52,9 +52,10 @@
                                     <th class="sort" data-sort="Image">Invoice</th>
                                     <th class="sort" data-sort="Image">Order Date</th>
                                     <th class="sort" data-sort="Details">Customer Name</th>
-                                    {{--<th class="sort" data-sort="Details">Coupon</th>--}}
+                                    <th class="sort" data-sort="Details">Shipping Address</th>
                                     <th class="sort" data-sort="status">Total Price</th>
                                     <th class="sort" data-sort="status">Discount</th>
+                                    <th class="sort" data-sort="status">Shipping Charge</th>
                                     <th class="sort" data-sort="status">Subtotal Price</th>
                                     <th class="sort" data-sort="status">Payment Status</th>
                                     <th class="sort" data-sort="status">Order Status</th>
@@ -70,19 +71,16 @@
                                         <td class="institute">{{$item->invoice}}</td>
                                         <td class="institute">{{date('d-m-Y', strtotime($item->updated_at))}}</td>
                                         <td class="institute">{{$item->customer->firstName}} {{$item->customer->lastName}}</td>
-                                        <td class="institute">${{round($item->total_price)}}</td>
-                                        <td class="institute">${{round($item->discount_price)}}</td>
-                                        <td class="institute">${{round($item->sub_price)}}</td>
+                                        <td class="institute">{{$item->billingAddress}}</td>
+                                        <td class="institute">${{$item->total_price}}</td>
+                                        <td class="institute">${{$item->discount_price}}</td>
+                                        <td class="institute">${{$item->Shipping_charge}}</td>
+                                        <td class="institute">${{$item->sub_price}}</td>
 
                                         <td class="institute">@if($item->is_paid ==1) <span class="badge badge-soft-success">Paid</span>
                                             @else <span class="badge badge-soft-danger">Unpaid</span>@endif</td>
                                         <td class="institute"> <span class="badge badge-soft-success">{{getOrderStatusIdToValue($item->order_status)}}</span>
-                                            </td>
-                                        {{--@if($item->is_paid ==1)
-                                            <td><span class="institute badge badge-success">Paid</span></td>
-                                        @else
-                                            <td><span class="institute badge badge-danger">Unpaid</span></td>
-                                        @endif--}}
+                                        </td>
                                         <td>
                                             <div class="d-flex gap-2">
                                                 <div class="show">

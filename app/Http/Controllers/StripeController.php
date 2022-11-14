@@ -34,9 +34,12 @@ class StripeController extends Controller
             'invoice' => uniqid(),
             'total_price' => $request['total_price'],
             'discount_price' => $request['discount_price'],
+            'billingAddress' => $request['billingAddress'],
+            'Shipping_charge' => $request['Shipping_charge'],
             'sub_price' => $request['sub_total'],
 
         ]);
+       // return $orders;
         $order_id = Order::insertGetId($orders);
 
         foreach (json_decode($request->products, true) as $item) {
@@ -66,8 +69,8 @@ class StripeController extends Controller
 
                 )));
 
-        } catch (\Exception $e) {
-            return $e->getMessage();
+        } catch (\Exception $exception) {
+            Alert::error('Sorry! ', $exception->getMessage());
             return redirect()->back();
         }
 
@@ -99,12 +102,12 @@ class StripeController extends Controller
             ]);
             Payment::create($payment);
 
-            Alert::success('Cart', " Payment Successfully Done");
+            Alert::success('Order', " Payment Successfully Done");
             //return $request->all();
             return redirect('/customer/order/history')->with('success', 'Payment Success!');
 
-        } catch (\Exception $e) {
-            return $e->getMessage();
+        } catch (\Exception $exception) {
+            Alert::error('Sorry! ', $exception->getMessage());
             return redirect()->back();
         }
 

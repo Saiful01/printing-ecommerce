@@ -11,6 +11,7 @@ app.controller('printingCartController', function ($scope, $http, $location) {
     $scope.totalPriceWithDiscount = 0;
     $scope.customer_address_type = "Home";
     $scope.delivery_charge = "0";
+    $scope.tax_fee = "0";
     $scope.addToCart = function (item) {
         if ($scope.poster_size == "") {
             return messageError("Please select poster size");
@@ -77,11 +78,11 @@ app.controller('printingCartController', function ($scope, $http, $location) {
             $scope.totalPriceWithDiscount = parseFloat(totalPrice - $scope.discount).toFixed(2);
 
 
-            $scope.totalPriceWithDiscount =  parseFloat($scope.totalPriceWithDiscount+ parseFloat($scope.delivery_charge));
+            $scope.totalPriceWithDiscount =  parseFloat($scope.totalPriceWithDiscount+ parseFloat($scope.delivery_charge)+ parseFloat($scope.tax_fee));
 
         } else {
             $scope.totalPriceWithDiscount = parseFloat(totalPrice).toFixed(2);
-            $scope.totalPriceWithDiscount = parseFloat($scope.totalPriceWithDiscount+ parseFloat($scope.delivery_charge));
+            $scope.totalPriceWithDiscount = parseFloat($scope.totalPriceWithDiscount+ parseFloat($scope.delivery_charge)+ parseFloat($scope.tax_fee));
 
         }
 
@@ -292,9 +293,19 @@ app.controller('printingCartController', function ($scope, $http, $location) {
     $scope.getCustomer = function () {
         $http.post('/web-api/customer-info', {}).then(function (response) {
             if (response.data.status_code == 200) {
-                $scope.customer_name = response.data.customer_name;
-                $scope.customer_phone = response.data.customer_phone;
-                $scope.customer_email = response.data.customer_email;
+                $scope.tax_fee = response.data.tax_fee;
+                console.log($scope.tax_fee);
+            }
+        }, function (response) {
+
+        });
+    }
+
+    $scope.tax_fee = function () {
+        $http.get('/web-api/tax-fee', {}).then(function (response) {
+            if (response.data.status_code == 200) {
+                $scope.tax_fee = response.data;
+                console.log( $scope.tax_fee);
             }
         }, function (response) {
 
@@ -308,7 +319,6 @@ app.controller('printingCartController', function ($scope, $http, $location) {
 
         $scope.getTotalPrice();
     }
-
 });
 
 
