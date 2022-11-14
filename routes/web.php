@@ -201,7 +201,7 @@ Route::group(['prefix' => 'operator', 'middleware' => 'operator'], function () {
 
 });
 
-Route::group(['prefix' => 'web-api', 'middleware' => 'admin'], function () {
+Route::group(['prefix' => 'web-api'], function () {
 
     Route::any('/states/{country_id}', [WebApiController::class, 'getStates']);
     Route::any('/tax-charge', [WebApiController::class, 'getTaxFee']);
