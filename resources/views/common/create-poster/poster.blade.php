@@ -83,17 +83,15 @@
                                             <label for="CustomLength">Or choose your custom size:</label>
                                             <div class="row align-items-center">
                                                 <div class="col-md-3">
-                                                    <input value="36" class="form-control" data-product="photo" min="8"
-                                                           max="60"
-                                                           type="text" name="cart_item[print_width]"
-                                                           id="cart_item_print_width">
+                                                    <input class="form-control" max="60" type="text"
+                                                           name="cposter_height" id="cposter_height"
+                                                           ng-model="cposter_height" ng-change="cPosterSizeUpdate()">
                                                 </div>
                                                 <div class="col-md-1"> x</div>
                                                 <div class="col-md-4">
-                                                    <input value="24" class="form-control" data-product="photo" min="8"
-                                                           max="60"
-                                                           type="text" name="cart_item[print_height]"
-                                                           id="cart_item_print_height">
+                                                    <input class="form-control" max="60" type="text"
+                                                           name="cposter_width" id="cposter_width"
+                                                           ng-model="cposter_width" ng-change="cPosterSizeUpdate()">
                                                 </div>
                                             </div>
                                         </div>
@@ -142,6 +140,8 @@
                     </div>
 
                 </div>
+
+
             </div>
             <div class="container-fluid bottom_buttons">
                 <div class="container">
@@ -158,7 +158,6 @@
             </div>
         </div>
     </div>
-
 
 
 
@@ -184,14 +183,20 @@
             $scope.product_type = "1";
             $scope.poster_size = "1";
             $scope.paper_type = "1";
-            $scope.price = 0;
             $scope.preview = Math.floor(Date.now() / 1000);
             $scope.hhh = "0000";
 
-
+            //Custom Poster Size Start
+            $scope.price = 10.48;
+            $scope.cposter_height = 12;
+            $scope.cposter_width = 18;
             $scope.cart_product_name = "Poster Print";
-            $scope.cart_product_type = "";
-            $scope.cart_product_size = "";
+            $scope.cart_product_type = "Photo Premium Glossy";
+
+            //Custom Poster Size End
+
+
+
 
 
             $scope.productChange = function () {
@@ -220,12 +225,15 @@
                     document.getElementById("aluminium-print").style.display = "block";
                     $scope.poster_size = "1";
                     $scope.changeAluminium();
+
+
                     $scope.cart_product_name = "Aluminium Print";
                 }
             }
 
             $scope.changePosterSize = function () {
-                console.log(poster_array);
+                console.log("Common f");
+
                 let data = poster_array.find((poster) => poster.id == $scope.poster_size);
                 if ($scope.paper_type == 1) {
                     $scope.price = data['photo_premium_glossy'];
@@ -251,25 +259,45 @@
                     $scope.cart_product_type = "Self Adhesive Synthetic";
                 }
 
-                console.log($scope.cart_poster_size);
+                var ret = data['title'].replace('Best Value!', '');
+                let myArray = ret.split("X");
+                $scope.ratioUpdate(myArray[1] / myArray[0]);
+                $scope.cposter_height = myArray[0];
+                $scope.cposter_width = myArray[1];
+
+                console.log(myArray);
             }
 
             $scope.changeAluminium = function () {
+
                 let al_array = <?php echo json_encode($aluminium_print) ?>;
                 let data = al_array.find((poster) => poster.id == $scope.poster_size);
                 console.log(data["price"]);
 
                 $scope.price = data["price"];
+
+                var ret = data['title'].replace('Best Value!', '');
+                let myArray = ret.split("X");
+                $scope.ratioUpdate(myArray[1] / myArray[0]);
+                $scope.cposter_height = myArray[0];
+                $scope.cposter_width = myArray[1];
+
+
             }
             $scope.changeFoamBoard = function () {
-                let array = <?php echo json_encode($foam_board) ?>;
-                console.log($scope.poster_size);
 
+                let array = <?php echo json_encode($foam_board) ?>;
                 let data = array.find((poster) => poster.id == $scope.poster_size);
                 $scope.price = data['price'];
+
+                var ret = data['title'].replace('Best Value!', '');
+                let myArray = ret.split("X");
+                $scope.ratioUpdate(myArray[1] / myArray[0]);
+                $scope.cposter_height = myArray[0];
+                $scope.cposter_width = myArray[1];
             }
 
-            $scope.changePosterSize();
+            /*$scope.changePosterSize();*/
             $scope.changeImage = function (preview) {
                 $scope.preview = preview;
                 $scope.hhh = "1111";
@@ -285,8 +313,7 @@
                 var previews = document.querySelectorAll('.preview');
                 var previewReady = false;
 
-
-                var cropper = new Cropper(image, {
+                var options = {
                     /* aspectRatio: 18 / 12,*/
                     ready: function () {
                         var cropper = this.cropper;
@@ -322,7 +349,9 @@
                     },
 
 
-                });
+                };
+
+                var cropper = new Cropper(image, options);
 
 
                 var result = document.getElementById('result');
@@ -335,8 +364,9 @@
 
                     if (cropper) {
                         canvas = cropper.getCroppedCanvas({
-                            width: 100,
-                            height: 160,
+                            maxWidth: 3072,
+                            maxHeight: 3072,
+                            imageSmoothingEnabled: 'false',
                         });
 
                         canvas.toBlob(function (blob) {
@@ -346,7 +376,10 @@
                             formData.append('title', $scope.cart_product_name + " " + $scope.cart_product_type);
                             formData.append('price', $scope.price);
                             formData.append('featured_image', "/uploads/" + '{{$name}}' + ".png");
-                            formData.append('size', $scope.cart_poster_size);
+                            formData.append('size', $scope.cposter_height+" X "+$scope.cposter_width);
+                            formData.append('product_type', $scope.product_type);
+                            formData.append('paper_type', $scope.paper_type);
+                            //formData.append('frame_type', $scope.frame_type);
 
                             console.log('{{$name}}');
                             console.log("/uploads/" + '{{$name}}' + ".png");
@@ -398,11 +431,17 @@
                                     let tempProduct = {
                                         "id": id,
                                         "title": $scope.cart_product_name + "(" + $scope.cart_product_type + ")",
-                                        "price": $scope.price,
+                                        "price": ($scope.price),
                                         "featured_image": "/uploads/" + image,
                                         "quantity": 1,
-                                        "size": $scope.cart_poster_size,
+                                        "size": $scope.cposter_height+" X "+$scope.cposter_width,
+                                        "product_type": $scope.cart_product_type,
+                                        "paper_type": $scope.cart_product_type,
+
                                     };
+
+                                    console.log(tempProduct);
+
                                     let cartProductList = localStorage.getItem('cart_product');
                                     if (cartProductList !== null && cartProductList !== undefined) {
                                         cartProductList = JSON.parse(cartProductList);
@@ -434,9 +473,107 @@
 
                                 },
                             });
-                        });
+                        }/*, 'image/jpeg', 1*/);
                     }
                 });
+
+
+                $scope.ratioUpdate = function (value) {
+                    console.log("change ratio");
+                    console.log("change ratio");
+                    cropper.destroy();
+                    var options = {
+                        aspectRatio: value,
+                        ready: function (e) {
+                            console.log(e.type);
+                        },
+                        cropstart: function (e) {
+                            console.log(e.type, e.detail.action);
+                        },
+                        cropmove: function (e) {
+                            console.log(e.type, e.detail.action);
+                        },
+                        cropend: function (e) {
+                            console.log(e.type, e.detail.action);
+                        },
+                        crop: function (e) {
+                            var data = e.detail;
+                        },
+                        zoom: function (e) {
+                            console.log(e.type, e.detail.ratio);
+                        }
+                    };
+                    cropper = new Cropper(image, options);
+                };
+
+                $scope.cPosterSizeUpdate = function () {
+
+
+                    console.log($scope.cposter_height);
+                    console.log($scope.cposter_width);
+                    if($scope.cposter_height >42){
+                        messageError("Height must be less than 42");
+                        $scope.cposter_height = 42;
+                    }
+
+                    if($scope.cposter_width >42){
+                        messageError("Width must be less than 42");
+                        $scope.cposter_width = 42;
+                    }
+                    if($scope.cposter_width*$scope.cposter_height >1800){
+                        messageError("Width must be less than 42");
+                        $scope.cposter_width = 42;
+                        $scope.cposter_height = 42;
+                    }
+
+
+                    let total_area = $scope.cposter_height * $scope.cposter_width;
+                    console.log(total_area);
+
+
+                    $http.post('/web-api/custom-poster-price', {
+                        total_area: total_area,
+                        paper_type: $scope.paper_type,
+
+                    }).then(function (response) {
+                        console.log(response.data+"  My price");
+
+                        if(response.data == 0) {
+                            alert("Invalid input");
+                        }
+                        $scope.price=response.data
+                    }, function (response) {
+
+                        console.log(response);
+                    });
+
+
+                    cropper.destroy();
+                    var options = {
+                        aspectRatio: $scope.cposter_height / $scope.cposter_width,
+                        ready: function (e) {
+                            console.log(e.type);
+                        },
+                        cropstart: function (e) {
+                            console.log(e.type, e.detail.action);
+                        },
+                        cropmove: function (e) {
+                            console.log(e.type, e.detail.action);
+                        },
+                        cropend: function (e) {
+                            console.log(e.type, e.detail.action);
+                        },
+                        crop: function (e) {
+                            var data = e.detail;
+                        },
+                        zoom: function (e) {
+                            console.log(e.type, e.detail.ratio);
+                        }
+                    };
+                    cropper = new Cropper(image, options);
+                };
+
+
             });
 
             function messageError(message) {
@@ -449,7 +586,6 @@
 
 
         });
-
     </script>
 
 @endsection

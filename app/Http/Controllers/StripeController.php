@@ -39,12 +39,11 @@ class StripeController extends Controller
             'sub_price' => $request['sub_total'],
 
         ]);
-       // return $orders;
+        // return $orders;
         $order_id = Order::insertGetId($orders);
 
         foreach (json_decode($request->products, true) as $item) {
 
-            // return $item;
 
             $order_item = ([
                 'order_id' => $order_id,
@@ -52,6 +51,8 @@ class StripeController extends Controller
                 'price' => $item['price'],
                 'size' => $item['size'],
                 'quantity' => $item['quantity'],
+                'product_type' => $item['product_type'],
+                'paper_type' => $item['paper_type'],
             ]);
             OrderDetails::create($order_item);
         }
@@ -84,9 +85,9 @@ class StripeController extends Controller
             ]);
 
             if ($charge['status'] == 'succeeded') {
-                $status=true;
-            }else{
-                $status=false;
+                $status = true;
+            } else {
+                $status = false;
             }
 
             ## Step2: Update Payment status ##
@@ -98,7 +99,7 @@ class StripeController extends Controller
             $payment = ([
                 'order_id' => $order_id,
                 'payment_amount' => $request['sub_total'],
-                'details'=>json_encode($charge),
+                'details' => json_encode($charge),
             ]);
             Payment::create($payment);
 

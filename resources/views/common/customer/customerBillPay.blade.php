@@ -60,7 +60,7 @@
                                                         <input type="radio" class="form-check-input" id="{{$ship->id}}"
                                                                name="Shipping_charge" value="{{$ship->Shipping_charge}}"
                                                                ng-change="changeDeliveryCharge({{$ship->Shipping_charge}})"
-                                                               ng-model="myValue" required>
+                                                               ng-model="Shipping_id" >
                                                         <label class="form-check-label" for="{{$ship->id}}">
                                                             <p><strong>{{$ship->title}}</strong></p>
                                                             <h3>{{$ship->Shipping_charge}}</h3>
@@ -109,7 +109,8 @@
                         <input type="hidden" name="products" value="@{{cart_products}}">
                         <input type="hidden" name="total_price" value="@{{ totalPriceCountAll }}">
                         <input type="hidden" name="discount_price" value="@{{ discount }}">
-                        <input type="hidden" name="sub_total" value="@{{ totalPriceWithDiscount }}">
+                        <input type="hidden" name="sub_total" value="@{{ totalPriceWithDiscountWithDeliverycharge }}">
+                        <input type="hidden" name="tax_fee" value="@{{ totalTaxPrice }}">
                         <button type="submit" class="btn btn-primary">Pay</button>
                     </form>
                 </div>

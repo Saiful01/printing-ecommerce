@@ -176,6 +176,8 @@
                     "title": item.title,
                     "price": new_price,
                     "featured_image": item.featured_image,
+                    "product_type": "",
+                    "paper_type": "",
                     "quantity": 1,
                     "size": size,
                 };
@@ -248,13 +250,11 @@
                 if (totalPrice > 200) {
                     $scope.discount = parseFloat($scope.totalPriceCountAll * .10).toFixed(2);
                     $scope.totalPriceWithDiscount = parseFloat(totalPrice - $scope.discount).toFixed(2);
-                    $scope.totalPriceWithDiscountWithDeliverycharge = (parseFloat($scope.totalPriceWithDiscount) + parseFloat($scope.delivery_charge) + parseFloat($scope.totalTaxPrice)).toFixed(2) - localStorage.getItem('coupon_value');
-                    console.log("coupon_value added")
+                    $scope.totalPriceWithDiscountWithDeliverycharge = ((parseFloat($scope.totalPriceWithDiscount) + parseFloat($scope.delivery_charge) + parseFloat($scope.totalTaxPrice)) - localStorage.getItem('coupon_value')).toFixed(2);
                     console.log(localStorage.getItem('coupon_value'))
                 } else {
                     $scope.totalPriceWithDiscount = parseFloat(totalPrice).toFixed(2);
-                    $scope.totalPriceWithDiscountWithDeliverycharge = (parseFloat($scope.totalPriceWithDiscount) + parseFloat($scope.delivery_charge) + parseFloat($scope.totalTaxPrice)).toFixed(2) - localStorage.getItem('coupon_value');
-                    console.log("coupon_value added")
+                    $scope.totalPriceWithDiscountWithDeliverycharge = ((parseFloat($scope.totalPriceWithDiscount) + parseFloat($scope.delivery_charge) + parseFloat($scope.totalTaxPrice))- localStorage.getItem('coupon_value')).toFixed(2);
                     console.log(localStorage.getItem('coupon_value'))
                 }
 
