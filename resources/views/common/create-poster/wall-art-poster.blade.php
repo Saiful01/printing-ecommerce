@@ -147,7 +147,7 @@
             $scope.total_item=0;
             $scope.changePosterSize = function (id, size, price) {
                 let data = poster_array.find((poster) => poster.title == size,);
-                document.getElementById("new_price" + id).innerHTML = price + data['photo_premium_glossy'];
+                document.getElementById("new_price" + id).innerHTML = parseFloat(price) + parseFloat(data['photo_premium_glossy']);
 
             }
             $scope.taxCharge = function () {
@@ -169,7 +169,7 @@
 
                 let poster_array2 = <?php echo json_encode($poster_size) ?>;
                 let data = poster_array2.find((mposter) => mposter.title == size);
-                let new_price = old_price + data['photo_premium_glossy'];
+                let new_price = parseFloat(old_price) + parseFloat(data['photo_premium_glossy']);
 
                 let tempProduct = {
                     "id": item.id,
