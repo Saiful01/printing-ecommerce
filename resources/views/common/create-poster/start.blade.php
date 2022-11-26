@@ -35,7 +35,7 @@
 
             <script type="text/javascript">
                 Dropzone.options.imageUpload = {
-                    maxFilesize: 1,
+                    maxFilesize: 200,
                     acceptedFiles: ".jpeg,.jpg,.png,.tif,.pdf",
 
                     init: function () {

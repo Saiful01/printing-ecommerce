@@ -12,9 +12,10 @@ app.controller('printingCartController', function ($scope, $http, $location) {
     $scope.totalPriceWithDiscountWithDeliverycharge = 0;
     $scope.totalTaxPrice = 0;
     $scope.customer_address_type = "Home";
-    $scope.delivery_charge = "0";
+    $scope.delivery_charge = 8.9;
     $scope.coupon_value = 0;
     $scope.CouponAmount = 0;
+    $scope.Shipping_id = "8.9";
 
     $scope.tax_charge_float = "0";
 
@@ -34,7 +35,8 @@ app.controller('printingCartController', function ($scope, $http, $location) {
 
     }
     $scope.addToCart = function (item) {
-        console.log($scope.tax_charge_float)
+        console.log($scope.cposter_height+" X "+$scope.cposter_width);
+        return ;
         console.log("ok tax value")
         if ($scope.poster_size == "") {
             return messageError("Please select poster size");
@@ -43,10 +45,13 @@ app.controller('printingCartController', function ($scope, $http, $location) {
         let tempProduct = {
             "id": item.id,
             "title": item.title,
+            "product_type": "",
+            "paper_type": "",
+            "frame_type": "",
             "price": item.price,
             "featured_image": item.featured_image,
             "quantity": $scope.quantity,
-            "size": $scope.poster_size,
+            "size": $scope.cposter_height+" X "+$scope.cposter_width,
         };
         let cartProductList = localStorage.getItem('cart_product');
         if (cartProductList !== null && cartProductList !== undefined) {
@@ -99,13 +104,12 @@ app.controller('printingCartController', function ($scope, $http, $location) {
         if (totalPrice > 200) {
             $scope.discount = parseFloat($scope.totalPriceCountAll * .10).toFixed(2);
             $scope.totalPriceWithDiscount = parseFloat(totalPrice - $scope.discount).toFixed(2);
-            $scope.totalPriceWithDiscountWithDeliverycharge = (parseFloat($scope.totalPriceWithDiscount) + parseFloat($scope.delivery_charge) + parseFloat($scope.totalTaxPrice)).toFixed(2) - localStorage.getItem('coupon_value');
+            $scope.totalPriceWithDiscountWithDeliverycharge = ((parseFloat($scope.totalPriceWithDiscount) + parseFloat($scope.delivery_charge) + parseFloat($scope.totalTaxPrice)) - localStorage.getItem('coupon_value')).toFixed(2);
             console.log("coupon_value added")
             console.log(localStorage.getItem('coupon_value'))
         } else {
             $scope.totalPriceWithDiscount = parseFloat(totalPrice).toFixed(2);
-            $scope.totalPriceWithDiscountWithDeliverycharge = (parseFloat($scope.totalPriceWithDiscount) + parseFloat($scope.delivery_charge) + parseFloat($scope.totalTaxPrice)).toFixed(2) - localStorage.getItem('coupon_value');
-            console.log("coupon_value added")
+            $scope.totalPriceWithDiscountWithDeliverycharge = ((parseFloat($scope.totalPriceWithDiscount) + parseFloat($scope.delivery_charge) + parseFloat($scope.totalTaxPrice))- localStorage.getItem('coupon_value')).toFixed(2);
             console.log(localStorage.getItem('coupon_value'))
         }
 
@@ -125,6 +129,7 @@ app.controller('printingCartController', function ($scope, $http, $location) {
             $scope.cart_products = cartProductList;
             $scope.cartActive = true;
             $scope.total_item = $scope.cart_products.length;
+            console.log("List Called")
             console.log($scope.cart_products)
 
         }

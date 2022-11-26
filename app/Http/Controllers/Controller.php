@@ -87,6 +87,11 @@ class Controller extends BaseController
         return view('common.pages.mounted-foam-board');
     }
 
+    public function paperTypes()
+    {
+        return view('common.pages.paper-types');
+    }
+
     public function customizePosterPrint()
     {
         return view('common.pages.customize-poster-print');

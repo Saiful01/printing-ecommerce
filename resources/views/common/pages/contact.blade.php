@@ -14,9 +14,7 @@
             <div class="container">
                 <div class="title-wrap text-center">
                     <h2 class="h1-style">Our Information</h2>
-                    <p class="h-sub maxW-825">Nor again is there anyone who loves or pursues or desires to obtain
-                        pain
-                        of itself, because it is pain, but because occasionally in which toil and pain</p>
+                    <p class="h-sub maxW-825"> If you require any further information, please feel free to call us by dialing number the bellow</p>
                 </div>
                 <div class="text-icn-blocks-row" style="margin-left: 29px">
                     <div class="text-icn-block-hor">
@@ -25,8 +23,8 @@
                         </div>
                         <div class="text">
                             <h4>Address:</h4>
-                            <p>Level 3 178 Clarence St,
-                                Sydney NSW00 2005</p>
+                            <p>Post Office Box 00
+                                Worcester,<br> PA 19490</p>
                         </div>
                     </div>
                     <div class="text-icn-block-hor">
@@ -35,7 +33,7 @@
                         </div>
                         <div class="text">
                             <h4>Phone:</h4>
-                            <p>+3 800 555 35 35<br>+3 800 555 35 35</p>
+                            <p>215-714-2076<br></p>
                         </div>
                     </div>
                     <div class="text-icn-block-hor">
@@ -44,11 +42,11 @@
                         </div>
                         <div class="text">
                             <h4>Hours:</h4>
-                            <p>Hours: 7 Days a week<br>
-                                09:00am to 5:00pm</p>
+                            <p>Hours: Monday to Friday<br>
+                                09:00am to 3:00pm</p>
                         </div>
                     </div>
-                    <div class="text-icn-block-hor">
+                    {{--<div class="text-icn-block-hor">
                         <div class="icn">
                             <i class="icon-call-center"></i>
                         </div>
@@ -56,7 +54,7 @@
                             <h4>Quick Help:</h4>
                             <p>+3 800 555 35 35<br>+3 800 555 35 35</p>
                         </div>
-                    </div>
+                    </div>--}}
                 </div>
             </div>
         </div>
@@ -66,8 +64,7 @@
             <div class="row vert-margin">
                 <div class="col-sm-9">
                     <div class="title-wrap"><h2 class="h1-style">Get In Touch With Us</h2>
-                        <div>Nor again is there anyone who loves or pursues or desires to obtain pain of itself,
-                            because it is pain, but because occasionally in which toil and pain
+                        <div>We are happy to answer your questions. Fill out the form and we’ll be in touch as soon as possible.
                         </div>
                     </div>
                     <form  action="/contact/send" class="contact-form"  method="post">
@@ -113,7 +110,7 @@
                 </div>
                 <div class="col-sm-9">
                     <div class="contact-map">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2201.3258493677126!2d-74.01291322172017!3d40.70657451080482!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sua!4v1492962272380"></iframe>
+                        <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=00%20Worcester,%20PA%2019490&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe
                     </div>
                 </div>
             </div>

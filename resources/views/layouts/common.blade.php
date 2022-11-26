@@ -16,12 +16,7 @@
     <link href="/common/css/style.css" rel="stylesheet">
     <!-- Custom font -->
     <link href="/common/fonts/icomoon/icons.css" rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Open%20Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+
     <!-- Dropzone CSS -->
     <link href="https://unpkg.com/dropzone/dist/dropzone.css" rel="stylesheet"/>
     <!-- Cropper CSS -->
@@ -88,7 +83,7 @@
                             <a href="/cart" class="dropdn-link only-icon wishlist-link ">
                                 <i class="icon-basket"></i><span
                                     class="dropdn-link-txt">Wishlist</span><span
-                                    class="minicart-qty" >@{{ total_item }}</span>
+                                    class="minicart-qty" ng-cloak>@{{ total_item }}</span>
                             </a>
                         </div>
                     </div>
@@ -105,23 +100,23 @@
                         <div class="hdr-line-separate">
                             <ul class="social-list list-unstyled">
                                 <li>
-                                    <a href="#"><i class="icon-facebook"></i></a>
+                                    <a href="https://www.instagram.com/posterprintstore/" target="_blank"><i class="icon-instagram"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.facebook.com/posterprintstore" target="_blank"><i class="icon-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.tiktok.com/@posterprintstore" target="_blank"><i><img src="/common/images/tiktok.png" style="margin-top: -8px" height="23"></i></a>
                                 </li>
                                 {{--<li>
                                     <a href="#"><i class="icon-twitter"></i></a>
                                 </li>
                                 <li>
                                     <a href="#"><i class="icon-google"></i></a>
-                                </li>--}}
-                                <li>
-                                    <a href="#"><i class="icon-instagram"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="icon-vimeo"></i></a>
                                 </li>
                                 <li>
                                     <a href="#"><i class="icon-linkedin"></i></a>
-                                </li>
+                                </li>--}}
                             </ul>
                         </div>
                         <!-- /Header Social -->
@@ -129,13 +124,13 @@
                     <div class="col hdr-topline-center">
                         <div class="custom-text js-custom-text-carousel"
                              data-slick='{"speed": 1000, "autoplaySpeed": 3000}'>
-                            <div class="custom-text-item"><i class="icon-fox"></i> We never use cheap economy
-                                paper when
-                                printing!
+                            <div class="custom-text-item"><i class="icon-fox"></i> State-of-the-art poster printing in a variety of sizes and materials at affordable prices
                             </div>
-                            <div class="custom-text-item"><i class="icon-gift"></i> Your photos will be printed
-                                on
-                                premium grade quality photo paper
+                            <div class="custom-text-item"><i class="icon-gift"></i> Frame up a serious statement with high-quality posters
+                            </div>
+                            <div class="custom-text-item"><i class="icon-fox"></i> Printed on premium grade quality photo paper
+                            </div>
+                            <div class="custom-text-item"><i class="icon-gift"></i> Elevate your posters into buzz-worthy billboards
                             </div>
                         </div>
                     </div>
@@ -189,30 +184,30 @@
                                             </div>
                                             <div class="mmenu-cols column-4">
                                                 <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="#">Poster Prints</a></h3>
+                                                    <h3 class="submenu-title"><a href="/customize-poster-print">Poster Prints</a></h3>
                                                     <ul class="submenu-list">
                                                         <li><a href="/customize-poster-print">Extremely affordable<span
                                                                     class="submenu-link-txt">custom size posters</span></a>
                                                         </li>
-                                                        <li><a href="/start-journey">Customize
+                                                        <li><a href="/customize-poster-print">Customize
                                                                 everything<span class="submenu-link-txt">from the size to the paper stock to fit your needs</span></a>
                                                         </li>
                                                     </ul>
                                                 </div>
                                                 <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="#">Foam Board Prints</a></h3>
+                                                    <h3 class="submenu-title"><a href="/foam-board-print">Foam Board Prints</a></h3>
                                                     <ul class="submenu-list">
                                                         <li><a href="/foam-board-print">Turn your into a sign,<span
                                                                     class="submenu-link-txt">display or presentation board for exhibitions</span></a>
                                                         </li>
-                                                        <li><a href="/mounted-foam-board-print">Mounted print on
+                                                        <li><a href="/foam-board-print">Mounted print on
                                                                 foam<span
                                                                     class="submenu-link-txt">Core board for easy hanging, framing or display</span></a>
                                                         </li>
                                                     </ul>
                                                 </div>
                                                 <div class="mmenu-col">
-                                                    <h3 class="submenu-title"><a href="#">Aluminum Prints</a></h3>
+                                                    <h3 class="submenu-title"><a href="/aluminum-print">Aluminum Prints</a></h3>
                                                     <ul class="submenu-list">
                                                         <li><a href="/aluminum-print">Infuse your artwork onto<span
                                                                     class="submenu-link-txt">aluminum for a compelling and impactful show</span></a>
@@ -229,6 +224,7 @@
                                 </div>
                             </li>
                             <li><a href="/poster-print">Banner</a>
+                            <li><a href="/paper-types">Poster Print</a>
                             <li><a href="/wall-art-poster">Wall Arts & Posters</a>
                             </li>
                             <li><a href="/pricing">Pricing</a></li>
@@ -244,7 +240,7 @@
                                 <a href="/cart" class="dropdn-link only-icon wishlist-link ">
                                     <i class="icon-basket"></i><span
                                         class="dropdn-link-txt">Wishlist</span><span
-                                        class="minicart-qty" ng-bind="total_item">@{{ total_item }}</span>
+                                        class="minicart-qty" ng-bind="total_item" ng-cloak>@{{ total_item }}</span>
                                 </a>
 
                             </div>
@@ -279,8 +275,10 @@
                         <li><a href="/wall-art-poster">Wall Arts & Posters</a></li>
                         <li><a href="/foam-board-print">Foam Board Prints</a></li>
                         <li><a href="/aluminum-print">Aluminum Prints</a></li>
+                        <li><a href="/poster-print">Banner</a>
+                        <li><a href="/paper-types">Poster Print</a>
                         <li><a href="/pricing">Pricing</a></li>
-                        <li><a href="/faql">FAQ</a></li>
+                        <li><a href="/faq">FAQ</a></li>
                         <li><a href="/contact">Contact</a></li>
                     </ul>
                 </div>
@@ -391,22 +389,13 @@
                         </div>
                         <ul class="social-list">
                             <li>
-                                <a href="#" class="icon icon-facebook"></a>
-                            </li>
-                            {{--<li>
-                                <a href="#" class="icon icon-twitter"></a>
+                                <a href="https://www.instagram.com/posterprintstore/" target="_blank"><i class="icon-instagram"></i></a>
                             </li>
                             <li>
-                                <a href="#" class="icon icon-google"></a>
-                            </li>--}}
-                            <li>
-                                <a href="#" class="icon icon-vimeo"></a>
+                                <a href="https://www.facebook.com/posterprintstore" target="_blank"><i class="icon-facebook"></i></a>
                             </li>
                             <li>
-                                <a href="#" class="icon icon-youtube"></a>
-                            </li>
-                            <li>
-                                <a href="#" class="icon icon-pinterest"></a>
+                                <a href="https://www.tiktok.com/@posterprintstore" target="_blank"><i><img src="/common/images/tiktok.png" style="margin-top: -8px" height="23"></i></a>
                             </li>
                         </ul>
                     </div>

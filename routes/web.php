@@ -46,6 +46,7 @@ Route::get('/foam-board-print', [Controller::class, 'foamBoard']);
 Route::get('/mounted-foam-board-print', [Controller::class, 'mountedFoamBoard']);
 Route::get('/customize-poster-print', [Controller::class, 'customizePosterPrint']);
 Route::get('/aluminum-print', [Controller::class, 'aluminiumPrint']);
+Route::get('/paper-types', [Controller::class, 'paperTypes']);
 Route::get('/pricing', [Controller::class, 'showPricing']);
 Route::get('/terms-and-conditions', [Controller::class, 'showTermsAndConditions']);
 Route::get('/faq', [Controller::class, 'showFAQ']);
@@ -206,6 +207,12 @@ Route::group(['prefix' => 'web-api'], function () {
     Route::any('/states/{country_id}', [WebApiController::class, 'getStates']);
     Route::any('/tax-charge', [WebApiController::class, 'getTaxFee']);
     Route::any('/coupon-save', [WebApiController::class, 'couponSave']);
+
+
+
+
+
+    Route::any('/custom-poster-price', [WebApiController::class, 'customPosterPrice']);
 });
 /*Admin Section End*/
 
@@ -233,7 +240,7 @@ Route::post('/contact/send', function (\Illuminate\Http\Request $request) {
 
 
     try {
-        mail("saiful013101@gmail.com", "Poster print store", $msg);
+        mail("customerservice@posterprintstore.com", "Poster print store", $msg);
         Alert::success('Congrats', 'Your Message Successfully Send');
     }catch (\Exception $exception){
         return $exception->getMessage();
@@ -244,9 +251,9 @@ Route::post('/contact/send', function (\Illuminate\Http\Request $request) {
 
 Route::get('/test', function () {
 
+    return view("cropper2");
 
 
-    return view("test");
 
     $array = [
         'title' => "dddddd",

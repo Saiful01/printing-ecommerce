@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Coupon;
 use App\Models\CouponUsed;
+use App\Models\CustomPrint;
 use App\Models\Tax;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
 class WebApiController extends Controller
 {
@@ -73,6 +73,29 @@ class WebApiController extends Controller
             ];
 
         }
+
+    }
+
+    public function customPosterPrice(Request $request)
+    {
+
+        //return $request->all();
+        $is_exist = CustomPrint::where('min', '<=', $request['total_area'])->where('max', '>=', $request['total_area'])->first();
+        if (is_null($is_exist)) {
+            return 0;
+        } else {
+
+            if ($request['paper_type'] == 1) {
+                return $is_exist->photo_premium_glossy*$request['total_area'];
+            } elseif ($request['paper_type'] == 2) {
+                return $is_exist->canvas*$request['total_area'];
+            } elseif ($request['paper_type'] == 3) {
+                return $is_exist->banner*$request['total_area'];
+            } else {
+                return $is_exist->self_adhesive*$request['total_area'];
+            }
+        }
+
 
     }
 }

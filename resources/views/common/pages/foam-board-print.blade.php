@@ -18,7 +18,7 @@
 
                         <div class="row">
                             <div class="col-lg-5">
-                                <img src="/common/images/assets/mounting.jpg" class="content_left"
+                                <img src="/common/images/assets/mounting.png" class="content_left"
                                      alt="Mounted Poster Prints">
                             </div>
 
@@ -43,7 +43,7 @@
                             </div>
                         </div>
 
-                        <table class="table">
+                        {{--<table class="table">
                             <tbody>
                             <tr>
                                 <td style="border-bottom:1px solid #f1f1f1; font-size:16px;" width="25%"
@@ -88,7 +88,7 @@
                                     <strong>$99.86</strong></td>
                             </tr>
                             </tbody>
-                        </table>
+                        </table>--}}
 
                     </div>
 

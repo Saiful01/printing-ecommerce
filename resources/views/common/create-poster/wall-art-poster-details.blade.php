@@ -1,7 +1,7 @@
 @extends("layouts.common")
 @section("content")
 
-    <div class="page-content" ng-controller="printingCartController">
+    <div class="page-content" ng-controller="printingCartController2">
         <div class="holder breadcrumbs-wrap mt-0">
             <div class="container">
                 <ul class="breadcrumbs">
@@ -89,7 +89,7 @@
                                 <div class="prd-block_actions prd-block_actions--wishlist">
                                     <div class="btn-wrap">
                                         <button class="btn btn--add-to-cart js-trigger-addtocart js-prd-addtocart"
-                                                ng-click="addToCart2({{$poster_size}},{{$poster}}, poster_size{{$poster->id}}, {{$poster->price}})">>
+                                                ng-click="addToCart2({{$poster_size}},{{$poster}}, poster_size{{$poster->id}}, {{$poster->price}})">
                                             Add to cart
                                         </button>
                                     </div>
@@ -120,24 +120,6 @@
                         <div id="collapse2" class="panel-collapse collapse show">
                             <div class="panel-body">
                                 <p>{{$poster->details}}</p>
-                                {{--<div class="row mt-3 mt-lg-5">
-                                    <div class="col-md-12">
-                                        <p>{{$poster->detailsSecTwo}} </p>
-                                    </div>
-                                    <div class="col-md-6"><img
-                                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                            data-src="{{$poster->featured_image}}" alt="" class="lazyload">
-                                    </div>
-                                </div>
-                                <div class="row mt-3 mt-lg-5 align-items-center">
-                                    <div class="col-md-6"><img
-                                            src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                                            data-src="{{$poster->featured_image}}" alt="" class="lazyload">
-                                    </div>
-                                    <div class="col-md-12">
-                                        <p>{{$poster->detailsSecThree}}</p>
-                                    </div>
-                                </div>--}}
                             </div>
                         </div>
                     </div>
@@ -150,7 +132,7 @@
     <script>
 
         let poster_array = <?php echo json_encode($poster_size) ?>;
-        app.controller('printingCartController', function ($scope, $http) {
+        app.controller('printingCartController2', function ($scope, $http) {
 
             $scope.product_type = "1";
             $scope.poster_size = "1";
@@ -170,6 +152,9 @@
                 let tempProduct = {
                     "id": item.id,
                     "title": item.title,
+                    "product_type": "",
+                    "paper_type": "",
+                    "frame_type": "",
                     "price": new_price,
                     "featured_image": item.featured_image,
                     "quantity": 1,
@@ -210,6 +195,7 @@
                 // $scope.getTotalPrice();
                 //$scope.getList();
 
+                location.reload();
             }
 
             function messageError(message) {

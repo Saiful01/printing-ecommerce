@@ -9,34 +9,32 @@
                 </ul>
             </div>
         </div>
-        <div class="container-fluid aluminum_slider">
-            <div class="container">
-
+        <div class="holder holder-mt-xsmall homepage_slider mb-3">
+            <div class="container ">
                 <div class="row">
-                    <div class="col-4 offset-8 text-center">
-                        <h1>Aluminum &amp;<br>Metal Printing</h1>
-                        <h2>Best Prices Ever!</h2>
-                        <h2>Starting From $8.99</h2>
-                        <p><a class="btn btn-lg" href="/start-journey">CREATE YOUR POSTER NOW</a></p>
+                    <div class="col-lg col-xl text-center">
+                        <h1>Aluminum Prints <br></h1>
+                        <p class="hps_bigtext"><strong>Create durable signage with metal stock and the vibrant hues of full color print. </strong></p>
+                        <!--p>
+                          If you order before 1pm EST, we will <strong>SHIP TODAY!</strong>
+                        </p-->
+                        <p class="hps_bigtext">
+                            <strong>100% SATISFACTION GUARANTEED </strong>
+                        </p>
+                        <br>
+                        <div>
+                            <a href="/start-journey" class="btn btn-default"
+                               title="Create custom banner prints">
+                                CREATE YOUR ALUMINUM PRINT NOW !
+                                <br>
+                                <small>Upload Your files, fast and easy !</small>
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-            </div>
-        </div>
-        <div class="container-fluid metal_slider">
-            <div class="container">
-                <div class="row justify-content-between">
-                    <div class="col-9 col-sm-7 col-md-6 col-lg-5 col-xl-4">
-                        <ol>
-                            <li>1- Full Color Print Area</li>
-                            <li>2- Aluminum Layer for Print Area</li>
-                            <li>3- Synthetic Core</li>
-                            <li>4- Aluminum Layer for Back</li>
-                        </ol>
-                    </div>
-                    <div class="col-9 col-sm-7 col-md-6 col-lg-5 col-xl-4 text-center">
-                        <p>Your Images Printed on<br>Aluminum Sandwich Panel</p>
-                        <p class="headline">BEST QUALITY MATERIAL AND BEST PRINT QUALITY FOR YOUR ART WORK</p>
+                    <div class="col-lg col-xl slider_image">
+                        <img src="/common/images/assets/metal-print-room.png" alt=""
+                             title="Premium quality poster prints">
                     </div>
                 </div>
             </div>
